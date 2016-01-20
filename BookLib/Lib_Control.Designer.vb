@@ -36,6 +36,8 @@ Partial Class Lib_Control
         Me.btnBrowseNewDir = New System.Windows.Forms.Button()
         Me.btnBrowseReviewDir = New System.Windows.Forms.Button()
         Me.FolderBrowserDialog = New System.Windows.Forms.FolderBrowserDialog()
+        Me.btnSave = New System.Windows.Forms.Button()
+        Me.btnCancel = New System.Windows.Forms.Button()
         Lib_Control_IDLabel = New System.Windows.Forms.Label()
         New_Book_DirLabel = New System.Windows.Forms.Label()
         Reviewed_Book_DirLabel = New System.Windows.Forms.Label()
@@ -135,11 +137,31 @@ Partial Class Lib_Control
         Me.btnBrowseReviewDir.Text = "Browse"
         Me.btnBrowseReviewDir.UseVisualStyleBackColor = True
         '
+        'btnSave
+        '
+        Me.btnSave.Location = New System.Drawing.Point(95, 208)
+        Me.btnSave.Name = "btnSave"
+        Me.btnSave.Size = New System.Drawing.Size(75, 23)
+        Me.btnSave.TabIndex = 9
+        Me.btnSave.Text = "Save"
+        Me.btnSave.UseVisualStyleBackColor = True
+        '
+        'btnCancel
+        '
+        Me.btnCancel.Location = New System.Drawing.Point(240, 207)
+        Me.btnCancel.Name = "btnCancel"
+        Me.btnCancel.Size = New System.Drawing.Size(75, 23)
+        Me.btnCancel.TabIndex = 10
+        Me.btnCancel.Text = "Cancel"
+        Me.btnCancel.UseVisualStyleBackColor = True
+        '
         'Lib_Control
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(715, 317)
+        Me.Controls.Add(Me.btnCancel)
+        Me.Controls.Add(Me.btnSave)
         Me.Controls.Add(Me.btnBrowseReviewDir)
         Me.Controls.Add(Me.btnBrowseNewDir)
         Me.Controls.Add(Reviewed_Book_DirLabel)
@@ -167,4 +189,6 @@ Partial Class Lib_Control
     Friend WithEvents btnBrowseNewDir As Button
     Friend WithEvents btnBrowseReviewDir As Button
     Friend WithEvents FolderBrowserDialog As FolderBrowserDialog
+    Friend WithEvents btnSave As Button
+    Friend WithEvents btnCancel As Button
 End Class

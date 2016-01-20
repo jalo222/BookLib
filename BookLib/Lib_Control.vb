@@ -26,13 +26,13 @@ Public Class Lib_Control
 
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btnBrowseNewDir.Click
+    Private Sub btnBrowseNewDir_Click(sender As Object, e As EventArgs) Handles btnBrowseNewDir.Click
         If FolderBrowserDialog.ShowDialog() = DialogResult.OK Then
             Me.New_Book_DirTextBox.Text = FolderBrowserDialog.SelectedPath
         End If
     End Sub
 
-    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles btnBrowseReviewDir.Click
-
+    Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
+        Me.Close()
     End Sub
 End Class
