@@ -29,4 +29,9 @@ Public Class BookLibStart
         Dim frmLib_Control As New Lib_Control
         frmLib_Control.Show()
     End Sub
+
+    Private Sub ImportReviewedBooksToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ImportReviewedBooksToolStripMenuItem.Click
+        Dim frmImpBookRev As New frmImportBooks
+        frmImpBookRev.Show()
+    End Sub
 End Class

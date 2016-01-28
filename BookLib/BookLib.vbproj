@@ -84,11 +84,10 @@
     <Compile Include="booklibDataSet.vb">
       <DependentUpon>booklibDataSet.xsd</DependentUpon>
     </Compile>
-    <Compile Include="BookLibStart.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="BookLibStart.Designer.vb">
+    <Compile Include="BookLibStart.designer.vb">
       <DependentUpon>BookLibStart.vb</DependentUpon>
+    </Compile>
+    <Compile Include="BookLibStart.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Categories.Designer.vb">
@@ -98,6 +97,12 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Cl_MySql.vb" />
+    <Compile Include="frmImportBooks.designer.vb">
+      <DependentUpon>frmImportBooks.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmImportBooks.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Lib_Control.Designer.vb">
       <DependentUpon>Lib_Control.vb</DependentUpon>
     </Compile>
@@ -127,6 +132,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Categories.resx">
       <DependentUpon>Categories.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmImportBooks.resx">
+      <DependentUpon>frmImportBooks.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Lib_Control.resx">
       <DependentUpon>Lib_Control.vb</DependentUpon>
@@ -163,6 +171,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\bookcase2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="FileTreeView\MasaSam.Forms.Controls\MasaSam.Forms.Controls.vbproj">
+      <Project>{a37365be-2593-47b7-8f95-82e7209d0c31}</Project>
+      <Name>MasaSam.Forms.Controls</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
