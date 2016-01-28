@@ -25,9 +25,10 @@ Partial Class BookLibStart
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.EditToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ControlFileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CategoriesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ViewToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ControlFileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ImportBookReviewToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -42,6 +43,7 @@ Partial Class BookLibStart
         '
         'FileToolStripMenuItem
         '
+        Me.FileToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ImportBookReviewToolStripMenuItem})
         Me.FileToolStripMenuItem.Name = "FileToolStripMenuItem"
         Me.FileToolStripMenuItem.Size = New System.Drawing.Size(37, 20)
         Me.FileToolStripMenuItem.Text = "File"
@@ -53,10 +55,16 @@ Partial Class BookLibStart
         Me.EditToolStripMenuItem.Size = New System.Drawing.Size(39, 20)
         Me.EditToolStripMenuItem.Text = "Edit"
         '
+        'ControlFileToolStripMenuItem
+        '
+        Me.ControlFileToolStripMenuItem.Name = "ControlFileToolStripMenuItem"
+        Me.ControlFileToolStripMenuItem.Size = New System.Drawing.Size(135, 22)
+        Me.ControlFileToolStripMenuItem.Text = "Control File"
+        '
         'CategoriesToolStripMenuItem
         '
         Me.CategoriesToolStripMenuItem.Name = "CategoriesToolStripMenuItem"
-        Me.CategoriesToolStripMenuItem.Size = New System.Drawing.Size(160, 22)
+        Me.CategoriesToolStripMenuItem.Size = New System.Drawing.Size(135, 22)
         Me.CategoriesToolStripMenuItem.Text = "Categories"
         '
         'ViewToolStripMenuItem
@@ -65,11 +73,11 @@ Partial Class BookLibStart
         Me.ViewToolStripMenuItem.Size = New System.Drawing.Size(44, 20)
         Me.ViewToolStripMenuItem.Text = "View"
         '
-        'ControlFileToolStripMenuItem
+        'ImportBookReviewToolStripMenuItem
         '
-        Me.ControlFileToolStripMenuItem.Name = "ControlFileToolStripMenuItem"
-        Me.ControlFileToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
-        Me.ControlFileToolStripMenuItem.Text = "Control File"
+        Me.ImportBookReviewToolStripMenuItem.Name = "ImportBookReviewToolStripMenuItem"
+        Me.ImportBookReviewToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.ImportBookReviewToolStripMenuItem.Text = "Import Book Review"
         '
         'BookLibStart
         '
@@ -95,4 +103,5 @@ Partial Class BookLibStart
     Friend WithEvents CategoriesToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ViewToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ControlFileToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ImportBookReviewToolStripMenuItem As ToolStripMenuItem
 End Class

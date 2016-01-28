@@ -29,4 +29,10 @@ Public Class BookLibStart
         Dim frmLib_Control As New Lib_Control
         frmLib_Control.Show()
     End Sub
+
+    Private Sub ImportBookReviewToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ImportBookReviewToolStripMenuItem.Click
+        Dim frmNewReview As New frmImpNewBookReview
+        frmNewReview.FileSystemTree1.RootDrive = "C:\Users\Johan\Documents\EBooks1"
+        frmNewReview.Show()
+    End Sub
 End Class
