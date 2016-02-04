@@ -16,7 +16,7 @@ Public Class BookLibStart
         cntBooks = MyCmd.ExecuteScalar
         MyCmd.CommandText = "select count(*) from authors"
         cntAuthors = MyCmd.ExecuteScalar
-        MsgBox("books = " + Str(cntBooks) + ",  Authors = " + Str(cntAuthors))
+        '        MsgBox("books = " + Str(cntBooks) + ",  Authors = " + Str(cntAuthors))
 
     End Sub
 
@@ -30,9 +30,8 @@ Public Class BookLibStart
         frmLib_Control.Show()
     End Sub
 
-    Private Sub ImportBookReviewToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ImportBookReviewToolStripMenuItem.Click
-        Dim frmNewReview As New frmImpNewBookReview
-        frmNewReview.FileSystemTree1.RootDrive = "C:\Users\Johan\Documents\EBooks1"
-        frmNewReview.Show()
+    Private Sub ImportReviewedBooksToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ImportReviewedBooksToolStripMenuItem.Click
+        Dim frmImpBookRev As New frmImportBooks
+        frmImpBookRev.Show()
     End Sub
 End Class

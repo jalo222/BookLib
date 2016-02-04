@@ -300,7 +300,7 @@ Partial Public Class booklibDataSet
     Private Sub InitClass()
         Me.DataSetName = "booklibDataSet"
         Me.Prefix = ""
-        Me.Namespace = "http://tempuri.org/booklibDataSet.xsd"
+        Me.Namespace = "http://tempuri.org/booklibDataSet2.xsd"
         Me.EnforceConstraints = true
         Me.SchemaSerializationMode = Global.System.Data.SchemaSerializationMode.IncludeSchema
         Me.tableauthors = New authorsDataTable()

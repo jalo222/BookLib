@@ -47,9 +47,6 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="MasaSam.Forms.Controls">
-      <HintPath>FileTreeView\MasaSam.Forms.Controls\obj\Debug\MasaSam.Forms.Controls.dll</HintPath>
-    </Reference>
     <Reference Include="MySql.Data, Version=6.9.8.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\Program Files (x86)\MySQL\Connector.NET 6.9\Assemblies\v4.5\MySql.Data.dll</HintPath>
@@ -79,19 +76,15 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="booklibDataSet.Designer.vb">
+    <Compile Include="booklibDataSet2.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>booklibDataSet.xsd</DependentUpon>
+      <DependentUpon>booklibDataSet2.xsd</DependentUpon>
     </Compile>
-    <Compile Include="booklibDataSet.vb">
-      <DependentUpon>booklibDataSet.xsd</DependentUpon>
+    <Compile Include="BookLibStart.designer.vb">
+      <DependentUpon>BookLibStart.vb</DependentUpon>
     </Compile>
     <Compile Include="BookLibStart.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="BookLibStart.Designer.vb">
-      <DependentUpon>BookLibStart.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Categories.Designer.vb">
@@ -101,10 +94,10 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Cl_MySql.vb" />
-    <Compile Include="frmImpNewBookReview.Designer.vb">
-      <DependentUpon>frmImpNewBookReview.vb</DependentUpon>
+    <Compile Include="frmImportBooks.designer.vb">
+      <DependentUpon>frmImportBooks.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmImpNewBookReview.vb">
+    <Compile Include="frmImportBooks.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Lib_Control.Designer.vb">
@@ -137,8 +130,8 @@
     <EmbeddedResource Include="Categories.resx">
       <DependentUpon>Categories.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmImpNewBookReview.resx">
-      <DependentUpon>frmImpNewBookReview.vb</DependentUpon>
+    <EmbeddedResource Include="frmImportBooks.resx">
+      <DependentUpon>frmImportBooks.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Lib_Control.resx">
       <DependentUpon>Lib_Control.vb</DependentUpon>
@@ -151,16 +144,16 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="booklibDataSet.xsc">
-      <DependentUpon>booklibDataSet.xsd</DependentUpon>
+    <None Include="booklibDataSet2.xsc">
+      <DependentUpon>booklibDataSet2.xsd</DependentUpon>
     </None>
-    <None Include="booklibDataSet.xsd">
+    <None Include="booklibDataSet2.xsd">
       <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>booklibDataSet.Designer.vb</LastGenOutput>
+      <LastGenOutput>booklibDataSet2.Designer.vb</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
-    <None Include="booklibDataSet.xss">
-      <DependentUpon>booklibDataSet.xsd</DependentUpon>
+    <None Include="booklibDataSet2.xss">
+      <DependentUpon>booklibDataSet2.xsd</DependentUpon>
     </None>
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
@@ -175,6 +168,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\bookcase2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="FileTreeView\MasaSam.Forms.Controls\MasaSam.Forms.Controls.vbproj">
+      <Project>{a37365be-2593-47b7-8f95-82e7209d0c31}</Project>
+      <Name>MasaSam.Forms.Controls</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
