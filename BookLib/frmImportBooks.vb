@@ -52,97 +52,30 @@ End sub
         cmdSave()
     End Sub
 
-    Private Sub BookIDTextBox1_TextChanged(sender As Object, e As EventArgs)
 
-    End Sub
-
-    Private Sub BookIDTextBox_TextChanged(sender As Object, e As EventArgs)
-
-    End Sub
-
-    Private Sub BooksBindingSource_CurrentChanged(sender As Object, e As EventArgs)
-
-    End Sub
 
     Private Sub txtBookRef_TextChanged(sender As Object, e As EventArgs) Handles txtBookRef.TextChanged
         ' MsgBox("split text " + Str(InStr(Me.txtBookRef.Text, "-")) + "  " + Me.txtBookRef.Text)
         Me.BookNameTextBox.Text = Mid(Me.txtBookRef.Text, 1, InStr(Me.txtBookRef.Text, "-") - 2)
-        Me.txtAuthor.Text = Mid(Me.txtBookRef.Text, InStr(Me.txtBookRef.Text, "-") + 1)
-        Me.txtAuthor.Text = changesMid(Me.txtAuthor.Text, 1, InStr(Me.txtAuthor.Text, ".") - 1)
+        Dim vAuth As String = Trim(Mid(Me.txtBookRef.Text, InStr(Me.txtBookRef.Text, "-") + 1))
+        ' Me.txtAuthor.Text = Mid(Me.txtBookRef.Text, InStr(Me.txtBookRef.Text, "-") + 1)
+        Me.txtAuthor.Text = Mid(vAuth, 1, InStr(vAuth, ".") - 1)
     End Sub
 
-    Private Sub Label3_Click(sender As Object, e As EventArgs)
 
-    End Sub
-
-    Private Sub Panel1_Paint(sender As Object, e As PaintEventArgs) Handles Panel1.Paint
-
-    End Sub
-
-    Private Sub txtTitle_TextChanged(sender As Object, e As EventArgs)
-
-    End Sub
-
-    Private Sub txtAuthor_TextChanged(sender As Object, e As EventArgs) Handles txtAuthor.TextChanged
-
-    End Sub
-
-    Private Sub Label4_Click(sender As Object, e As EventArgs) Handles Label4.Click
-
-    End Sub
-
-    Private Sub TextBox2_TextChanged(sender As Object, e As EventArgs)
-
-    End Sub
-
-    Private Sub TextBox1_TextChanged(sender As Object, e As EventArgs)
-
-    End Sub
-
-    Private Sub Label8_Click(sender As Object, e As EventArgs)
-
-    End Sub
-
-    Private Sub AuthorsBindingNavigatorSaveItem_Click(sender As Object, e As EventArgs) Handles AuthorsBindingNavigatorSaveItem.Click
+    Private Sub AuthorsBindingNavigatorSaveItem_Click(sender As Object, e As EventArgs)
         Me.Validate()
         Me.AuthorsBindingSource.EndEdit()
         Me.TableAdapterManager.UpdateAll(Me.BooklibDataSet)
 
     End Sub
 
-    Private Sub AuthorIDTextBox_TextChanged(sender As Object, e As EventArgs) Handles AuthorIDTextBox.TextChanged
-
-    End Sub
-
-    Private Sub AuthorIDLabel_Click(sender As Object, e As EventArgs)
-
-    End Sub
-
-    Private Sub AuthorNameLabel_Click(sender As Object, e As EventArgs)
-
-    End Sub
-
-    Private Sub AuthorSurnameTextBox_TextChanged(sender As Object, e As EventArgs) Handles AuthorSurnameTextBox.TextChanged
-
-    End Sub
-
-    Private Sub AuthorSurnameLabel_Click(sender As Object, e As EventArgs)
-
-    End Sub
-
-    Private Sub AuthorNameTextBox_TextChanged(sender As Object, e As EventArgs) Handles AuthorNameTextBox.TextChanged
-
-    End Sub
-
-    Private Sub Panel2_Paint(sender As Object, e As PaintEventArgs) Handles Panel2.Paint
-
-    End Sub
-
-    Private Sub BookNameTextBox_TextChanged(sender As Object, e As EventArgs) Handles BookNameTextBox.TextChanged
-
-    End Sub
-
-    Private Sub BookNameLabel_Click(sender As Object, e As EventArgs)
-
+    Private Sub txtAuthor_TextChanged(sender As Object, e As EventArgs) Handles txtAuthor.TextChanged
+        MsgBox("Name")
+        Dim vWrds() As String = Split(Trim(Me.txtAuthor.Text))
+        '       For i As Integer = 0 To vWrds.Length - 1
+        '       MsgBox(Str(i) + " - " + vWrds(i))
+        '       Next
+        Me.v_FirstName.Text = vWrds(0)
     End Sub
 End Class
