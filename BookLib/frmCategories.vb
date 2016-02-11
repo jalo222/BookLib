@@ -1,4 +1,4 @@
-﻿Public Class Categories
+﻿Public Class frmCategories
     '    Private Sub CategoriesBindingNavigatorSaveItem_Click(sender As Object, e As EventArgs) Handles MyBaseBindingNavigatorSaveItem.Click, MyBaseBindingNavigatorSaveItem.Click, MyBaseBindingNavigatorSaveItem.Click
     '    Me.Validate()
     '    Me.CategoriesBindingSource.EndEdit()
