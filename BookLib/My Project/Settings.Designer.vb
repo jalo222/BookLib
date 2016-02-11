@@ -57,21 +57,21 @@ Namespace My
         <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.SpecialSettingAttribute(Global.System.Configuration.SpecialSetting.ConnectionString),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("server=localhost;user id=johan_fj;persistsecurityinfo=True;database=booklib")>  _
-        Public ReadOnly Property MyConn2() As String
+         Global.System.Configuration.DefaultSettingValueAttribute("server=localhost;user id=root;database=booklib;password=root;persistsecurityinfo="& _ 
+            "True;allowuservariables=True")>  _
+        Public ReadOnly Property booklibConnectionString() As String
             Get
-                Return CType(Me("MyConn2"),String)
+                Return CType(Me("booklibConnectionString"),String)
             End Get
         End Property
         
         <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.SpecialSettingAttribute(Global.System.Configuration.SpecialSetting.ConnectionString),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("server=localhost;user id=johan_fj;database=booklib;password=johan;persistsecurity"& _ 
-            "info=True;allowuservariables=True")>  _
-        Public ReadOnly Property booklibConnectionString() As String
+         Global.System.Configuration.DefaultSettingValueAttribute("server=localhost;user id=root;persistsecurityinfo=True;database=booklib")>  _
+        Public ReadOnly Property booklibConnectionString1() As String
             Get
-                Return CType(Me("booklibConnectionString"),String)
+                Return CType(Me("booklibConnectionString1"),String)
             End Get
         End Property
     End Class

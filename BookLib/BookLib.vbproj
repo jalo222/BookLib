@@ -46,6 +46,9 @@
   <PropertyGroup>
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="MySql.Data, Version=6.9.8.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -55,6 +58,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.Services" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
@@ -76,10 +80,13 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="booklibDataSet2.Designer.vb">
+    <Compile Include="booklibDataSet.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>booklibDataSet2.xsd</DependentUpon>
+      <DependentUpon>booklibDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="booklibDataSet.vb">
+      <DependentUpon>booklibDataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="BookLibStart.designer.vb">
       <DependentUpon>BookLibStart.vb</DependentUpon>
@@ -87,13 +94,19 @@
     <Compile Include="BookLibStart.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Categories.Designer.vb">
-      <DependentUpon>Categories.vb</DependentUpon>
+    <Compile Include="frmCategories.Designer.vb">
+      <DependentUpon>frmCategories.vb</DependentUpon>
     </Compile>
-    <Compile Include="Categories.vb">
+    <Compile Include="frmCategories.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Cl_MySql.vb" />
+    <Compile Include="frmFileTypes.Designer.vb">
+      <DependentUpon>frmFileTypes.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmFileTypes.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmImportBooks.designer.vb">
       <DependentUpon>frmImportBooks.vb</DependentUpon>
     </Compile>
@@ -122,13 +135,17 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Settings.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="BookLibStart.resx">
       <DependentUpon>BookLibStart.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Categories.resx">
-      <DependentUpon>Categories.vb</DependentUpon>
+    <EmbeddedResource Include="frmCategories.resx">
+      <DependentUpon>frmCategories.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmFileTypes.resx">
+      <DependentUpon>frmFileTypes.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmImportBooks.resx">
       <DependentUpon>frmImportBooks.vb</DependentUpon>
@@ -144,17 +161,18 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="booklibDataSet2.xsc">
-      <DependentUpon>booklibDataSet2.xsd</DependentUpon>
+    <None Include="booklibDataSet.xsc">
+      <DependentUpon>booklibDataSet.xsd</DependentUpon>
     </None>
-    <None Include="booklibDataSet2.xsd">
+    <None Include="booklibDataSet.xsd">
       <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>booklibDataSet2.Designer.vb</LastGenOutput>
+      <LastGenOutput>booklibDataSet.Designer.vb</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
-    <None Include="booklibDataSet2.xss">
-      <DependentUpon>booklibDataSet2.xsd</DependentUpon>
+    <None Include="booklibDataSet.xss">
+      <DependentUpon>booklibDataSet.xsd</DependentUpon>
     </None>
+    <None Include="My Project\app.manifest" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>

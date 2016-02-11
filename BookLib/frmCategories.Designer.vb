@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class Categories
+Partial Class frmCategories
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -25,7 +25,7 @@ Partial Class Categories
         Me.components = New System.ComponentModel.Container()
         Dim CategoryIDLabel As System.Windows.Forms.Label
         Dim CategoryNameLabel As System.Windows.Forms.Label
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Categories))
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmCategories))
         Me.ListBox1 = New System.Windows.Forms.ListBox()
         Me.BooklibDataSet = New BookLib.booklibDataSet()
         Me.CategoriesBindingSource = New System.Windows.Forms.BindingSource(Me.components)

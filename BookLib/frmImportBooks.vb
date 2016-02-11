@@ -28,6 +28,8 @@ End sub
     End Sub
 
     Private Sub frmImportBooks_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        'TODO: This line of code loads data into the 'BooklibDataSet.file_types' table. You can move, or remove it, as needed.
+        Me.File_typesTableAdapter.Fill(Me.BooklibDataSet.file_types)
         'TODO: This line of code loads data into the 'BooklibDataSet.books' table. You can move, or remove it, as needed.
         Me.BooksTableAdapter.Fill(Me.BooklibDataSet.books)
         'TODO: This line of code loads data into the 'BooklibDataSet.authors' table. You can move, or remove it, as needed.
@@ -77,5 +79,29 @@ End sub
         '       MsgBox(Str(i) + " - " + vWrds(i))
         '       Next
         Me.v_FirstName.Text = vWrds(0)
+    End Sub
+
+    Private Sub FileTypeIDTextBox_TextChanged(sender As Object, e As EventArgs) Handles FileTypeIDTextBox.TextChanged
+
+    End Sub
+
+    Private Sub FileTypeIDLabel_Click(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub FileExtensionTextBox_TextChanged(sender As Object, e As EventArgs) Handles FileExtensionTextBox.TextChanged
+
+    End Sub
+
+    Private Sub FileExtensionLabel_Click(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub FileTypeTextBox_TextChanged(sender As Object, e As EventArgs) Handles FileTypeTextBox.TextChanged
+
+    End Sub
+
+    Private Sub FileTypeLabel_Click(sender As Object, e As EventArgs)
+
     End Sub
 End Class

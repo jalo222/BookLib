@@ -24,11 +24,13 @@ Partial Class BookLibStart
     Private Sub InitializeComponent()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ImportReviewedBooksToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.EditToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ControlFileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CategoriesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.FileTypesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ViewToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ImportReviewedBooksToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -48,9 +50,15 @@ Partial Class BookLibStart
         Me.FileToolStripMenuItem.Size = New System.Drawing.Size(37, 20)
         Me.FileToolStripMenuItem.Text = "File"
         '
+        'ImportReviewedBooksToolStripMenuItem
+        '
+        Me.ImportReviewedBooksToolStripMenuItem.Name = "ImportReviewedBooksToolStripMenuItem"
+        Me.ImportReviewedBooksToolStripMenuItem.Size = New System.Drawing.Size(195, 22)
+        Me.ImportReviewedBooksToolStripMenuItem.Text = "Import ReviewedBooks"
+        '
         'EditToolStripMenuItem
         '
-        Me.EditToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ControlFileToolStripMenuItem, Me.CategoriesToolStripMenuItem})
+        Me.EditToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ControlFileToolStripMenuItem, Me.CategoriesToolStripMenuItem, Me.FileTypesToolStripMenuItem})
         Me.EditToolStripMenuItem.Name = "EditToolStripMenuItem"
         Me.EditToolStripMenuItem.Size = New System.Drawing.Size(39, 20)
         Me.EditToolStripMenuItem.Text = "Edit"
@@ -67,17 +75,26 @@ Partial Class BookLibStart
         Me.CategoriesToolStripMenuItem.Size = New System.Drawing.Size(135, 22)
         Me.CategoriesToolStripMenuItem.Text = "Categories"
         '
+        'FileTypesToolStripMenuItem
+        '
+        Me.FileTypesToolStripMenuItem.Name = "FileTypesToolStripMenuItem"
+        Me.FileTypesToolStripMenuItem.Size = New System.Drawing.Size(135, 22)
+        Me.FileTypesToolStripMenuItem.Text = "File_Types"
+        '
         'ViewToolStripMenuItem
         '
         Me.ViewToolStripMenuItem.Name = "ViewToolStripMenuItem"
         Me.ViewToolStripMenuItem.Size = New System.Drawing.Size(44, 20)
         Me.ViewToolStripMenuItem.Text = "View"
         '
-        'ImportReviewedBooksToolStripMenuItem
+        'Button1
         '
-        Me.ImportReviewedBooksToolStripMenuItem.Name = "ImportReviewedBooksToolStripMenuItem"
-        Me.ImportReviewedBooksToolStripMenuItem.Size = New System.Drawing.Size(195, 22)
-        Me.ImportReviewedBooksToolStripMenuItem.Text = "Import ReviewedBooks"
+        Me.Button1.Location = New System.Drawing.Point(210, 37)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(129, 31)
+        Me.Button1.TabIndex = 1
+        Me.Button1.Text = "Button1"
+        Me.Button1.UseVisualStyleBackColor = True
         '
         'BookLibStart
         '
@@ -86,6 +103,7 @@ Partial Class BookLibStart
         Me.BackgroundImage = Global.BookLib.My.Resources.Resources.bookcase2
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.ClientSize = New System.Drawing.Size(943, 366)
+        Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.MenuStrip1)
         Me.MainMenuStrip = Me.MenuStrip1
         Me.Name = "BookLibStart"
@@ -104,4 +122,6 @@ Partial Class BookLibStart
     Friend WithEvents ViewToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ControlFileToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ImportReviewedBooksToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents FileTypesToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents Button1 As Button
 End Class
