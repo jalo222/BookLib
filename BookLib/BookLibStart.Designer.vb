@@ -24,11 +24,11 @@ Partial Class BookLibStart
     Private Sub InitializeComponent()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ImportReviewedBooksToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.EditToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ControlFileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CategoriesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ViewToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ImportReviewedBooksToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -47,6 +47,12 @@ Partial Class BookLibStart
         Me.FileToolStripMenuItem.Name = "FileToolStripMenuItem"
         Me.FileToolStripMenuItem.Size = New System.Drawing.Size(37, 20)
         Me.FileToolStripMenuItem.Text = "File"
+        '
+        'ImportReviewedBooksToolStripMenuItem
+        '
+        Me.ImportReviewedBooksToolStripMenuItem.Name = "ImportReviewedBooksToolStripMenuItem"
+        Me.ImportReviewedBooksToolStripMenuItem.Size = New System.Drawing.Size(195, 22)
+        Me.ImportReviewedBooksToolStripMenuItem.Text = "Import ReviewedBooks"
         '
         'EditToolStripMenuItem
         '
@@ -72,12 +78,6 @@ Partial Class BookLibStart
         Me.ViewToolStripMenuItem.Name = "ViewToolStripMenuItem"
         Me.ViewToolStripMenuItem.Size = New System.Drawing.Size(44, 20)
         Me.ViewToolStripMenuItem.Text = "View"
-        '
-        'ImportReviewedBooksToolStripMenuItem
-        '
-        Me.ImportReviewedBooksToolStripMenuItem.Name = "ImportReviewedBooksToolStripMenuItem"
-        Me.ImportReviewedBooksToolStripMenuItem.Size = New System.Drawing.Size(195, 22)
-        Me.ImportReviewedBooksToolStripMenuItem.Text = "Import ReviewedBooks"
         '
         'BookLibStart
         '

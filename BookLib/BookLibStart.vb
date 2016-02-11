@@ -34,4 +34,8 @@ Public Class BookLibStart
         Dim frmImpBookRev As New frmImportBooks
         frmImpBookRev.Show()
     End Sub
+
+    Private Sub MenuStrip1_ItemClicked(sender As Object, e As ToolStripItemClickedEventArgs) Handles MenuStrip1.ItemClicked
+
+    End Sub
 End Class
