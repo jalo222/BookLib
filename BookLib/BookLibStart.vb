@@ -44,7 +44,7 @@ Public Class BookLibStart
         Dim xtab As New DataTable
         Dim coldata As String
 
-        xtab = Cl_MySql.FetchCatgories("*", "categoryname like 'We%'")
+        xtab = Cl_MySql.TblLookup("authors", "*", "categoryname like 'We%'")
         MsgBox("Rows = " + Str(xtab.Rows.Count))
         coldata = ""
         For Each xt In xtab.Rows

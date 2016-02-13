@@ -9,16 +9,17 @@ Public Class Cl_MySql
         Return MyConn
     End Function
 
-    Shared Function FetchCatgories(P_VarList As String, P_Where As string)
+    Shared Function TblLookup(P_Table As String, P_VarList As String, P_Where As String)
         Dim myDataAdapter As New MySqlDataAdapter
         Dim cmd As New MySqlCommand("Select * From categories", Conn)
         Dim myDataTable As New DataTable
         Dim v_SqlTxt, v_Where As String
 
         'Set the select command on the DataAdapter
-        If Len(P_Where) > 0 Then v_Where = " where " & P_Where Else v_where = ""
-        v_SqlTxt = String.Join(" ", "Select", P_VarList, "from categories", v_Where)
+        If Len(P_Where) > 0 Then v_Where = " where " & P_Where Else v_Where = ""
+        v_SqlTxt = String.Join(" ", "Select", P_VarList, "from", P_Table, v_Where)
         cmd.CommandText = v_SqlTxt
+        MsgBox(v_SqlTxt)
         myDataAdapter.SelectCommand = cmd
 
         'Fill the DataTable

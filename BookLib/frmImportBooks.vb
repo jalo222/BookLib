@@ -59,13 +59,13 @@
         Dim vWrds() As String = Split(Trim(Me.txtAuthor.Text))
         Me.v_FirstName.Text = vWrds(0)
         Me.v_Surname.Text = vWrds(vWrds.Length - 1)
-        Dim vAuthExists As Integer
-        vAuthExists = Cl_MySql.fnSearchAuthName(v_Surname.Text, v_FirstName.Text)
-        MsgBox("Found " + Str(vAuthExists) + " author entries.")
-        If vAuthExists = 0 Then
+        Dim v_AuthTbl As New DataTable
+        v_AuthTbl = Cl_MySql.TblLookup("authors", "*", "AuthorSurname = '" & v_Surname.Text & "' and AuthorName = '" & v_FirstName.Text & "'")
+        MsgBox("Found " + Str(v_AuthTbl.Rows.Count) + " author entries.")
+        If v_AuthTbl.Rows.Count = 0 Then
             Me.AuthorsBindingSource.AddNew()
-            Me.AuthorNameTextBox.Text = v_FirstName.Text
-            Me.AuthorSurnameTextBox.Text = v_Surname.Text
+            Me.txtAuthorName.Text = v_FirstName.Text
+            Me.txtAuthorSurname.Text = v_Surname.Text
         End If
     End Sub
 End Class
