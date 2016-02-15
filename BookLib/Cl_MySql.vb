@@ -26,4 +26,20 @@ Public Class Cl_MySql
         myDataAdapter.Fill(myDataTable)
         Return myDataTable
     End Function
+
+    Shared Function fnInsertAuthor(P_Surname As String, P_Name As String)
+        Dim cmd As New MySqlCommand("", Conn)
+        Dim NewID As Integer
+
+        cmd.CommandText = "insert into authors (AuthorSurname, AuthorName)" &
+            " values (" &
+            " '" & P_Surname & "' " &
+            ", '" & P_Name & "')"
+        MsgBox(cmd.CommandText)
+        cmd.ExecuteScalar()
+        cmd.CommandText = ("select last_insert_id()")
+        NewID = cmd.ExecuteScalar()
+        MsgBox("New Id: " & NewID)
+        Return NewID
+    End Function
 End Class

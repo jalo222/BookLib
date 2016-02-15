@@ -42,9 +42,6 @@
         Me.CategoryNameTextBox.Focus()
     End Sub
 
-    Private Sub ListBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ListBox1.SelectedIndexChanged
-
-    End Sub
 
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
         Me.btnAdd.Visible = False
@@ -59,4 +56,5 @@
                 Save_DataSet()
         End Select
     End Sub
+
 End Class

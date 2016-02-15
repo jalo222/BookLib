@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class BookLibStart
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class BookLibStart
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -30,7 +30,6 @@ Partial Class BookLibStart
         Me.CategoriesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.FileTypesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ViewToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.Button1 = New System.Windows.Forms.Button()
         Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -87,15 +86,6 @@ Partial Class BookLibStart
         Me.ViewToolStripMenuItem.Size = New System.Drawing.Size(44, 20)
         Me.ViewToolStripMenuItem.Text = "View"
         '
-        'Button1
-        '
-        Me.Button1.Location = New System.Drawing.Point(210, 37)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(129, 31)
-        Me.Button1.TabIndex = 1
-        Me.Button1.Text = "Button1"
-        Me.Button1.UseVisualStyleBackColor = True
-        '
         'BookLibStart
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -103,7 +93,6 @@ Partial Class BookLibStart
         Me.BackgroundImage = Global.BookLib.My.Resources.Resources.bookcase2
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.ClientSize = New System.Drawing.Size(943, 366)
-        Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.MenuStrip1)
         Me.MainMenuStrip = Me.MenuStrip1
         Me.Name = "BookLibStart"
@@ -123,5 +112,4 @@ Partial Class BookLibStart
     Friend WithEvents ControlFileToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ImportReviewedBooksToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents FileTypesToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents Button1 As Button
 End Class

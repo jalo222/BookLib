@@ -40,19 +40,19 @@ Public Class BookLibStart
         frmFileTypes.Show()
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        Dim xtab As New DataTable
-        Dim coldata As String
-
-        xtab = Cl_MySql.TblLookup("authors", "*", "categoryname like 'We%'")
-        MsgBox("Rows = " + Str(xtab.Rows.Count))
-        coldata = ""
-        For Each xt In xtab.Rows
-            For Each col In xtab.Columns
-                coldata = coldata & " -    " & ((col.ToString) & " " & (xt(col)))
-            Next
-            coldata = coldata + Chr(10) + Chr(13)
-        Next
-        MsgBox(coldata)
-    End Sub
+    '    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+    '    Dim xtab As New DataTable
+    '    Dim coldata As String
+    '
+    '        xtab = Cl_MySql.TblLookup("authors", "*", "categoryname like 'We%'")
+    '        MsgBox("Rows = " + Str(xtab.Rows.Count))
+    '        coldata = ""
+    '    For Each xt In xtab.Rows
+    '    For Each col In xtab.Columns
+    '                coldata = coldata & " -    " & ((col.ToString) & " " & (xt(col)))
+    '    Next
+    '            coldata = coldata + Chr(10) + Chr(13)
+    '    Next
+    '        MsgBox(coldata)
+    '    End Sub
 End Class

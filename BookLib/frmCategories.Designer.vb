@@ -27,8 +27,8 @@ Partial Class frmCategories
         Dim CategoryNameLabel As System.Windows.Forms.Label
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmCategories))
         Me.ListBox1 = New System.Windows.Forms.ListBox()
-        Me.BooklibDataSet = New BookLib.booklibDataSet()
         Me.CategoriesBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.BooklibDataSet = New BookLib.booklibDataSet()
         Me.CategoriesTableAdapter = New BookLib.booklibDataSetTableAdapters.categoriesTableAdapter()
         Me.TableAdapterManager = New BookLib.booklibDataSetTableAdapters.TableAdapterManager()
         Me.CategoriesBindingNavigator = New System.Windows.Forms.BindingNavigator(Me.components)
@@ -53,8 +53,8 @@ Partial Class frmCategories
         Me.btnDelete = New System.Windows.Forms.Button()
         CategoryIDLabel = New System.Windows.Forms.Label()
         CategoryNameLabel = New System.Windows.Forms.Label()
-        CType(Me.BooklibDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.CategoriesBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.BooklibDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.CategoriesBindingNavigator, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.CategoriesBindingNavigator.SuspendLayout()
         Me.SuspendLayout()
@@ -89,15 +89,15 @@ Partial Class frmCategories
         Me.ListBox1.Size = New System.Drawing.Size(198, 303)
         Me.ListBox1.TabIndex = 0
         '
-        'BooklibDataSet
-        '
-        Me.BooklibDataSet.DataSetName = "booklibDataSet"
-        Me.BooklibDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
-        '
         'CategoriesBindingSource
         '
         Me.CategoriesBindingSource.DataMember = "categories"
         Me.CategoriesBindingSource.DataSource = Me.BooklibDataSet
+        '
+        'BooklibDataSet
+        '
+        Me.BooklibDataSet.DataSetName = "booklibDataSet"
+        Me.BooklibDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
         '
         'CategoriesTableAdapter
         '
@@ -107,8 +107,11 @@ Partial Class frmCategories
         '
         Me.TableAdapterManager.authorsTableAdapter = Nothing
         Me.TableAdapterManager.BackupDataSetBeforeUpdate = False
+        Me.TableAdapterManager.book_coversTableAdapter = Nothing
         Me.TableAdapterManager.booksTableAdapter = Nothing
         Me.TableAdapterManager.categoriesTableAdapter = Me.CategoriesTableAdapter
+        Me.TableAdapterManager.file_typesTableAdapter = Nothing
+        Me.TableAdapterManager.lib_controlTableAdapter = Nothing
         Me.TableAdapterManager.UpdateOrder = BookLib.booklibDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete
         '
         'CategoriesBindingNavigator
@@ -283,7 +286,7 @@ Partial Class frmCategories
         Me.btnDelete.Text = "Delete"
         Me.btnDelete.UseVisualStyleBackColor = True
         '
-        'Categories
+        'frmCategories
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -300,10 +303,10 @@ Partial Class frmCategories
         Me.Controls.Add(Me.ListBox1)
         Me.Controls.Add(Me.Panel1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D
-        Me.Name = "Categories"
+        Me.Name = "frmCategories"
         Me.Text = "Categories"
-        CType(Me.BooklibDataSet, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.CategoriesBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.BooklibDataSet, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.CategoriesBindingNavigator, System.ComponentModel.ISupportInitialize).EndInit()
         Me.CategoriesBindingNavigator.ResumeLayout(False)
         Me.CategoriesBindingNavigator.PerformLayout()

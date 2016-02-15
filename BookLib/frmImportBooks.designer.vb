@@ -253,6 +253,7 @@ Partial Class frmImportBooks
         '
         'AuthorsBindingSource
         '
+        Me.AuthorsBindingSource.AllowNew = False
         Me.AuthorsBindingSource.DataMember = "authors"
         Me.AuthorsBindingSource.DataSource = Me.BooklibDataSet
         '
@@ -277,6 +278,7 @@ Partial Class frmImportBooks
         '
         'txtAuthorID
         '
+        Me.txtAuthorID.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.AuthorsBindingSource, "AuthorID", True))
         Me.txtAuthorID.Location = New System.Drawing.Point(89, 12)
         Me.txtAuthorID.Name = "txtAuthorID"
         Me.txtAuthorID.Size = New System.Drawing.Size(30, 20)
@@ -284,6 +286,7 @@ Partial Class frmImportBooks
         '
         'txtAuthorName
         '
+        Me.txtAuthorName.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.AuthorsBindingSource, "AuthorName", True))
         Me.txtAuthorName.Location = New System.Drawing.Point(89, 38)
         Me.txtAuthorName.Name = "txtAuthorName"
         Me.txtAuthorName.Size = New System.Drawing.Size(310, 20)

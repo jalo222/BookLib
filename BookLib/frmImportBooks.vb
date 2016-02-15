@@ -15,10 +15,31 @@
                     txtCoverFileName.Text = vFName
                 End If
             Next
-            'Next
+            ChkAuthor()
         Next
-    End sub
+    End Sub
 
+    Private Sub ChkAuthor()
+        Dim NewAuthID As Integer
+        Dim vWrds() As String = Split(Trim(Me.txtAuthor.Text))
+        Me.v_FirstName.Text = vWrds(0)
+        Me.v_Surname.Text = vWrds(vWrds.Length - 1)
+        Dim v_AuthTbl As New DataTable
+        v_AuthTbl = Cl_MySql.TblLookup("authors", "*", "AuthorSurname = '" & v_Surname.Text & "' and AuthorName = '" & v_FirstName.Text & "'")
+        MsgBox("Found " + Str(v_AuthTbl.Rows.Count) + " author entries.")
+        If v_AuthTbl.Rows.Count = 0 Then
+            'Me.AuthorsBindingSource.AddNew()
+            'Me.txtAuthorName.Text = v_FirstName.Text
+            'Me.txtAuthorSurname.Text = v_Surname.Text
+            NewAuthID = Cl_MySql.fnInsertAuthor(v_Surname.Text, v_FirstName.Text)
+
+        End If
+        Me.txtAuthorID.Text = NewAuthID
+        Me.AuthorsBindingSource.Filter = "AuthorID = " & Me.txtAuthorID.Text
+        'Me.AuthorsTableAdapter.Connection = Conn
+        Me.AuthorsTableAdapter.Fill(Me.BooklibDataSet.authors)
+
+    End Sub
     Private Sub Book_coversBindingNavigatorSaveItem_Click(sender As Object, e As EventArgs)
         cmdSave()
     End Sub
@@ -26,6 +47,7 @@
     Private Sub frmImportBooks_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.BooksTableAdapter.Connection = Conn
         Me.BooksTableAdapter.Fill(Me.BooklibDataSet.books)
+        Me.AuthorsBindingSource.Filter = "AuthorID = null"
         Me.AuthorsTableAdapter.Connection = Conn
         Me.AuthorsTableAdapter.Fill(Me.BooklibDataSet.authors)
 
@@ -56,16 +78,16 @@
     End Sub
 
     Private Sub txtAuthor_TextChanged(sender As Object, e As EventArgs) Handles txtAuthor.TextChanged
-        Dim vWrds() As String = Split(Trim(Me.txtAuthor.Text))
-        Me.v_FirstName.Text = vWrds(0)
-        Me.v_Surname.Text = vWrds(vWrds.Length - 1)
-        Dim v_AuthTbl As New DataTable
-        v_AuthTbl = Cl_MySql.TblLookup("authors", "*", "AuthorSurname = '" & v_Surname.Text & "' and AuthorName = '" & v_FirstName.Text & "'")
-        MsgBox("Found " + Str(v_AuthTbl.Rows.Count) + " author entries.")
-        If v_AuthTbl.Rows.Count = 0 Then
-            Me.AuthorsBindingSource.AddNew()
-            Me.txtAuthorName.Text = v_FirstName.Text
-            Me.txtAuthorSurname.Text = v_Surname.Text
-        End If
+        '        Dim vWrds() As String = Split(Trim(Me.txtAuthor.Text))
+        '        Me.v_FirstName.Text = vWrds(0)
+        '        Me.v_Surname.Text = vWrds(vWrds.Length - 1)
+        '        Dim v_AuthTbl As New DataTable
+        '        v_AuthTbl = Cl_MySql.TblLookup("authors", "*", "AuthorSurname = '" & v_Surname.Text & "' and AuthorName = '" & v_FirstName.Text & "'")
+        '        MsgBox("Found " + Str(v_AuthTbl.Rows.Count) + " author entries.")
+        '        If v_AuthTbl.Rows.Count = 0 Then
+        '        Me.AuthorsBindingSource.AddNew()
+        '        Me.txtAuthorName.Text = v_FirstName.Text
+        '        Me.txtAuthorSurname.Text = v_Surname.Text
+        '        End If
     End Sub
 End Class
