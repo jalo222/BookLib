@@ -26,12 +26,16 @@ Partial Class Test
         Dim BookIDLabel As System.Windows.Forms.Label
         Dim BookNameLabel As System.Windows.Forms.Label
         Dim AuthorIDLabel As System.Windows.Forms.Label
+        Dim FileTypeIDLabel As System.Windows.Forms.Label
+        Dim AuthorIDLabel1 As System.Windows.Forms.Label
+        Dim AuthorNameLabel As System.Windows.Forms.Label
+        Dim AuthorSurnameLabel As System.Windows.Forms.Label
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Test))
-        Dim FileTypeIDLabel1 As System.Windows.Forms.Label
         Me.BooklibDataSet = New BookLib.booklibDataSet()
         Me.BooksBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.BooksTableAdapter = New BookLib.booklibDataSetTableAdapters.booksTableAdapter()
         Me.TableAdapterManager = New BookLib.booklibDataSetTableAdapters.TableAdapterManager()
+        Me.AuthorsTableAdapter = New BookLib.booklibDataSetTableAdapters.authorsTableAdapter()
         Me.BooksBindingNavigator = New System.Windows.Forms.BindingNavigator(Me.components)
         Me.BindingNavigatorAddNewItem = New System.Windows.Forms.ToolStripButton()
         Me.BindingNavigatorCountItem = New System.Windows.Forms.ToolStripLabel()
@@ -48,27 +52,33 @@ Partial Class Test
         Me.BookIDTextBox = New System.Windows.Forms.TextBox()
         Me.BookNameTextBox = New System.Windows.Forms.TextBox()
         Me.AuthorIDComboBox = New System.Windows.Forms.ComboBox()
+        Me.AuthorsBindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
+        Me.FileTypeIDTextBox = New System.Windows.Forms.TextBox()
         Me.AuthorsBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.AuthorsTableAdapter = New BookLib.booklibDataSetTableAdapters.authorsTableAdapter()
-        Me.FileTypeIDComboBox = New System.Windows.Forms.ComboBox()
-        Me.File_typesBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.File_typesTableAdapter = New BookLib.booklibDataSetTableAdapters.file_typesTableAdapter()
+        Me.AuthorIDComboBox1 = New System.Windows.Forms.ComboBox()
+        Me.AuthorsBindingSource2 = New System.Windows.Forms.BindingSource(Me.components)
+        Me.AuthorNameTextBox = New System.Windows.Forms.TextBox()
+        Me.AuthorSurnameTextBox = New System.Windows.Forms.TextBox()
         BookIDLabel = New System.Windows.Forms.Label()
         BookNameLabel = New System.Windows.Forms.Label()
         AuthorIDLabel = New System.Windows.Forms.Label()
-        FileTypeIDLabel1 = New System.Windows.Forms.Label()
+        FileTypeIDLabel = New System.Windows.Forms.Label()
+        AuthorIDLabel1 = New System.Windows.Forms.Label()
+        AuthorNameLabel = New System.Windows.Forms.Label()
+        AuthorSurnameLabel = New System.Windows.Forms.Label()
         CType(Me.BooklibDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.BooksBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.BooksBindingNavigator, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.BooksBindingNavigator.SuspendLayout()
+        CType(Me.AuthorsBindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.AuthorsBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.File_typesBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.AuthorsBindingSource2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'BookIDLabel
         '
         BookIDLabel.AutoSize = True
-        BookIDLabel.Location = New System.Drawing.Point(170, 46)
+        BookIDLabel.Location = New System.Drawing.Point(91, 52)
         BookIDLabel.Name = "BookIDLabel"
         BookIDLabel.Size = New System.Drawing.Size(49, 13)
         BookIDLabel.TabIndex = 1
@@ -77,7 +87,7 @@ Partial Class Test
         'BookNameLabel
         '
         BookNameLabel.AutoSize = True
-        BookNameLabel.Location = New System.Drawing.Point(170, 72)
+        BookNameLabel.Location = New System.Drawing.Point(91, 78)
         BookNameLabel.Name = "BookNameLabel"
         BookNameLabel.Size = New System.Drawing.Size(66, 13)
         BookNameLabel.TabIndex = 3
@@ -86,11 +96,47 @@ Partial Class Test
         'AuthorIDLabel
         '
         AuthorIDLabel.AutoSize = True
-        AuthorIDLabel.Location = New System.Drawing.Point(170, 98)
+        AuthorIDLabel.Location = New System.Drawing.Point(91, 104)
         AuthorIDLabel.Name = "AuthorIDLabel"
         AuthorIDLabel.Size = New System.Drawing.Size(55, 13)
         AuthorIDLabel.TabIndex = 5
         AuthorIDLabel.Text = "Author ID:"
+        '
+        'FileTypeIDLabel
+        '
+        FileTypeIDLabel.AutoSize = True
+        FileTypeIDLabel.Location = New System.Drawing.Point(91, 131)
+        FileTypeIDLabel.Name = "FileTypeIDLabel"
+        FileTypeIDLabel.Size = New System.Drawing.Size(67, 13)
+        FileTypeIDLabel.TabIndex = 7
+        FileTypeIDLabel.Text = "File Type ID:"
+        '
+        'AuthorIDLabel1
+        '
+        AuthorIDLabel1.AutoSize = True
+        AuthorIDLabel1.Location = New System.Drawing.Point(114, 190)
+        AuthorIDLabel1.Name = "AuthorIDLabel1"
+        AuthorIDLabel1.Size = New System.Drawing.Size(55, 13)
+        AuthorIDLabel1.TabIndex = 9
+        AuthorIDLabel1.Text = "Author ID:"
+        '
+        'AuthorNameLabel
+        '
+        AuthorNameLabel.AutoSize = True
+        AuthorNameLabel.Location = New System.Drawing.Point(114, 217)
+        AuthorNameLabel.Name = "AuthorNameLabel"
+        AuthorNameLabel.Size = New System.Drawing.Size(72, 13)
+        AuthorNameLabel.TabIndex = 11
+        AuthorNameLabel.Text = "Author Name:"
+        '
+        'AuthorSurnameLabel
+        '
+        AuthorSurnameLabel.AutoSize = True
+        AuthorSurnameLabel.Location = New System.Drawing.Point(114, 243)
+        AuthorSurnameLabel.Name = "AuthorSurnameLabel"
+        AuthorSurnameLabel.Size = New System.Drawing.Size(86, 13)
+        AuthorSurnameLabel.TabIndex = 13
+        AuthorSurnameLabel.Text = "Author Surname:"
         '
         'BooklibDataSet
         '
@@ -108,14 +154,17 @@ Partial Class Test
         '
         'TableAdapterManager
         '
-        Me.TableAdapterManager.authorsTableAdapter = Nothing
+        Me.TableAdapterManager.authorsTableAdapter = Me.AuthorsTableAdapter
         Me.TableAdapterManager.BackupDataSetBeforeUpdate = False
-        Me.TableAdapterManager.book_coversTableAdapter = Nothing
         Me.TableAdapterManager.booksTableAdapter = Me.BooksTableAdapter
         Me.TableAdapterManager.categoriesTableAdapter = Nothing
         Me.TableAdapterManager.file_typesTableAdapter = Nothing
         Me.TableAdapterManager.lib_controlTableAdapter = Nothing
         Me.TableAdapterManager.UpdateOrder = BookLib.booklibDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete
+        '
+        'AuthorsTableAdapter
+        '
+        Me.AuthorsTableAdapter.ClearBeforeFill = True
         '
         'BooksBindingNavigator
         '
@@ -131,7 +180,7 @@ Partial Class Test
         Me.BooksBindingNavigator.MovePreviousItem = Me.BindingNavigatorMovePreviousItem
         Me.BooksBindingNavigator.Name = "BooksBindingNavigator"
         Me.BooksBindingNavigator.PositionItem = Me.BindingNavigatorPositionItem
-        Me.BooksBindingNavigator.Size = New System.Drawing.Size(529, 25)
+        Me.BooksBindingNavigator.Size = New System.Drawing.Size(447, 25)
         Me.BooksBindingNavigator.TabIndex = 0
         Me.BooksBindingNavigator.Text = "BindingNavigator1"
         '
@@ -231,7 +280,7 @@ Partial Class Test
         'BookIDTextBox
         '
         Me.BookIDTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.BooksBindingSource, "BookID", True))
-        Me.BookIDTextBox.Location = New System.Drawing.Point(243, 43)
+        Me.BookIDTextBox.Location = New System.Drawing.Point(164, 49)
         Me.BookIDTextBox.Name = "BookIDTextBox"
         Me.BookIDTextBox.Size = New System.Drawing.Size(121, 20)
         Me.BookIDTextBox.TabIndex = 2
@@ -239,7 +288,7 @@ Partial Class Test
         'BookNameTextBox
         '
         Me.BookNameTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.BooksBindingSource, "BookName", True))
-        Me.BookNameTextBox.Location = New System.Drawing.Point(243, 69)
+        Me.BookNameTextBox.Location = New System.Drawing.Point(164, 75)
         Me.BookNameTextBox.Name = "BookNameTextBox"
         Me.BookNameTextBox.Size = New System.Drawing.Size(121, 20)
         Me.BookNameTextBox.TabIndex = 4
@@ -247,67 +296,86 @@ Partial Class Test
         'AuthorIDComboBox
         '
         Me.AuthorIDComboBox.DataBindings.Add(New System.Windows.Forms.Binding("SelectedValue", Me.BooksBindingSource, "AuthorID", True))
-        Me.AuthorIDComboBox.DataSource = Me.AuthorsBindingSource
+        Me.AuthorIDComboBox.DataBindings.Add(New System.Windows.Forms.Binding("SelectedItem", Me.AuthorsBindingSource1, "AuthorID", True))
+        Me.AuthorIDComboBox.DataSource = Me.AuthorsBindingSource1
         Me.AuthorIDComboBox.DisplayMember = "AuthorName"
         Me.AuthorIDComboBox.FormattingEnabled = True
-        Me.AuthorIDComboBox.Location = New System.Drawing.Point(243, 95)
+        Me.AuthorIDComboBox.Location = New System.Drawing.Point(164, 101)
         Me.AuthorIDComboBox.Name = "AuthorIDComboBox"
         Me.AuthorIDComboBox.Size = New System.Drawing.Size(121, 21)
         Me.AuthorIDComboBox.TabIndex = 6
         Me.AuthorIDComboBox.ValueMember = "AuthorID"
+        '
+        'AuthorsBindingSource1
+        '
+        Me.AuthorsBindingSource1.DataMember = "authors"
+        Me.AuthorsBindingSource1.DataSource = Me.BooklibDataSet
+        '
+        'FileTypeIDTextBox
+        '
+        Me.FileTypeIDTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.BooksBindingSource, "FileTypeID", True))
+        Me.FileTypeIDTextBox.Location = New System.Drawing.Point(164, 128)
+        Me.FileTypeIDTextBox.Name = "FileTypeIDTextBox"
+        Me.FileTypeIDTextBox.Size = New System.Drawing.Size(121, 20)
+        Me.FileTypeIDTextBox.TabIndex = 8
         '
         'AuthorsBindingSource
         '
         Me.AuthorsBindingSource.DataMember = "authors"
         Me.AuthorsBindingSource.DataSource = Me.BooklibDataSet
         '
-        'AuthorsTableAdapter
+        'AuthorIDComboBox1
         '
-        Me.AuthorsTableAdapter.ClearBeforeFill = True
+        Me.AuthorIDComboBox1.DataBindings.Add(New System.Windows.Forms.Binding("SelectedValue", Me.AuthorsBindingSource, "AuthorID", True))
+        Me.AuthorIDComboBox1.DataSource = Me.AuthorsBindingSource2
+        Me.AuthorIDComboBox1.DisplayMember = "AuthorName"
+        Me.AuthorIDComboBox1.FormattingEnabled = True
+        Me.AuthorIDComboBox1.Location = New System.Drawing.Point(206, 187)
+        Me.AuthorIDComboBox1.Name = "AuthorIDComboBox1"
+        Me.AuthorIDComboBox1.Size = New System.Drawing.Size(121, 21)
+        Me.AuthorIDComboBox1.TabIndex = 10
+        Me.AuthorIDComboBox1.ValueMember = "AuthorID"
         '
-        'FileTypeIDLabel1
+        'AuthorsBindingSource2
         '
-        FileTypeIDLabel1.AutoSize = True
-        FileTypeIDLabel1.Location = New System.Drawing.Point(170, 125)
-        FileTypeIDLabel1.Name = "FileTypeIDLabel1"
-        FileTypeIDLabel1.Size = New System.Drawing.Size(67, 13)
-        FileTypeIDLabel1.TabIndex = 8
-        FileTypeIDLabel1.Text = "File Type ID:"
+        Me.AuthorsBindingSource2.DataMember = "authors"
+        Me.AuthorsBindingSource2.DataSource = Me.BooklibDataSet
         '
-        'FileTypeIDComboBox
+        'AuthorNameTextBox
         '
-        Me.FileTypeIDComboBox.DataBindings.Add(New System.Windows.Forms.Binding("SelectedValue", Me.BooksBindingSource, "FileTypeID", True))
-        Me.FileTypeIDComboBox.DataSource = Me.File_typesBindingSource
-        Me.FileTypeIDComboBox.DisplayMember = "FileExtension"
-        Me.FileTypeIDComboBox.FormattingEnabled = True
-        Me.FileTypeIDComboBox.Location = New System.Drawing.Point(243, 122)
-        Me.FileTypeIDComboBox.Name = "FileTypeIDComboBox"
-        Me.FileTypeIDComboBox.Size = New System.Drawing.Size(121, 21)
-        Me.FileTypeIDComboBox.TabIndex = 9
-        Me.FileTypeIDComboBox.ValueMember = "FileTypeID"
+        Me.AuthorNameTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.AuthorsBindingSource, "AuthorName", True))
+        Me.AuthorNameTextBox.Location = New System.Drawing.Point(206, 214)
+        Me.AuthorNameTextBox.Name = "AuthorNameTextBox"
+        Me.AuthorNameTextBox.Size = New System.Drawing.Size(121, 20)
+        Me.AuthorNameTextBox.TabIndex = 12
         '
-        'File_typesBindingSource
+        'AuthorSurnameTextBox
         '
-        Me.File_typesBindingSource.DataMember = "file_types"
-        Me.File_typesBindingSource.DataSource = Me.BooklibDataSet
-        '
-        'File_typesTableAdapter
-        '
-        Me.File_typesTableAdapter.ClearBeforeFill = True
+        Me.AuthorSurnameTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.AuthorsBindingSource, "AuthorSurname", True))
+        Me.AuthorSurnameTextBox.Location = New System.Drawing.Point(206, 240)
+        Me.AuthorSurnameTextBox.Name = "AuthorSurnameTextBox"
+        Me.AuthorSurnameTextBox.Size = New System.Drawing.Size(121, 20)
+        Me.AuthorSurnameTextBox.TabIndex = 14
         '
         'Test
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(529, 288)
-        Me.Controls.Add(FileTypeIDLabel1)
-        Me.Controls.Add(Me.FileTypeIDComboBox)
+        Me.ClientSize = New System.Drawing.Size(447, 280)
+        Me.Controls.Add(AuthorIDLabel1)
+        Me.Controls.Add(Me.AuthorIDComboBox1)
+        Me.Controls.Add(AuthorNameLabel)
+        Me.Controls.Add(Me.AuthorNameTextBox)
+        Me.Controls.Add(AuthorSurnameLabel)
+        Me.Controls.Add(Me.AuthorSurnameTextBox)
         Me.Controls.Add(BookIDLabel)
         Me.Controls.Add(Me.BookIDTextBox)
         Me.Controls.Add(BookNameLabel)
         Me.Controls.Add(Me.BookNameTextBox)
         Me.Controls.Add(AuthorIDLabel)
         Me.Controls.Add(Me.AuthorIDComboBox)
+        Me.Controls.Add(FileTypeIDLabel)
+        Me.Controls.Add(Me.FileTypeIDTextBox)
         Me.Controls.Add(Me.BooksBindingNavigator)
         Me.Name = "Test"
         Me.Text = "Test"
@@ -316,8 +384,9 @@ Partial Class Test
         CType(Me.BooksBindingNavigator, System.ComponentModel.ISupportInitialize).EndInit()
         Me.BooksBindingNavigator.ResumeLayout(False)
         Me.BooksBindingNavigator.PerformLayout()
+        CType(Me.AuthorsBindingSource1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.AuthorsBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.File_typesBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.AuthorsBindingSource2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -340,12 +409,15 @@ Partial Class Test
     Friend WithEvents BindingNavigatorMoveLastItem As ToolStripButton
     Friend WithEvents BindingNavigatorSeparator2 As ToolStripSeparator
     Friend WithEvents BooksBindingNavigatorSaveItem As ToolStripButton
+    Friend WithEvents AuthorsTableAdapter As booklibDataSetTableAdapters.authorsTableAdapter
     Friend WithEvents BookIDTextBox As TextBox
     Friend WithEvents BookNameTextBox As TextBox
     Friend WithEvents AuthorIDComboBox As ComboBox
+    Friend WithEvents FileTypeIDTextBox As TextBox
     Friend WithEvents AuthorsBindingSource As BindingSource
-    Friend WithEvents AuthorsTableAdapter As booklibDataSetTableAdapters.authorsTableAdapter
-    Friend WithEvents FileTypeIDComboBox As ComboBox
-    Friend WithEvents File_typesBindingSource As BindingSource
-    Friend WithEvents File_typesTableAdapter As booklibDataSetTableAdapters.file_typesTableAdapter
+    Friend WithEvents AuthorsBindingSource1 As BindingSource
+    Friend WithEvents AuthorIDComboBox1 As ComboBox
+    Friend WithEvents AuthorNameTextBox As TextBox
+    Friend WithEvents AuthorSurnameTextBox As TextBox
+    Friend WithEvents AuthorsBindingSource2 As BindingSource
 End Class

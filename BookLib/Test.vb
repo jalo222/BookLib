@@ -7,8 +7,6 @@
     End Sub
 
     Private Sub Test_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        'TODO: This line of code loads data into the 'BooklibDataSet.file_types' table. You can move, or remove it, as needed.
-        Me.File_typesTableAdapter.Fill(Me.BooklibDataSet.file_types)
         'TODO: This line of code loads data into the 'BooklibDataSet.authors' table. You can move, or remove it, as needed.
         Me.AuthorsTableAdapter.Fill(Me.BooklibDataSet.authors)
         'TODO: This line of code loads data into the 'BooklibDataSet.books' table. You can move, or remove it, as needed.
@@ -16,12 +14,14 @@
 
     End Sub
 
-    Private Sub FileTypeIDLabel_Click(sender As Object, e As EventArgs)
+    Private Sub BindingNavigatorMoveNextItem_Click(sender As Object, e As EventArgs) Handles BindingNavigatorMoveNextItem.Click
     End Sub
 
-
-    Private Sub BookNameTextBox_TextChanged(sender As Object, e As EventArgs) Handles BookNameTextBox.TextChanged
-        Me.AuthorIDComboBox.SelectedItem = 16
-
+    Private Sub AuthorIDComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles AuthorIDComboBox.SelectedIndexChanged
+        If Me.AuthorIDComboBox.SelectedValue IsNot Nothing Then
+            Me.AuthorIDComboBox1.SelectedValue = Me.AuthorIDComboBox.SelectedValue
+            MsgBox("Auth id = " & (Me.AuthorIDComboBox.SelectedValue))
+            Me.AuthorsBindingSource.Filter = "authorID = " & Me.AuthorIDComboBox.SelectedValue
+        End If
     End Sub
 End Class

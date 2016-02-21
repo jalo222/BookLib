@@ -107,7 +107,7 @@ Partial Class frmCategories
         '
         Me.TableAdapterManager.authorsTableAdapter = Nothing
         Me.TableAdapterManager.BackupDataSetBeforeUpdate = False
-        Me.TableAdapterManager.book_coversTableAdapter = Nothing
+        'Me.TableAdapterManager.book_coversTableAdapter = Nothing
         Me.TableAdapterManager.booksTableAdapter = Nothing
         Me.TableAdapterManager.categoriesTableAdapter = Me.CategoriesTableAdapter
         Me.TableAdapterManager.file_typesTableAdapter = Nothing
