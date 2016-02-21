@@ -16,6 +16,7 @@
                 End If
             Next
             ChkAuthor()
+            AuthorIDComboBox.Text = 13
         Next
     End Sub
 
@@ -34,8 +35,8 @@
             NewAuthID = Cl_MySql.fnInsertAuthor(v_Surname.Text, v_FirstName.Text)
 
         End If
-        Me.txtAuthorID.Text = NewAuthID
-        Me.AuthorsBindingSource.Filter = "AuthorID = " & Me.txtAuthorID.Text
+        ' Me.txtAuthorID.Text = NewAuthID
+        ' Me.AuthorsBindingSource.Filter = "AuthorID = " & Me.txtAuthorID.Text
         'Me.AuthorsTableAdapter.Connection = Conn
         Me.AuthorsTableAdapter.Fill(Me.BooklibDataSet.authors)
 
@@ -89,5 +90,9 @@
         '        Me.txtAuthorName.Text = v_FirstName.Text
         '        Me.txtAuthorSurname.Text = v_Surname.Text
         '        End If
+    End Sub
+
+    Private Sub ListBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ListBox1.SelectedIndexChanged
+
     End Sub
 End Class

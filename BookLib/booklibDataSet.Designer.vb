@@ -37,9 +37,9 @@ Partial Public Class booklibDataSet
     
     Private tablebooks As booksDataTable
     
-    Private relationFB_Author As Global.System.Data.DataRelation
-    
     Private relationFB_FileType As Global.System.Data.DataRelation
+    
+    Private relationFB_Author As Global.System.Data.DataRelation
     
     Private _schemaSerializationMode As Global.System.Data.SchemaSerializationMode = Global.System.Data.SchemaSerializationMode.IncludeSchema
     
@@ -318,8 +318,8 @@ Partial Public Class booklibDataSet
                 Me.tablebooks.InitVars
             End If
         End If
-        Me.relationFB_Author = Me.Relations("FB_Author")
         Me.relationFB_FileType = Me.Relations("FB_FileType")
+        Me.relationFB_Author = Me.Relations("FB_Author")
     End Sub
     
     <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -342,10 +342,21 @@ Partial Public Class booklibDataSet
         MyBase.Tables.Add(Me.tablelib_control)
         Me.tablebooks = New booksDataTable()
         MyBase.Tables.Add(Me.tablebooks)
-        Me.relationFB_Author = New Global.System.Data.DataRelation("FB_Author", New Global.System.Data.DataColumn() {Me.tableauthors.AuthorIDColumn}, New Global.System.Data.DataColumn() {Me.tablebooks.AuthorIDColumn}, false)
-        Me.Relations.Add(Me.relationFB_Author)
+        Dim fkc As Global.System.Data.ForeignKeyConstraint
+        fkc = New Global.System.Data.ForeignKeyConstraint("FB_FileType", New Global.System.Data.DataColumn() {Me.tablefile_types.FileTypeIDColumn}, New Global.System.Data.DataColumn() {Me.tablebooks.FileTypeIDColumn})
+        Me.tablebooks.Constraints.Add(fkc)
+        fkc.AcceptRejectRule = Global.System.Data.AcceptRejectRule.Cascade
+        fkc.DeleteRule = Global.System.Data.Rule.Cascade
+        fkc.UpdateRule = Global.System.Data.Rule.Cascade
+        fkc = New Global.System.Data.ForeignKeyConstraint("FB_Author", New Global.System.Data.DataColumn() {Me.tableauthors.AuthorIDColumn}, New Global.System.Data.DataColumn() {Me.tablebooks.AuthorIDColumn})
+        Me.tablebooks.Constraints.Add(fkc)
+        fkc.AcceptRejectRule = Global.System.Data.AcceptRejectRule.Cascade
+        fkc.DeleteRule = Global.System.Data.Rule.Cascade
+        fkc.UpdateRule = Global.System.Data.Rule.Cascade
         Me.relationFB_FileType = New Global.System.Data.DataRelation("FB_FileType", New Global.System.Data.DataColumn() {Me.tablefile_types.FileTypeIDColumn}, New Global.System.Data.DataColumn() {Me.tablebooks.FileTypeIDColumn}, false)
         Me.Relations.Add(Me.relationFB_FileType)
+        Me.relationFB_Author = New Global.System.Data.DataRelation("FB_Author", New Global.System.Data.DataColumn() {Me.tableauthors.AuthorIDColumn}, New Global.System.Data.DataColumn() {Me.tablebooks.AuthorIDColumn}, false)
+        Me.Relations.Add(Me.relationFB_Author)
     End Sub
     
     <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -2668,23 +2679,23 @@ Partial Public Class booklibDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Property authorsRow() As authorsRow
-            Get
-                Return CType(Me.GetParentRow(Me.Table.ParentRelations("FB_Author")),authorsRow)
-            End Get
-            Set
-                Me.SetParentRow(value, Me.Table.ParentRelations("FB_Author"))
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Property file_typesRow() As file_typesRow
             Get
                 Return CType(Me.GetParentRow(Me.Table.ParentRelations("FB_FileType")),file_typesRow)
             End Get
             Set
                 Me.SetParentRow(value, Me.Table.ParentRelations("FB_FileType"))
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property authorsRow() As authorsRow
+            Get
+                Return CType(Me.GetParentRow(Me.Table.ParentRelations("FB_Author")),authorsRow)
+            End Get
+            Set
+                Me.SetParentRow(value, Me.Table.ParentRelations("FB_Author"))
             End Set
         End Property
         
