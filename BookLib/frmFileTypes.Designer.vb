@@ -145,7 +145,7 @@ Partial Class frmFileTypes
         '
         Me.TableAdapterManager.authorsTableAdapter = Nothing
         Me.TableAdapterManager.BackupDataSetBeforeUpdate = False
-        Me.TableAdapterManager.book_coversTableAdapter = Nothing
+        'Me.TableAdapterManager.book_coversTableAdapter = Nothing
         Me.TableAdapterManager.booksTableAdapter = Nothing
         Me.TableAdapterManager.categoriesTableAdapter = Nothing
         Me.TableAdapterManager.file_typesTableAdapter = Me.File_typesTableAdapter
