@@ -393,11 +393,13 @@
       <xs:selector xpath=".//mstns:books" />
       <xs:field xpath="mstns:BookID" />
     </xs:unique>
+    <xs:keyref name="FB_Author" refer="Constraint1" msprop:rel_Generator_UserChildTable="books" msprop:rel_Generator_ChildPropName="GetbooksRows" msprop:rel_Generator_UserRelationName="FB_Author" msprop:rel_Generator_ParentPropName="authorsRow" msprop:rel_Generator_RelationVarName="relationFB_Author" msprop:rel_Generator_UserParentTable="authors" msdata:AcceptRejectRule="Cascade">
+      <xs:selector xpath=".//mstns:books" />
+      <xs:field xpath="mstns:AuthorID" />
+    </xs:keyref>
+    <xs:keyref name="FB_FileType" refer="file_types_Constraint1" msprop:rel_Generator_UserChildTable="books" msprop:rel_Generator_ChildPropName="GetbooksRows" msprop:rel_Generator_UserRelationName="FB_FileType" msprop:rel_Generator_RelationVarName="relationFB_FileType" msprop:rel_Generator_UserParentTable="file_types" msprop:rel_Generator_ParentPropName="file_typesRow" msdata:AcceptRejectRule="Cascade">
+      <xs:selector xpath=".//mstns:books" />
+      <xs:field xpath="mstns:FileTypeID" />
+    </xs:keyref>
   </xs:element>
-  <xs:annotation>
-    <xs:appinfo>
-      <msdata:Relationship name="FB_Author" msdata:parent="authors" msdata:child="books" msdata:parentkey="AuthorID" msdata:childkey="AuthorID" msprop:Generator_UserChildTable="books" msprop:Generator_ChildPropName="GetbooksRows" msprop:Generator_UserRelationName="FB_Author" msprop:Generator_RelationVarName="relationFB_Author" msprop:Generator_UserParentTable="authors" msprop:Generator_ParentPropName="authorsRow" />
-      <msdata:Relationship name="FB_FileType" msdata:parent="file_types" msdata:child="books" msdata:parentkey="FileTypeID" msdata:childkey="FileTypeID" msprop:Generator_UserChildTable="books" msprop:Generator_ChildPropName="GetbooksRows" msprop:Generator_UserRelationName="FB_FileType" msprop:Generator_RelationVarName="relationFB_FileType" msprop:Generator_UserParentTable="file_types" msprop:Generator_ParentPropName="file_typesRow" />
-    </xs:appinfo>
-  </xs:annotation>
 </xs:schema>

@@ -29,8 +29,10 @@ Partial Class frmImportBooks
         Dim FileTypeIDLabel As System.Windows.Forms.Label
         Dim FileExtensionLabel As System.Windows.Forms.Label
         Dim FileTypeLabel As System.Windows.Forms.Label
-        Dim AuthorIDLabel1 As System.Windows.Forms.Label
         Dim AuthorIDLabel As System.Windows.Forms.Label
+        Dim AuthorIDLabel1 As System.Windows.Forms.Label
+        Dim AuthorNameLabel1 As System.Windows.Forms.Label
+        Dim AuthorSurnameLabel1 As System.Windows.Forms.Label
         Me.FileSystemTree2 = New MasaSam.Forms.Controls.FileSystemTree()
         Me.btnImport = New System.Windows.Forms.Button()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
@@ -48,9 +50,11 @@ Partial Class frmImportBooks
         Me.AuthorsTableAdapter = New BookLib.booklibDataSetTableAdapters.authorsTableAdapter()
         Me.TableAdapterManager = New BookLib.booklibDataSetTableAdapters.TableAdapterManager()
         Me.BooksTableAdapter = New BookLib.booklibDataSetTableAdapters.booksTableAdapter()
+        Me.File_typesTableAdapter = New BookLib.booklibDataSetTableAdapters.file_typesTableAdapter()
         Me.txtAuthorName = New System.Windows.Forms.TextBox()
         Me.txtAuthorSurname = New System.Windows.Forms.TextBox()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.Panel3 = New System.Windows.Forms.Panel()
         Me.AuthorIDTextBox = New System.Windows.Forms.TextBox()
         Me.BooksBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.txtBookName = New System.Windows.Forms.TextBox()
@@ -58,27 +62,38 @@ Partial Class frmImportBooks
         Me.v_Surname = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
-        Me.FileTypeIDTextBox = New System.Windows.Forms.TextBox()
+        Me.txtFileTypeID = New System.Windows.Forms.TextBox()
         Me.File_typesBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.File_typesTableAdapter = New BookLib.booklibDataSetTableAdapters.file_typesTableAdapter()
-        Me.FileExtensionTextBox = New System.Windows.Forms.TextBox()
-        Me.FileTypeTextBox = New System.Windows.Forms.TextBox()
-        Me.txtBookAuthID = New System.Windows.Forms.TextBox()
+        Me.txtFileExtension = New System.Windows.Forms.TextBox()
+        Me.txtFileType = New System.Windows.Forms.TextBox()
+        Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.v_FileType = New System.Windows.Forms.TextBox()
+        Me.AuthorNameTextBox = New System.Windows.Forms.TextBox()
+        Me.AuthorSurnameTextBox = New System.Windows.Forms.TextBox()
+        Me.BooksBindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
+        Me.AuthorIDComboBox = New System.Windows.Forms.ComboBox()
+        Me.AuthorsBindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
         AuthorNameLabel = New System.Windows.Forms.Label()
         AuthorSurnameLabel = New System.Windows.Forms.Label()
         BookNameLabel = New System.Windows.Forms.Label()
         FileTypeIDLabel = New System.Windows.Forms.Label()
         FileExtensionLabel = New System.Windows.Forms.Label()
         FileTypeLabel = New System.Windows.Forms.Label()
-        AuthorIDLabel1 = New System.Windows.Forms.Label()
         AuthorIDLabel = New System.Windows.Forms.Label()
+        AuthorIDLabel1 = New System.Windows.Forms.Label()
+        AuthorNameLabel1 = New System.Windows.Forms.Label()
+        AuthorSurnameLabel1 = New System.Windows.Forms.Label()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         CType(Me.BooklibDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.AuthorsBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel2.SuspendLayout()
+        Me.Panel3.SuspendLayout()
         CType(Me.BooksBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.File_typesBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel4.SuspendLayout()
+        CType(Me.BooksBindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.AuthorsBindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'AuthorNameLabel
@@ -111,7 +126,7 @@ Partial Class frmImportBooks
         'FileTypeIDLabel
         '
         FileTypeIDLabel.AutoSize = True
-        FileTypeIDLabel.Location = New System.Drawing.Point(375, 275)
+        FileTypeIDLabel.Location = New System.Drawing.Point(17, 21)
         FileTypeIDLabel.Name = "FileTypeIDLabel"
         FileTypeIDLabel.Size = New System.Drawing.Size(67, 13)
         FileTypeIDLabel.TabIndex = 28
@@ -120,7 +135,7 @@ Partial Class frmImportBooks
         'FileExtensionLabel
         '
         FileExtensionLabel.AutoSize = True
-        FileExtensionLabel.Location = New System.Drawing.Point(384, 310)
+        FileExtensionLabel.Location = New System.Drawing.Point(28, 52)
         FileExtensionLabel.Name = "FileExtensionLabel"
         FileExtensionLabel.Size = New System.Drawing.Size(56, 13)
         FileExtensionLabel.TabIndex = 29
@@ -129,21 +144,11 @@ Partial Class frmImportBooks
         'FileTypeLabel
         '
         FileTypeLabel.AutoSize = True
-        FileTypeLabel.Location = New System.Drawing.Point(522, 310)
+        FileTypeLabel.Location = New System.Drawing.Point(33, 82)
         FileTypeLabel.Name = "FileTypeLabel"
         FileTypeLabel.Size = New System.Drawing.Size(53, 13)
         FileTypeLabel.TabIndex = 30
         FileTypeLabel.Text = "File Type:"
-        '
-        'AuthorIDLabel1
-        '
-        AuthorIDLabel1.AutoSize = True
-        AuthorIDLabel1.Location = New System.Drawing.Point(387, 144)
-        AuthorIDLabel1.Name = "AuthorIDLabel1"
-        AuthorIDLabel1.Size = New System.Drawing.Size(55, 13)
-        AuthorIDLabel1.TabIndex = 31
-        AuthorIDLabel1.Text = "Author ID:"
-        AuthorIDLabel1.Visible = False
         '
         'AuthorIDLabel
         '
@@ -231,7 +236,6 @@ Partial Class frmImportBooks
         Me.Label4.Size = New System.Drawing.Size(38, 13)
         Me.Label4.TabIndex = 10
         Me.Label4.Text = "Author"
-        Me.Label4.Visible = False
         '
         'txtAuthor
         '
@@ -239,7 +243,6 @@ Partial Class frmImportBooks
         Me.txtAuthor.Name = "txtAuthor"
         Me.txtAuthor.Size = New System.Drawing.Size(416, 20)
         Me.txtAuthor.TabIndex = 12
-        Me.txtAuthor.Visible = False
         '
         'Panel1
         '
@@ -264,6 +267,7 @@ Partial Class frmImportBooks
         'BooklibDataSet
         '
         Me.BooklibDataSet.DataSetName = "booklibDataSet"
+        Me.BooklibDataSet.EnforceConstraints = False
         Me.BooklibDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
         '
         'AuthorsBindingSource
@@ -282,13 +286,17 @@ Partial Class frmImportBooks
         Me.TableAdapterManager.BackupDataSetBeforeUpdate = False
         Me.TableAdapterManager.booksTableAdapter = Me.BooksTableAdapter
         Me.TableAdapterManager.categoriesTableAdapter = Nothing
-        Me.TableAdapterManager.file_typesTableAdapter = Nothing
+        Me.TableAdapterManager.file_typesTableAdapter = Me.File_typesTableAdapter
         Me.TableAdapterManager.lib_controlTableAdapter = Nothing
         Me.TableAdapterManager.UpdateOrder = BookLib.booklibDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete
         '
         'BooksTableAdapter
         '
         Me.BooksTableAdapter.ClearBeforeFill = True
+        '
+        'File_typesTableAdapter
+        '
+        Me.File_typesTableAdapter.ClearBeforeFill = True
         '
         'txtAuthorName
         '
@@ -310,6 +318,7 @@ Partial Class frmImportBooks
         '
         Me.Panel2.BackColor = System.Drawing.SystemColors.GradientInactiveCaption
         Me.Panel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.Panel2.Controls.Add(Me.Panel3)
         Me.Panel2.Controls.Add(AuthorIDLabel)
         Me.Panel2.Controls.Add(Me.AuthorIDTextBox)
         Me.Panel2.Controls.Add(Me.txtAuthorSurname)
@@ -318,8 +327,23 @@ Partial Class frmImportBooks
         Me.Panel2.Controls.Add(Me.txtAuthorName)
         Me.Panel2.Location = New System.Drawing.Point(448, 158)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(423, 108)
+        Me.Panel2.Size = New System.Drawing.Size(425, 129)
         Me.Panel2.TabIndex = 23
+        '
+        'Panel3
+        '
+        Me.Panel3.BackColor = System.Drawing.SystemColors.GradientInactiveCaption
+        Me.Panel3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.Panel3.Controls.Add(Me.AuthorIDComboBox)
+        Me.Panel3.Controls.Add(AuthorIDLabel1)
+        Me.Panel3.Controls.Add(AuthorNameLabel1)
+        Me.Panel3.Controls.Add(Me.AuthorNameTextBox)
+        Me.Panel3.Controls.Add(AuthorSurnameLabel1)
+        Me.Panel3.Controls.Add(Me.AuthorSurnameTextBox)
+        Me.Panel3.Location = New System.Drawing.Point(-2, -2)
+        Me.Panel3.Name = "Panel3"
+        Me.Panel3.Size = New System.Drawing.Size(423, 127)
+        Me.Panel3.TabIndex = 24
         '
         'AuthorIDTextBox
         '
@@ -348,7 +372,6 @@ Partial Class frmImportBooks
         Me.v_FirstName.Name = "v_FirstName"
         Me.v_FirstName.Size = New System.Drawing.Size(134, 20)
         Me.v_FirstName.TabIndex = 25
-        Me.v_FirstName.Visible = False
         '
         'v_Surname
         '
@@ -356,7 +379,6 @@ Partial Class frmImportBooks
         Me.v_Surname.Name = "v_Surname"
         Me.v_Surname.Size = New System.Drawing.Size(158, 20)
         Me.v_Surname.TabIndex = 26
-        Me.v_Surname.Visible = False
         '
         'Label3
         '
@@ -366,7 +388,6 @@ Partial Class frmImportBooks
         Me.Label3.Size = New System.Drawing.Size(57, 13)
         Me.Label3.TabIndex = 27
         Me.Label3.Text = "First Name"
-        Me.Label3.Visible = False
         '
         'Label5
         '
@@ -376,63 +397,130 @@ Partial Class frmImportBooks
         Me.Label5.Size = New System.Drawing.Size(49, 13)
         Me.Label5.TabIndex = 28
         Me.Label5.Text = "Surname"
-        Me.Label5.Visible = False
         '
-        'FileTypeIDTextBox
+        'txtFileTypeID
         '
-        Me.FileTypeIDTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.BooksBindingSource, "FileTypeID", True))
-        Me.FileTypeIDTextBox.Location = New System.Drawing.Point(448, 272)
-        Me.FileTypeIDTextBox.Name = "FileTypeIDTextBox"
-        Me.FileTypeIDTextBox.Size = New System.Drawing.Size(38, 20)
-        Me.FileTypeIDTextBox.TabIndex = 29
+        Me.txtFileTypeID.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.File_typesBindingSource, "FileTypeID", True))
+        Me.txtFileTypeID.Location = New System.Drawing.Point(92, 14)
+        Me.txtFileTypeID.Name = "txtFileTypeID"
+        Me.txtFileTypeID.Size = New System.Drawing.Size(38, 20)
+        Me.txtFileTypeID.TabIndex = 29
         '
         'File_typesBindingSource
         '
         Me.File_typesBindingSource.DataMember = "file_types"
         Me.File_typesBindingSource.DataSource = Me.BooklibDataSet
         '
-        'File_typesTableAdapter
+        'txtFileExtension
         '
-        Me.File_typesTableAdapter.ClearBeforeFill = True
+        Me.txtFileExtension.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.File_typesBindingSource, "FileExtension", True))
+        Me.txtFileExtension.Location = New System.Drawing.Point(92, 49)
+        Me.txtFileExtension.Name = "txtFileExtension"
+        Me.txtFileExtension.Size = New System.Drawing.Size(60, 20)
+        Me.txtFileExtension.TabIndex = 30
         '
-        'FileExtensionTextBox
+        'txtFileType
         '
-        Me.FileExtensionTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.File_typesBindingSource, "FileExtension", True))
-        Me.FileExtensionTextBox.Location = New System.Drawing.Point(448, 307)
-        Me.FileExtensionTextBox.Name = "FileExtensionTextBox"
-        Me.FileExtensionTextBox.Size = New System.Drawing.Size(60, 20)
-        Me.FileExtensionTextBox.TabIndex = 30
+        Me.txtFileType.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.File_typesBindingSource, "FileType", True))
+        Me.txtFileType.Location = New System.Drawing.Point(92, 79)
+        Me.txtFileType.Name = "txtFileType"
+        Me.txtFileType.Size = New System.Drawing.Size(310, 20)
+        Me.txtFileType.TabIndex = 31
         '
-        'FileTypeTextBox
+        'Panel4
         '
-        Me.FileTypeTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.File_typesBindingSource, "FileType", True))
-        Me.FileTypeTextBox.Location = New System.Drawing.Point(581, 307)
-        Me.FileTypeTextBox.Name = "FileTypeTextBox"
-        Me.FileTypeTextBox.Size = New System.Drawing.Size(268, 20)
-        Me.FileTypeTextBox.TabIndex = 31
+        Me.Panel4.BackColor = System.Drawing.SystemColors.GradientInactiveCaption
+        Me.Panel4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.Panel4.Controls.Add(Me.txtFileType)
+        Me.Panel4.Controls.Add(Me.txtFileTypeID)
+        Me.Panel4.Controls.Add(FileTypeIDLabel)
+        Me.Panel4.Controls.Add(FileTypeLabel)
+        Me.Panel4.Controls.Add(Me.txtFileExtension)
+        Me.Panel4.Controls.Add(FileExtensionLabel)
+        Me.Panel4.Location = New System.Drawing.Point(447, 288)
+        Me.Panel4.Name = "Panel4"
+        Me.Panel4.Size = New System.Drawing.Size(417, 111)
+        Me.Panel4.TabIndex = 33
         '
-        'txtBookAuthID
+        'v_FileType
         '
-        Me.txtBookAuthID.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.BooksBindingSource, "AuthorID", True))
-        Me.txtBookAuthID.Location = New System.Drawing.Point(448, 141)
-        Me.txtBookAuthID.Name = "txtBookAuthID"
-        Me.txtBookAuthID.Size = New System.Drawing.Size(100, 20)
-        Me.txtBookAuthID.TabIndex = 32
-        Me.txtBookAuthID.Visible = False
+        Me.v_FileType.Location = New System.Drawing.Point(448, 141)
+        Me.v_FileType.Name = "v_FileType"
+        Me.v_FileType.Size = New System.Drawing.Size(82, 20)
+        Me.v_FileType.TabIndex = 35
+        '
+        'AuthorIDLabel1
+        '
+        AuthorIDLabel1.AutoSize = True
+        AuthorIDLabel1.Location = New System.Drawing.Point(39, 22)
+        AuthorIDLabel1.Name = "AuthorIDLabel1"
+        AuthorIDLabel1.Size = New System.Drawing.Size(55, 13)
+        AuthorIDLabel1.TabIndex = 0
+        AuthorIDLabel1.Text = "Author ID:"
+        '
+        'AuthorNameLabel1
+        '
+        AuthorNameLabel1.AutoSize = True
+        AuthorNameLabel1.Location = New System.Drawing.Point(39, 49)
+        AuthorNameLabel1.Name = "AuthorNameLabel1"
+        AuthorNameLabel1.Size = New System.Drawing.Size(72, 13)
+        AuthorNameLabel1.TabIndex = 2
+        AuthorNameLabel1.Text = "Author Name:"
+        '
+        'AuthorNameTextBox
+        '
+        Me.AuthorNameTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.AuthorsBindingSource, "AuthorName", True))
+        Me.AuthorNameTextBox.Location = New System.Drawing.Point(131, 46)
+        Me.AuthorNameTextBox.Name = "AuthorNameTextBox"
+        Me.AuthorNameTextBox.Size = New System.Drawing.Size(121, 20)
+        Me.AuthorNameTextBox.TabIndex = 3
+        '
+        'AuthorSurnameLabel1
+        '
+        AuthorSurnameLabel1.AutoSize = True
+        AuthorSurnameLabel1.Location = New System.Drawing.Point(39, 75)
+        AuthorSurnameLabel1.Name = "AuthorSurnameLabel1"
+        AuthorSurnameLabel1.Size = New System.Drawing.Size(86, 13)
+        AuthorSurnameLabel1.TabIndex = 4
+        AuthorSurnameLabel1.Text = "Author Surname:"
+        '
+        'AuthorSurnameTextBox
+        '
+        Me.AuthorSurnameTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.AuthorsBindingSource, "AuthorSurname", True))
+        Me.AuthorSurnameTextBox.Location = New System.Drawing.Point(131, 72)
+        Me.AuthorSurnameTextBox.Name = "AuthorSurnameTextBox"
+        Me.AuthorSurnameTextBox.Size = New System.Drawing.Size(121, 20)
+        Me.AuthorSurnameTextBox.TabIndex = 5
+        '
+        'BooksBindingSource1
+        '
+        Me.BooksBindingSource1.DataMember = "FB_Author"
+        Me.BooksBindingSource1.DataSource = Me.AuthorsBindingSource
+        '
+        'AuthorIDComboBox
+        '
+        Me.AuthorIDComboBox.DataBindings.Add(New System.Windows.Forms.Binding("SelectedValue", Me.BooksBindingSource1, "AuthorID", True))
+        Me.AuthorIDComboBox.DataSource = Me.AuthorsBindingSource1
+        Me.AuthorIDComboBox.DisplayMember = "AuthorName"
+        Me.AuthorIDComboBox.FormattingEnabled = True
+        Me.AuthorIDComboBox.Location = New System.Drawing.Point(131, 15)
+        Me.AuthorIDComboBox.Name = "AuthorIDComboBox"
+        Me.AuthorIDComboBox.Size = New System.Drawing.Size(121, 21)
+        Me.AuthorIDComboBox.TabIndex = 6
+        Me.AuthorIDComboBox.ValueMember = "AuthorID"
+        '
+        'AuthorsBindingSource1
+        '
+        Me.AuthorsBindingSource1.DataMember = "authors"
+        Me.AuthorsBindingSource1.DataSource = Me.BooklibDataSet
         '
         'frmImportBooks
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1162, 675)
-        Me.Controls.Add(AuthorIDLabel1)
-        Me.Controls.Add(Me.txtBookAuthID)
-        Me.Controls.Add(FileTypeLabel)
-        Me.Controls.Add(Me.FileTypeTextBox)
-        Me.Controls.Add(FileExtensionLabel)
-        Me.Controls.Add(Me.FileExtensionTextBox)
-        Me.Controls.Add(FileTypeIDLabel)
-        Me.Controls.Add(Me.FileTypeIDTextBox)
+        Me.Controls.Add(Me.v_FileType)
+        Me.Controls.Add(Me.Panel4)
         Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.v_Surname)
@@ -459,8 +547,14 @@ Partial Class frmImportBooks
         CType(Me.AuthorsBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()
+        Me.Panel3.ResumeLayout(False)
+        Me.Panel3.PerformLayout()
         CType(Me.BooksBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.File_typesBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Panel4.ResumeLayout(False)
+        Me.Panel4.PerformLayout()
+        CType(Me.BooksBindingSource1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.AuthorsBindingSource1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -492,11 +586,18 @@ Partial Class frmImportBooks
     Friend WithEvents v_Surname As TextBox
     Friend WithEvents Label3 As Label
     Friend WithEvents Label5 As Label
-    Friend WithEvents FileTypeIDTextBox As TextBox
+    Friend WithEvents txtFileTypeID As TextBox
     Friend WithEvents File_typesBindingSource As BindingSource
     Friend WithEvents File_typesTableAdapter As booklibDataSetTableAdapters.file_typesTableAdapter
-    Friend WithEvents FileExtensionTextBox As TextBox
-    Friend WithEvents FileTypeTextBox As TextBox
-    Friend WithEvents txtBookAuthID As TextBox
+    Friend WithEvents txtFileExtension As TextBox
+    Friend WithEvents txtFileType As TextBox
     Friend WithEvents AuthorIDTextBox As TextBox
+    Friend WithEvents Panel3 As Panel
+    Friend WithEvents Panel4 As Panel
+    Friend WithEvents v_FileType As TextBox
+    Friend WithEvents AuthorNameTextBox As TextBox
+    Friend WithEvents AuthorSurnameTextBox As TextBox
+    Friend WithEvents AuthorIDComboBox As ComboBox
+    Friend WithEvents BooksBindingSource1 As BindingSource
+    Friend WithEvents AuthorsBindingSource1 As BindingSource
 End Class

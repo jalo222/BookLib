@@ -10,6 +10,7 @@
                 ' MsgBox("Name = " & vFName)
                 vFExt = ImpFile.Extension
                 If vFExt = ".mobi" Or vFExt = ".epub" Then
+                    Me.v_FileType.Text = vFExt
                     Me.txtBookRef.Text = vFName
                     v_BookName = Mid(txtBookRef.Text, 1, InStr(txtBookRef.Text, "-") - 2)
                     Dim vAuth As String = Trim(Mid(txtBookRef.Text, InStr(txtBookRef.Text, "-") + 1))
@@ -22,11 +23,13 @@
             Next
             ChkBook()
             ChkAuthor()
+            ChkFileType()
         Next
     End Sub
     Private Sub ChkBook()
         Dim v_BookTbl As New DataTable
         v_BookTbl = Cl_MySql.TblLookup("books", "*", "BookName = '" & Me.txtBookName.Text & "'")
+        MsgBox("book cnt = " & v_BookTbl.Rows.Count)
         If v_BookTbl.Rows.Count = 0 Then
             Me.BooksBindingSource.AddNew()
             Me.txtBookName.Text = v_BookName
@@ -50,9 +53,21 @@
             'NewAuthID = v_AuthTbl.Rows(0).Item("AuthorID")
             Me.AuthorsBindingSource.Filter = "AuthorID = " & v_AuthTbl.Rows(0).Item("AuthorID")
         End If
-        Me.txtBookAuthID.Text = Me.AuthorIDTextBox.Text
-
+        '        Me.txtBookAuthID.Text = Me.txtAuthorID.Text
     End Sub
+
+    Private Sub ChkFileType()
+        Dim v_FtypeTbl As New DataTable
+        v_FtypeTbl = Cl_MySql.TblLookup("file_types", "*", "FileExtension = '" & v_FileType.Text & "'")
+        If v_FtypeTbl.Rows.Count = 0 Then
+            Me.File_typesBindingSource.AddNew()
+            Me.txtFileExtension.Text = v_FileType.Text
+        Else
+            Me.File_typesBindingSource.Filter = "FileTypeID = " & v_FtypeTbl.Rows(0).Item("FileTypeID")
+        End If
+        '        Me.txtBookFileTypeID.Text = txtFileTypeID.Text
+    End Sub
+
     Private Sub Book_coversBindingNavigatorSaveItem_Click(sender As Object, e As EventArgs)
         cmdSave()
     End Sub
@@ -64,13 +79,17 @@
         Me.AuthorsBindingSource.Filter = "AuthorID = null"
         Me.AuthorsTableAdapter.Connection = Conn
         Me.AuthorsTableAdapter.Fill(Me.BooklibDataSet.authors)
+        Me.File_typesBindingSource.Filter = "FileTypeID = null"
+        Me.File_typesTableAdapter.Connection = Conn
+        Me.File_typesTableAdapter.Fill(Me.BooklibDataSet.file_types)
 
     End Sub
 
     Private Sub cmdSave()
         Me.Validate()
-        Me.AuthorsBindingSource.EndEdit()
         Me.BooksBindingSource.EndEdit()
+        Me.AuthorsBindingSource.EndEdit()
+        Me.File_typesBindingSource.EndEdit()
         Me.TableAdapterManager.UpdateAll(Me.BooklibDataSet)
     End Sub
 
@@ -87,11 +106,8 @@
     End Sub
 
 
-    Private Sub AuthorsBindingNavigatorSaveItem_Click(sender As Object, e As EventArgs)
-        Me.Validate()
-        Me.AuthorsBindingSource.EndEdit()
-        Me.TableAdapterManager.UpdateAll(Me.BooklibDataSet)
+
+    Private Sub txtFileTypeID_TextChanged(sender As Object, e As EventArgs) Handles txtFileTypeID.TextChanged
 
     End Sub
-
 End Class
