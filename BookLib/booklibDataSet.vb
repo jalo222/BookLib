@@ -1,4 +1,2 @@
-﻿
-
-Partial Public Class booklibDataSet
+﻿Partial Class booklibDataSet
 End Class
