@@ -40,6 +40,11 @@ Public Class BookLibStart
         frmFileTypes.Show()
     End Sub
 
+    Private Sub TestToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TestToolStripMenuItem.Click
+        Dim frmTest As New Test
+        frmTest.Show()
+    End Sub
+
     '    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
     '    Dim xtab As New DataTable
     '    Dim coldata As String

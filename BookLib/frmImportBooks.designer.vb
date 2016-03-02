@@ -24,13 +24,13 @@ Partial Class frmImportBooks
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim BookNameLabel As System.Windows.Forms.Label
-        Dim AuthorIDLabel As System.Windows.Forms.Label
         Dim FileTypeIDLabel As System.Windows.Forms.Label
         Dim AuthorNameLabel As System.Windows.Forms.Label
         Dim AuthorSurnameLabel As System.Windows.Forms.Label
         Dim AuthorIDLabel1 As System.Windows.Forms.Label
         Dim BookIDLabel As System.Windows.Forms.Label
         Dim AuthorFullNameLabel As System.Windows.Forms.Label
+        Dim AuthorIDLabel As System.Windows.Forms.Label
         Me.FileSystemTree2 = New MasaSam.Forms.Controls.FileSystemTree()
         Me.btnImport = New System.Windows.Forms.Button()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
@@ -43,7 +43,6 @@ Partial Class frmImportBooks
         Me.BooksTableAdapter = New BookLib.booklibDataSetTableAdapters.booksTableAdapter()
         Me.BooksBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.BookNameTextBox = New System.Windows.Forms.TextBox()
-        Me.AuthorIDComboBox = New System.Windows.Forms.ComboBox()
         Me.AuthorsBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.FileTypeIDComboBox = New System.Windows.Forms.ComboBox()
         Me.File_typesBindingSource = New System.Windows.Forms.BindingSource(Me.components)
@@ -57,14 +56,15 @@ Partial Class frmImportBooks
         Me.File_typesTableAdapter = New BookLib.booklibDataSetTableAdapters.file_typesTableAdapter()
         Me.AuthorsTableAdapter = New BookLib.booklibDataSetTableAdapters.authorsTableAdapter()
         Me.AuthorFullNameTextBox = New System.Windows.Forms.TextBox()
+        Me.AuthorIDComboBox = New System.Windows.Forms.TextBox()
         BookNameLabel = New System.Windows.Forms.Label()
-        AuthorIDLabel = New System.Windows.Forms.Label()
         FileTypeIDLabel = New System.Windows.Forms.Label()
         AuthorNameLabel = New System.Windows.Forms.Label()
         AuthorSurnameLabel = New System.Windows.Forms.Label()
         AuthorIDLabel1 = New System.Windows.Forms.Label()
         BookIDLabel = New System.Windows.Forms.Label()
         AuthorFullNameLabel = New System.Windows.Forms.Label()
+        AuthorIDLabel = New System.Windows.Forms.Label()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.BooklibDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.BooksBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -80,15 +80,6 @@ Partial Class frmImportBooks
         BookNameLabel.Size = New System.Drawing.Size(66, 13)
         BookNameLabel.TabIndex = 21
         BookNameLabel.Text = "Book Name:"
-        '
-        'AuthorIDLabel
-        '
-        AuthorIDLabel.AutoSize = True
-        AuthorIDLabel.Location = New System.Drawing.Point(422, 239)
-        AuthorIDLabel.Name = "AuthorIDLabel"
-        AuthorIDLabel.Size = New System.Drawing.Size(55, 13)
-        AuthorIDLabel.TabIndex = 23
-        AuthorIDLabel.Text = "Author ID:"
         '
         'FileTypeIDLabel
         '
@@ -143,6 +134,15 @@ Partial Class frmImportBooks
         AuthorFullNameLabel.Size = New System.Drawing.Size(91, 13)
         AuthorFullNameLabel.TabIndex = 36
         AuthorFullNameLabel.Text = "Author Full Name:"
+        '
+        'AuthorIDLabel
+        '
+        AuthorIDLabel.AutoSize = True
+        AuthorIDLabel.Location = New System.Drawing.Point(434, 239)
+        AuthorIDLabel.Name = "AuthorIDLabel"
+        AuthorIDLabel.Size = New System.Drawing.Size(55, 13)
+        AuthorIDLabel.TabIndex = 37
+        AuthorIDLabel.Text = "Author ID:"
         '
         'FileSystemTree2
         '
@@ -238,18 +238,6 @@ Partial Class frmImportBooks
         Me.BookNameTextBox.Size = New System.Drawing.Size(121, 20)
         Me.BookNameTextBox.TabIndex = 22
         '
-        'AuthorIDComboBox
-        '
-        Me.AuthorIDComboBox.DataBindings.Add(New System.Windows.Forms.Binding("SelectedValue", Me.BooksBindingSource, "AuthorID", True))
-        Me.AuthorIDComboBox.DataSource = Me.AuthorsBindingSource
-        Me.AuthorIDComboBox.DisplayMember = "AuthorFullName"
-        Me.AuthorIDComboBox.FormattingEnabled = True
-        Me.AuthorIDComboBox.Location = New System.Drawing.Point(495, 236)
-        Me.AuthorIDComboBox.Name = "AuthorIDComboBox"
-        Me.AuthorIDComboBox.Size = New System.Drawing.Size(121, 21)
-        Me.AuthorIDComboBox.TabIndex = 24
-        Me.AuthorIDComboBox.ValueMember = "AuthorID"
-        '
         'AuthorsBindingSource
         '
         Me.AuthorsBindingSource.DataMember = "authors"
@@ -331,7 +319,7 @@ Partial Class frmImportBooks
         '
         'AuthorsTableAdapter
         '
-        Me.AuthorsTableAdapter.ClearBeforeFill = True
+        Me.AuthorsTableAdapter.ClearBeforeFill = False
         '
         'AuthorFullNameTextBox
         '
@@ -341,11 +329,21 @@ Partial Class frmImportBooks
         Me.AuthorFullNameTextBox.Size = New System.Drawing.Size(268, 20)
         Me.AuthorFullNameTextBox.TabIndex = 37
         '
+        'AuthorIDComboBox
+        '
+        Me.AuthorIDComboBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.BooksBindingSource, "AuthorID", True))
+        Me.AuthorIDComboBox.Location = New System.Drawing.Point(495, 236)
+        Me.AuthorIDComboBox.Name = "AuthorIDComboBox"
+        Me.AuthorIDComboBox.Size = New System.Drawing.Size(100, 20)
+        Me.AuthorIDComboBox.TabIndex = 38
+        '
         'frmImportBooks
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1162, 675)
+        Me.Controls.Add(AuthorIDLabel)
+        Me.Controls.Add(Me.AuthorIDComboBox)
         Me.Controls.Add(AuthorFullNameLabel)
         Me.Controls.Add(Me.AuthorFullNameTextBox)
         Me.Controls.Add(BookIDLabel)
@@ -361,8 +359,6 @@ Partial Class frmImportBooks
         Me.Controls.Add(Me.AuthorSurnameTextBox)
         Me.Controls.Add(BookNameLabel)
         Me.Controls.Add(Me.BookNameTextBox)
-        Me.Controls.Add(AuthorIDLabel)
-        Me.Controls.Add(Me.AuthorIDComboBox)
         Me.Controls.Add(FileTypeIDLabel)
         Me.Controls.Add(Me.FileTypeIDComboBox)
         Me.Controls.Add(Me.Label7)
@@ -396,7 +392,6 @@ Partial Class frmImportBooks
     Friend WithEvents BooksBindingSource As BindingSource
     Friend WithEvents BooksTableAdapter As booklibDataSetTableAdapters.booksTableAdapter
     Friend WithEvents BookNameTextBox As TextBox
-    Friend WithEvents AuthorIDComboBox As ComboBox
     Friend WithEvents FileTypeIDComboBox As ComboBox
     Friend WithEvents AuthorsBindingSource As BindingSource
     Friend WithEvents AuthorNameTextBox As TextBox
@@ -410,4 +405,5 @@ Partial Class frmImportBooks
     Friend WithEvents File_typesTableAdapter As booklibDataSetTableAdapters.file_typesTableAdapter
     Friend WithEvents AuthorsTableAdapter As booklibDataSetTableAdapters.authorsTableAdapter
     Friend WithEvents AuthorFullNameTextBox As TextBox
+    Friend WithEvents AuthorIDComboBox As TextBox
 End Class
