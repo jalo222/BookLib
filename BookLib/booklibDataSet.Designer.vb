@@ -304,7 +304,7 @@ Partial Public Class booklibDataSet
         Me.DataSetName = "booklibDataSet"
         Me.Prefix = ""
         Me.Namespace = "http://tempuri.org/booklibDataSet.xsd"
-        Me.EnforceConstraints = true
+        Me.EnforceConstraints = false
         Me.SchemaSerializationMode = Global.System.Data.SchemaSerializationMode.IncludeSchema
         Me.tablebooks = New booksDataTable()
         MyBase.Tables.Add(Me.tablebooks)
@@ -320,6 +320,11 @@ Partial Public Class booklibDataSet
         fkc = New Global.System.Data.ForeignKeyConstraint("FK_File_Type", New Global.System.Data.DataColumn() {Me.tablefile_types.FileTypeIDColumn}, New Global.System.Data.DataColumn() {Me.tablebooks.FileTypeIDColumn})
         Me.tablebooks.Constraints.Add(fkc)
         fkc.AcceptRejectRule = Global.System.Data.AcceptRejectRule.None
+        fkc.DeleteRule = Global.System.Data.Rule.Cascade
+        fkc.UpdateRule = Global.System.Data.Rule.Cascade
+        fkc = New Global.System.Data.ForeignKeyConstraint("FK_Author", New Global.System.Data.DataColumn() {Me.tableauthors.AuthorIDColumn}, New Global.System.Data.DataColumn() {Me.tablebooks.AuthorIDColumn})
+        Me.tablebooks.Constraints.Add(fkc)
+        fkc.AcceptRejectRule = Global.System.Data.AcceptRejectRule.Cascade
         fkc.DeleteRule = Global.System.Data.Rule.Cascade
         fkc.UpdateRule = Global.System.Data.Rule.Cascade
         Me.relationFK_File_Type = New Global.System.Data.DataRelation("FK_File_Type", New Global.System.Data.DataColumn() {Me.tablefile_types.FileTypeIDColumn}, New Global.System.Data.DataColumn() {Me.tablebooks.FileTypeIDColumn}, false)
@@ -1781,7 +1786,6 @@ Partial Public Class booklibDataSet
             Me.columnAuthorID.Unique = true
             Me.columnAuthorName.MaxLength = 45
             Me.columnAuthorSurname.MaxLength = 45
-            Me.columnAuthorFullName.AllowDBNull = false
             Me.columnAuthorFullName.MaxLength = 45
         End Sub
         
@@ -2296,7 +2300,11 @@ Partial Public Class booklibDataSet
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Property AuthorFullName() As String
             Get
-                Return CType(Me(Me.tableauthors.AuthorFullNameColumn),String)
+                Try 
+                    Return CType(Me(Me.tableauthors.AuthorFullNameColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'AuthorFullName' in table 'authors' is DBNull.", e)
+                End Try
             End Get
             Set
                 Me(Me.tableauthors.AuthorFullNameColumn) = value
@@ -2325,6 +2333,18 @@ Partial Public Class booklibDataSet
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Sub SetAuthorSurnameNull()
             Me(Me.tableauthors.AuthorSurnameColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsAuthorFullNameNull() As Boolean
+            Return Me.IsNull(Me.tableauthors.AuthorFullNameColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetAuthorFullNameNull()
+            Me(Me.tableauthors.AuthorFullNameColumn) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -4377,7 +4397,8 @@ Namespace booklibDataSetTableAdapters
             Me._adapter.DeleteCommand.Connection = Me.Connection
             Me._adapter.DeleteCommand.CommandText = "DELETE FROM `authors` WHERE ((`AuthorID` = @p1) AND ((@p2 = 1 AND `AuthorName` IS"& _ 
                 " NULL) OR (`AuthorName` = @p3)) AND ((@p4 = 1 AND `AuthorSurname` IS NULL) OR (`"& _ 
-                "AuthorSurname` = @p5)) AND (`AuthorFullName` = @p6))"
+                "AuthorSurname` = @p5)) AND ((@p6 = 1 AND `AuthorFullName` IS NULL) OR (`AuthorFu"& _ 
+                "llName` = @p7)))"
             Me._adapter.DeleteCommand.CommandType = Global.System.Data.CommandType.Text
             Dim param As Global.MySql.Data.MySqlClient.MySqlParameter = New Global.MySql.Data.MySqlClient.MySqlParameter()
             param.ParameterName = "@p1"
@@ -4423,6 +4444,15 @@ Namespace booklibDataSetTableAdapters
             Me._adapter.DeleteCommand.Parameters.Add(param)
             param = New Global.MySql.Data.MySqlClient.MySqlParameter()
             param.ParameterName = "@p6"
+            param.DbType = Global.System.Data.DbType.Int32
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.Int32
+            param.IsNullable = true
+            param.SourceColumn = "AuthorFullName"
+            param.SourceVersion = Global.System.Data.DataRowVersion.Original
+            param.SourceColumnNullMapping = true
+            Me._adapter.DeleteCommand.Parameters.Add(param)
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter()
+            param.ParameterName = "@p7"
             param.DbType = Global.System.Data.DbType.[String]
             param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.VarChar
             param.IsNullable = true
@@ -4431,8 +4461,9 @@ Namespace booklibDataSetTableAdapters
             Me._adapter.DeleteCommand.Parameters.Add(param)
             Me._adapter.InsertCommand = New Global.MySql.Data.MySqlClient.MySqlCommand()
             Me._adapter.InsertCommand.Connection = Me.Connection
-            Me._adapter.InsertCommand.CommandText = "INSERT INTO `authors` (`AuthorName`, `AuthorSurname`, `AuthorFullName`) VALUES (@"& _ 
-                "p1, @p2, @p3)"
+            Me._adapter.InsertCommand.CommandText = "INSERT INTO authors"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         (AuthorName, AuthorSurname, AuthorF"& _ 
+                "ullName)"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"VALUES        (@p1, @p2, @p3);"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                             SELECT   "& _ 
+                "     AuthorID"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                              = LAST_INSERT_ID()"
             Me._adapter.InsertCommand.CommandType = Global.System.Data.CommandType.Text
             param = New Global.MySql.Data.MySqlClient.MySqlParameter()
             param.ParameterName = "@p1"
@@ -4460,7 +4491,8 @@ Namespace booklibDataSetTableAdapters
             Me._adapter.UpdateCommand.CommandText = "UPDATE `authors` SET `AuthorName` = @p1, `AuthorSurname` = @p2, `AuthorFullName` "& _ 
                 "= @p3 WHERE ((`AuthorID` = @p4) AND ((@p5 = 1 AND `AuthorName` IS NULL) OR (`Aut"& _ 
                 "horName` = @p6)) AND ((@p7 = 1 AND `AuthorSurname` IS NULL) OR (`AuthorSurname` "& _ 
-                "= @p8)) AND (`AuthorFullName` = @p9))"
+                "= @p8)) AND ((@p9 = 1 AND `AuthorFullName` IS NULL) OR (`AuthorFullName` = @p10)"& _ 
+                "))"
             Me._adapter.UpdateCommand.CommandType = Global.System.Data.CommandType.Text
             param = New Global.MySql.Data.MySqlClient.MySqlParameter()
             param.ParameterName = "@p1"
@@ -4527,6 +4559,15 @@ Namespace booklibDataSetTableAdapters
             Me._adapter.UpdateCommand.Parameters.Add(param)
             param = New Global.MySql.Data.MySqlClient.MySqlParameter()
             param.ParameterName = "@p9"
+            param.DbType = Global.System.Data.DbType.Int32
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.Int32
+            param.IsNullable = true
+            param.SourceColumn = "AuthorFullName"
+            param.SourceVersion = Global.System.Data.DataRowVersion.Original
+            param.SourceColumnNullMapping = true
+            Me._adapter.UpdateCommand.Parameters.Add(param)
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter()
+            param.ParameterName = "@p10"
             param.DbType = Global.System.Data.DbType.[String]
             param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.VarChar
             param.IsNullable = true
@@ -4609,7 +4650,7 @@ Namespace booklibDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Delete, true)>  _
-        Public Overloads Overridable Function Delete(ByVal p1 As Integer, ByVal p3 As String, ByVal p5 As String, ByVal p6 As String) As Integer
+        Public Overloads Overridable Function Delete(ByVal p1 As Integer, ByVal p3 As String, ByVal p5 As String, ByVal p7 As String) As Integer
             Me.Adapter.DeleteCommand.Parameters(0).Value = CType(p1,Integer)
             If (p3 Is Nothing) Then
                 Me.Adapter.DeleteCommand.Parameters(1).Value = CType(1,Object)
@@ -4625,10 +4666,12 @@ Namespace booklibDataSetTableAdapters
                 Me.Adapter.DeleteCommand.Parameters(3).Value = CType(0,Object)
                 Me.Adapter.DeleteCommand.Parameters(4).Value = CType(p5,String)
             End If
-            If (p6 Is Nothing) Then
-                Throw New Global.System.ArgumentNullException("p6")
+            If (p7 Is Nothing) Then
+                Me.Adapter.DeleteCommand.Parameters(5).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(6).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.DeleteCommand.Parameters(5).Value = CType(p6,String)
+                Me.Adapter.DeleteCommand.Parameters(5).Value = CType(0,Object)
+                Me.Adapter.DeleteCommand.Parameters(6).Value = CType(p7,String)
             End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.DeleteCommand.Connection.State
             If ((Me.Adapter.DeleteCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
@@ -4661,7 +4704,7 @@ Namespace booklibDataSetTableAdapters
                 Me.Adapter.InsertCommand.Parameters(1).Value = CType(p2,String)
             End If
             If (p3 Is Nothing) Then
-                Throw New Global.System.ArgumentNullException("p3")
+                Me.Adapter.InsertCommand.Parameters(2).Value = Global.System.DBNull.Value
             Else
                 Me.Adapter.InsertCommand.Parameters(2).Value = CType(p3,String)
             End If
@@ -4684,7 +4727,7 @@ Namespace booklibDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, true)>  _
-        Public Overloads Overridable Function Update(ByVal p1 As String, ByVal p2 As String, ByVal p3 As String, ByVal p4 As Integer, ByVal p6 As String, ByVal p8 As String, ByVal p9 As String) As Integer
+        Public Overloads Overridable Function Update(ByVal p1 As String, ByVal p2 As String, ByVal p3 As String, ByVal p4 As Integer, ByVal p6 As String, ByVal p8 As String, ByVal p10 As String) As Integer
             If (p1 Is Nothing) Then
                 Me.Adapter.UpdateCommand.Parameters(0).Value = Global.System.DBNull.Value
             Else
@@ -4696,7 +4739,7 @@ Namespace booklibDataSetTableAdapters
                 Me.Adapter.UpdateCommand.Parameters(1).Value = CType(p2,String)
             End If
             If (p3 Is Nothing) Then
-                Throw New Global.System.ArgumentNullException("p3")
+                Me.Adapter.UpdateCommand.Parameters(2).Value = Global.System.DBNull.Value
             Else
                 Me.Adapter.UpdateCommand.Parameters(2).Value = CType(p3,String)
             End If
@@ -4715,10 +4758,12 @@ Namespace booklibDataSetTableAdapters
                 Me.Adapter.UpdateCommand.Parameters(6).Value = CType(0,Object)
                 Me.Adapter.UpdateCommand.Parameters(7).Value = CType(p8,String)
             End If
-            If (p9 Is Nothing) Then
-                Throw New Global.System.ArgumentNullException("p9")
+            If (p10 Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(8).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(9).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(8).Value = CType(p9,String)
+                Me.Adapter.UpdateCommand.Parameters(8).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(9).Value = CType(p10,String)
             End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.UpdateCommand.Connection.State
             If ((Me.Adapter.UpdateCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
