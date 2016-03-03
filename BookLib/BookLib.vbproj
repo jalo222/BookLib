@@ -126,12 +126,6 @@
     <Compile Include="frmImportBooks.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmImportBooks_OLD.designer.vb">
-      <DependentUpon>frmImportBooks_OLD.vb</DependentUpon>
-    </Compile>
-    <Compile Include="frmImportBooks_OLD.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Lib_Control.Designer.vb">
       <DependentUpon>Lib_Control.vb</DependentUpon>
     </Compile>
@@ -174,9 +168,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmImportBooks.resx">
       <DependentUpon>frmImportBooks.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmImportBooks_OLD.resx">
-      <DependentUpon>frmImportBooks_OLD.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Lib_Control.resx">
       <DependentUpon>Lib_Control.vb</DependentUpon>

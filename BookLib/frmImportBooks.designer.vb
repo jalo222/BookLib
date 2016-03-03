@@ -34,7 +34,7 @@ Partial Class frmImportBooks
         Dim FileTypeIDLabel1 As System.Windows.Forms.Label
         Dim FileExtensionLabel As System.Windows.Forms.Label
         Dim FileTypeLabel As System.Windows.Forms.Label
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmImportBooks))
+        Dim Label1 As System.Windows.Forms.Label
         Me.FileSystemTree2 = New MasaSam.Forms.Controls.FileSystemTree()
         Me.txtBookName = New System.Windows.Forms.TextBox()
         Me.txtAuthor = New System.Windows.Forms.TextBox()
@@ -49,32 +49,20 @@ Partial Class frmImportBooks
         Me.TableAdapterManager = New BookLib.booklibDataSetTableAdapters.TableAdapterManager()
         Me.AuthorsTableAdapter = New BookLib.booklibDataSetTableAdapters.authorsTableAdapter()
         Me.File_typesTableAdapter = New BookLib.booklibDataSetTableAdapters.file_typesTableAdapter()
-        Me.BooksBindingNavigator = New System.Windows.Forms.BindingNavigator(Me.components)
-        Me.BindingNavigatorAddNewItem = New System.Windows.Forms.ToolStripButton()
-        Me.BindingNavigatorCountItem = New System.Windows.Forms.ToolStripLabel()
-        Me.BindingNavigatorDeleteItem = New System.Windows.Forms.ToolStripButton()
-        Me.BindingNavigatorMoveFirstItem = New System.Windows.Forms.ToolStripButton()
-        Me.BindingNavigatorMovePreviousItem = New System.Windows.Forms.ToolStripButton()
-        Me.BindingNavigatorSeparator = New System.Windows.Forms.ToolStripSeparator()
-        Me.BindingNavigatorPositionItem = New System.Windows.Forms.ToolStripTextBox()
-        Me.BindingNavigatorSeparator1 = New System.Windows.Forms.ToolStripSeparator()
-        Me.BindingNavigatorMoveNextItem = New System.Windows.Forms.ToolStripButton()
-        Me.BindingNavigatorMoveLastItem = New System.Windows.Forms.ToolStripButton()
-        Me.BindingNavigatorSeparator2 = New System.Windows.Forms.ToolStripSeparator()
-        Me.BooksBindingNavigatorSaveItem = New System.Windows.Forms.ToolStripButton()
         Me.BookIDTextBox = New System.Windows.Forms.TextBox()
         Me.BookNameTextBox = New System.Windows.Forms.TextBox()
-        Me.AuthorIDTextBox = New System.Windows.Forms.TextBox()
-        Me.FileTypeIDTextBox = New System.Windows.Forms.TextBox()
+        Me.BookAuthorIDTextBox = New System.Windows.Forms.TextBox()
+        Me.BookFileTypeIDTextBox = New System.Windows.Forms.TextBox()
         Me.AuthorsBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.AuthorIDTextBox1 = New System.Windows.Forms.TextBox()
+        Me.AuthorIDTextBox = New System.Windows.Forms.TextBox()
         Me.AuthorNameTextBox = New System.Windows.Forms.TextBox()
         Me.AuthorSurnameTextBox = New System.Windows.Forms.TextBox()
         Me.AuthorFullNameTextBox = New System.Windows.Forms.TextBox()
         Me.File_typesBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.FileTypeIDTextBox1 = New System.Windows.Forms.TextBox()
-        Me.FileExtensionTextBox = New System.Windows.Forms.TextBox()
-        Me.FileTypeTextBox = New System.Windows.Forms.TextBox()
+        Me.FileTypeIDBookTextBox = New System.Windows.Forms.TextBox()
+        Me.FileExtensionBookTextBox = New System.Windows.Forms.TextBox()
+        Me.FileTypeBookTextBox = New System.Windows.Forms.TextBox()
+        Me.CoverFileTypeIDTextBox = New System.Windows.Forms.TextBox()
         BookIDLabel = New System.Windows.Forms.Label()
         BookNameLabel = New System.Windows.Forms.Label()
         AuthorIDLabel = New System.Windows.Forms.Label()
@@ -86,11 +74,10 @@ Partial Class frmImportBooks
         FileTypeIDLabel1 = New System.Windows.Forms.Label()
         FileExtensionLabel = New System.Windows.Forms.Label()
         FileTypeLabel = New System.Windows.Forms.Label()
+        Label1 = New System.Windows.Forms.Label()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.BooklibDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.BooksBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.BooksBindingNavigator, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.BooksBindingNavigator.SuspendLayout()
         CType(Me.AuthorsBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.File_typesBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -134,7 +121,7 @@ Partial Class frmImportBooks
         'AuthorIDLabel1
         '
         AuthorIDLabel1.AutoSize = True
-        AuthorIDLabel1.Location = New System.Drawing.Point(438, 253)
+        AuthorIDLabel1.Location = New System.Drawing.Point(431, 293)
         AuthorIDLabel1.Name = "AuthorIDLabel1"
         AuthorIDLabel1.Size = New System.Drawing.Size(55, 13)
         AuthorIDLabel1.TabIndex = 49
@@ -143,7 +130,7 @@ Partial Class frmImportBooks
         'AuthorNameLabel
         '
         AuthorNameLabel.AutoSize = True
-        AuthorNameLabel.Location = New System.Drawing.Point(438, 279)
+        AuthorNameLabel.Location = New System.Drawing.Point(431, 319)
         AuthorNameLabel.Name = "AuthorNameLabel"
         AuthorNameLabel.Size = New System.Drawing.Size(72, 13)
         AuthorNameLabel.TabIndex = 51
@@ -152,7 +139,7 @@ Partial Class frmImportBooks
         'AuthorSurnameLabel
         '
         AuthorSurnameLabel.AutoSize = True
-        AuthorSurnameLabel.Location = New System.Drawing.Point(438, 305)
+        AuthorSurnameLabel.Location = New System.Drawing.Point(431, 345)
         AuthorSurnameLabel.Name = "AuthorSurnameLabel"
         AuthorSurnameLabel.Size = New System.Drawing.Size(86, 13)
         AuthorSurnameLabel.TabIndex = 53
@@ -161,7 +148,7 @@ Partial Class frmImportBooks
         'AuthorFullNameLabel
         '
         AuthorFullNameLabel.AutoSize = True
-        AuthorFullNameLabel.Location = New System.Drawing.Point(438, 331)
+        AuthorFullNameLabel.Location = New System.Drawing.Point(431, 371)
         AuthorFullNameLabel.Name = "AuthorFullNameLabel"
         AuthorFullNameLabel.Size = New System.Drawing.Size(91, 13)
         AuthorFullNameLabel.TabIndex = 55
@@ -170,7 +157,7 @@ Partial Class frmImportBooks
         'FileTypeIDLabel1
         '
         FileTypeIDLabel1.AutoSize = True
-        FileTypeIDLabel1.Location = New System.Drawing.Point(442, 369)
+        FileTypeIDLabel1.Location = New System.Drawing.Point(435, 409)
         FileTypeIDLabel1.Name = "FileTypeIDLabel1"
         FileTypeIDLabel1.Size = New System.Drawing.Size(67, 13)
         FileTypeIDLabel1.TabIndex = 56
@@ -179,7 +166,7 @@ Partial Class frmImportBooks
         'FileExtensionLabel
         '
         FileExtensionLabel.AutoSize = True
-        FileExtensionLabel.Location = New System.Drawing.Point(442, 395)
+        FileExtensionLabel.Location = New System.Drawing.Point(435, 435)
         FileExtensionLabel.Name = "FileExtensionLabel"
         FileExtensionLabel.Size = New System.Drawing.Size(75, 13)
         FileExtensionLabel.TabIndex = 58
@@ -188,7 +175,7 @@ Partial Class frmImportBooks
         'FileTypeLabel
         '
         FileTypeLabel.AutoSize = True
-        FileTypeLabel.Location = New System.Drawing.Point(442, 421)
+        FileTypeLabel.Location = New System.Drawing.Point(435, 461)
         FileTypeLabel.Name = "FileTypeLabel"
         FileTypeLabel.Size = New System.Drawing.Size(53, 13)
         FileTypeLabel.TabIndex = 60
@@ -292,117 +279,6 @@ Partial Class frmImportBooks
         '
         Me.File_typesTableAdapter.ClearBeforeFill = True
         '
-        'BooksBindingNavigator
-        '
-        Me.BooksBindingNavigator.AddNewItem = Me.BindingNavigatorAddNewItem
-        Me.BooksBindingNavigator.BindingSource = Me.BooksBindingSource
-        Me.BooksBindingNavigator.CountItem = Me.BindingNavigatorCountItem
-        Me.BooksBindingNavigator.DeleteItem = Me.BindingNavigatorDeleteItem
-        Me.BooksBindingNavigator.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.BindingNavigatorMoveFirstItem, Me.BindingNavigatorMovePreviousItem, Me.BindingNavigatorSeparator, Me.BindingNavigatorPositionItem, Me.BindingNavigatorCountItem, Me.BindingNavigatorSeparator1, Me.BindingNavigatorMoveNextItem, Me.BindingNavigatorMoveLastItem, Me.BindingNavigatorSeparator2, Me.BindingNavigatorAddNewItem, Me.BindingNavigatorDeleteItem, Me.BooksBindingNavigatorSaveItem})
-        Me.BooksBindingNavigator.Location = New System.Drawing.Point(0, 0)
-        Me.BooksBindingNavigator.MoveFirstItem = Me.BindingNavigatorMoveFirstItem
-        Me.BooksBindingNavigator.MoveLastItem = Me.BindingNavigatorMoveLastItem
-        Me.BooksBindingNavigator.MoveNextItem = Me.BindingNavigatorMoveNextItem
-        Me.BooksBindingNavigator.MovePreviousItem = Me.BindingNavigatorMovePreviousItem
-        Me.BooksBindingNavigator.Name = "BooksBindingNavigator"
-        Me.BooksBindingNavigator.PositionItem = Me.BindingNavigatorPositionItem
-        Me.BooksBindingNavigator.Size = New System.Drawing.Size(919, 25)
-        Me.BooksBindingNavigator.TabIndex = 42
-        Me.BooksBindingNavigator.Text = "BindingNavigator1"
-        '
-        'BindingNavigatorAddNewItem
-        '
-        Me.BindingNavigatorAddNewItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.BindingNavigatorAddNewItem.Image = CType(resources.GetObject("BindingNavigatorAddNewItem.Image"), System.Drawing.Image)
-        Me.BindingNavigatorAddNewItem.Name = "BindingNavigatorAddNewItem"
-        Me.BindingNavigatorAddNewItem.RightToLeftAutoMirrorImage = True
-        Me.BindingNavigatorAddNewItem.Size = New System.Drawing.Size(23, 22)
-        Me.BindingNavigatorAddNewItem.Text = "Add new"
-        '
-        'BindingNavigatorCountItem
-        '
-        Me.BindingNavigatorCountItem.Name = "BindingNavigatorCountItem"
-        Me.BindingNavigatorCountItem.Size = New System.Drawing.Size(35, 22)
-        Me.BindingNavigatorCountItem.Text = "of {0}"
-        Me.BindingNavigatorCountItem.ToolTipText = "Total number of items"
-        '
-        'BindingNavigatorDeleteItem
-        '
-        Me.BindingNavigatorDeleteItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.BindingNavigatorDeleteItem.Image = CType(resources.GetObject("BindingNavigatorDeleteItem.Image"), System.Drawing.Image)
-        Me.BindingNavigatorDeleteItem.Name = "BindingNavigatorDeleteItem"
-        Me.BindingNavigatorDeleteItem.RightToLeftAutoMirrorImage = True
-        Me.BindingNavigatorDeleteItem.Size = New System.Drawing.Size(23, 22)
-        Me.BindingNavigatorDeleteItem.Text = "Delete"
-        '
-        'BindingNavigatorMoveFirstItem
-        '
-        Me.BindingNavigatorMoveFirstItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.BindingNavigatorMoveFirstItem.Image = CType(resources.GetObject("BindingNavigatorMoveFirstItem.Image"), System.Drawing.Image)
-        Me.BindingNavigatorMoveFirstItem.Name = "BindingNavigatorMoveFirstItem"
-        Me.BindingNavigatorMoveFirstItem.RightToLeftAutoMirrorImage = True
-        Me.BindingNavigatorMoveFirstItem.Size = New System.Drawing.Size(23, 22)
-        Me.BindingNavigatorMoveFirstItem.Text = "Move first"
-        '
-        'BindingNavigatorMovePreviousItem
-        '
-        Me.BindingNavigatorMovePreviousItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.BindingNavigatorMovePreviousItem.Image = CType(resources.GetObject("BindingNavigatorMovePreviousItem.Image"), System.Drawing.Image)
-        Me.BindingNavigatorMovePreviousItem.Name = "BindingNavigatorMovePreviousItem"
-        Me.BindingNavigatorMovePreviousItem.RightToLeftAutoMirrorImage = True
-        Me.BindingNavigatorMovePreviousItem.Size = New System.Drawing.Size(23, 22)
-        Me.BindingNavigatorMovePreviousItem.Text = "Move previous"
-        '
-        'BindingNavigatorSeparator
-        '
-        Me.BindingNavigatorSeparator.Name = "BindingNavigatorSeparator"
-        Me.BindingNavigatorSeparator.Size = New System.Drawing.Size(6, 25)
-        '
-        'BindingNavigatorPositionItem
-        '
-        Me.BindingNavigatorPositionItem.AccessibleName = "Position"
-        Me.BindingNavigatorPositionItem.AutoSize = False
-        Me.BindingNavigatorPositionItem.Name = "BindingNavigatorPositionItem"
-        Me.BindingNavigatorPositionItem.Size = New System.Drawing.Size(50, 23)
-        Me.BindingNavigatorPositionItem.Text = "0"
-        Me.BindingNavigatorPositionItem.ToolTipText = "Current position"
-        '
-        'BindingNavigatorSeparator1
-        '
-        Me.BindingNavigatorSeparator1.Name = "BindingNavigatorSeparator1"
-        Me.BindingNavigatorSeparator1.Size = New System.Drawing.Size(6, 25)
-        '
-        'BindingNavigatorMoveNextItem
-        '
-        Me.BindingNavigatorMoveNextItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.BindingNavigatorMoveNextItem.Image = CType(resources.GetObject("BindingNavigatorMoveNextItem.Image"), System.Drawing.Image)
-        Me.BindingNavigatorMoveNextItem.Name = "BindingNavigatorMoveNextItem"
-        Me.BindingNavigatorMoveNextItem.RightToLeftAutoMirrorImage = True
-        Me.BindingNavigatorMoveNextItem.Size = New System.Drawing.Size(23, 22)
-        Me.BindingNavigatorMoveNextItem.Text = "Move next"
-        '
-        'BindingNavigatorMoveLastItem
-        '
-        Me.BindingNavigatorMoveLastItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.BindingNavigatorMoveLastItem.Image = CType(resources.GetObject("BindingNavigatorMoveLastItem.Image"), System.Drawing.Image)
-        Me.BindingNavigatorMoveLastItem.Name = "BindingNavigatorMoveLastItem"
-        Me.BindingNavigatorMoveLastItem.RightToLeftAutoMirrorImage = True
-        Me.BindingNavigatorMoveLastItem.Size = New System.Drawing.Size(23, 22)
-        Me.BindingNavigatorMoveLastItem.Text = "Move last"
-        '
-        'BindingNavigatorSeparator2
-        '
-        Me.BindingNavigatorSeparator2.Name = "BindingNavigatorSeparator2"
-        Me.BindingNavigatorSeparator2.Size = New System.Drawing.Size(6, 25)
-        '
-        'BooksBindingNavigatorSaveItem
-        '
-        Me.BooksBindingNavigatorSaveItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.BooksBindingNavigatorSaveItem.Image = CType(resources.GetObject("BooksBindingNavigatorSaveItem.Image"), System.Drawing.Image)
-        Me.BooksBindingNavigatorSaveItem.Name = "BooksBindingNavigatorSaveItem"
-        Me.BooksBindingNavigatorSaveItem.Size = New System.Drawing.Size(23, 22)
-        Me.BooksBindingNavigatorSaveItem.Text = "Save Data"
-        '
         'BookIDTextBox
         '
         Me.BookIDTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.BooksBindingSource, "BookID", True))
@@ -419,39 +295,39 @@ Partial Class frmImportBooks
         Me.BookNameTextBox.Size = New System.Drawing.Size(100, 20)
         Me.BookNameTextBox.TabIndex = 45
         '
-        'AuthorIDTextBox
+        'BookAuthorIDTextBox
         '
-        Me.AuthorIDTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.BooksBindingSource, "AuthorID", True))
-        Me.AuthorIDTextBox.Location = New System.Drawing.Point(477, 188)
-        Me.AuthorIDTextBox.Name = "AuthorIDTextBox"
-        Me.AuthorIDTextBox.Size = New System.Drawing.Size(100, 20)
-        Me.AuthorIDTextBox.TabIndex = 47
+        Me.BookAuthorIDTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.BooksBindingSource, "AuthorID", True))
+        Me.BookAuthorIDTextBox.Location = New System.Drawing.Point(477, 188)
+        Me.BookAuthorIDTextBox.Name = "BookAuthorIDTextBox"
+        Me.BookAuthorIDTextBox.Size = New System.Drawing.Size(100, 20)
+        Me.BookAuthorIDTextBox.TabIndex = 47
         '
-        'FileTypeIDTextBox
+        'BookFileTypeIDTextBox
         '
-        Me.FileTypeIDTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.BooksBindingSource, "FileTypeID", True))
-        Me.FileTypeIDTextBox.Location = New System.Drawing.Point(477, 214)
-        Me.FileTypeIDTextBox.Name = "FileTypeIDTextBox"
-        Me.FileTypeIDTextBox.Size = New System.Drawing.Size(100, 20)
-        Me.FileTypeIDTextBox.TabIndex = 49
+        Me.BookFileTypeIDTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.BooksBindingSource, "FileTypeID", True))
+        Me.BookFileTypeIDTextBox.Location = New System.Drawing.Point(477, 214)
+        Me.BookFileTypeIDTextBox.Name = "BookFileTypeIDTextBox"
+        Me.BookFileTypeIDTextBox.Size = New System.Drawing.Size(100, 20)
+        Me.BookFileTypeIDTextBox.TabIndex = 49
         '
         'AuthorsBindingSource
         '
         Me.AuthorsBindingSource.DataMember = "authors"
         Me.AuthorsBindingSource.DataSource = Me.BooklibDataSet
         '
-        'AuthorIDTextBox1
+        'AuthorIDTextBox
         '
-        Me.AuthorIDTextBox1.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.AuthorsBindingSource, "AuthorID", True))
-        Me.AuthorIDTextBox1.Location = New System.Drawing.Point(535, 250)
-        Me.AuthorIDTextBox1.Name = "AuthorIDTextBox1"
-        Me.AuthorIDTextBox1.Size = New System.Drawing.Size(100, 20)
-        Me.AuthorIDTextBox1.TabIndex = 50
+        Me.AuthorIDTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.AuthorsBindingSource, "AuthorID", True))
+        Me.AuthorIDTextBox.Location = New System.Drawing.Point(528, 290)
+        Me.AuthorIDTextBox.Name = "AuthorIDTextBox"
+        Me.AuthorIDTextBox.Size = New System.Drawing.Size(100, 20)
+        Me.AuthorIDTextBox.TabIndex = 50
         '
         'AuthorNameTextBox
         '
         Me.AuthorNameTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.AuthorsBindingSource, "AuthorName", True))
-        Me.AuthorNameTextBox.Location = New System.Drawing.Point(535, 276)
+        Me.AuthorNameTextBox.Location = New System.Drawing.Point(528, 316)
         Me.AuthorNameTextBox.Name = "AuthorNameTextBox"
         Me.AuthorNameTextBox.Size = New System.Drawing.Size(100, 20)
         Me.AuthorNameTextBox.TabIndex = 52
@@ -459,7 +335,7 @@ Partial Class frmImportBooks
         'AuthorSurnameTextBox
         '
         Me.AuthorSurnameTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.AuthorsBindingSource, "AuthorSurname", True))
-        Me.AuthorSurnameTextBox.Location = New System.Drawing.Point(535, 302)
+        Me.AuthorSurnameTextBox.Location = New System.Drawing.Point(528, 342)
         Me.AuthorSurnameTextBox.Name = "AuthorSurnameTextBox"
         Me.AuthorSurnameTextBox.Size = New System.Drawing.Size(100, 20)
         Me.AuthorSurnameTextBox.TabIndex = 54
@@ -467,7 +343,7 @@ Partial Class frmImportBooks
         'AuthorFullNameTextBox
         '
         Me.AuthorFullNameTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.AuthorsBindingSource, "AuthorFullName", True))
-        Me.AuthorFullNameTextBox.Location = New System.Drawing.Point(535, 328)
+        Me.AuthorFullNameTextBox.Location = New System.Drawing.Point(528, 368)
         Me.AuthorFullNameTextBox.Name = "AuthorFullNameTextBox"
         Me.AuthorFullNameTextBox.Size = New System.Drawing.Size(100, 20)
         Me.AuthorFullNameTextBox.TabIndex = 56
@@ -477,43 +353,62 @@ Partial Class frmImportBooks
         Me.File_typesBindingSource.DataMember = "file_types"
         Me.File_typesBindingSource.DataSource = Me.BooklibDataSet
         '
-        'FileTypeIDTextBox1
+        'FileTypeIDBookTextBox
         '
-        Me.FileTypeIDTextBox1.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.File_typesBindingSource, "FileTypeID", True))
-        Me.FileTypeIDTextBox1.Location = New System.Drawing.Point(523, 366)
-        Me.FileTypeIDTextBox1.Name = "FileTypeIDTextBox1"
-        Me.FileTypeIDTextBox1.Size = New System.Drawing.Size(100, 20)
-        Me.FileTypeIDTextBox1.TabIndex = 57
+        Me.FileTypeIDBookTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.File_typesBindingSource, "FileTypeID", True))
+        Me.FileTypeIDBookTextBox.Location = New System.Drawing.Point(516, 406)
+        Me.FileTypeIDBookTextBox.Name = "FileTypeIDBookTextBox"
+        Me.FileTypeIDBookTextBox.Size = New System.Drawing.Size(100, 20)
+        Me.FileTypeIDBookTextBox.TabIndex = 57
         '
-        'FileExtensionTextBox
+        'FileExtensionBookTextBox
         '
-        Me.FileExtensionTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.File_typesBindingSource, "FileExtension", True))
-        Me.FileExtensionTextBox.Location = New System.Drawing.Point(523, 392)
-        Me.FileExtensionTextBox.Name = "FileExtensionTextBox"
-        Me.FileExtensionTextBox.Size = New System.Drawing.Size(100, 20)
-        Me.FileExtensionTextBox.TabIndex = 59
+        Me.FileExtensionBookTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.File_typesBindingSource, "FileExtension", True))
+        Me.FileExtensionBookTextBox.Location = New System.Drawing.Point(516, 432)
+        Me.FileExtensionBookTextBox.Name = "FileExtensionBookTextBox"
+        Me.FileExtensionBookTextBox.Size = New System.Drawing.Size(100, 20)
+        Me.FileExtensionBookTextBox.TabIndex = 59
         '
-        'FileTypeTextBox
+        'FileTypeBookTextBox
         '
-        Me.FileTypeTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.File_typesBindingSource, "FileType", True))
-        Me.FileTypeTextBox.Location = New System.Drawing.Point(523, 418)
-        Me.FileTypeTextBox.Name = "FileTypeTextBox"
-        Me.FileTypeTextBox.Size = New System.Drawing.Size(100, 20)
-        Me.FileTypeTextBox.TabIndex = 61
+        Me.FileTypeBookTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.File_typesBindingSource, "FileType", True))
+        Me.FileTypeBookTextBox.Location = New System.Drawing.Point(516, 458)
+        Me.FileTypeBookTextBox.Name = "FileTypeBookTextBox"
+        Me.FileTypeBookTextBox.Size = New System.Drawing.Size(100, 20)
+        Me.FileTypeBookTextBox.TabIndex = 61
+        '
+        'Label1
+        '
+        Label1.AutoSize = True
+        Label1.Location = New System.Drawing.Point(404, 243)
+        Label1.Name = "Label1"
+        Label1.Size = New System.Drawing.Size(67, 13)
+        Label1.TabIndex = 67
+        Label1.Text = "File Type ID:"
+        '
+        'CoverFileTypeIDTextBox
+        '
+        Me.CoverFileTypeIDTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.BooksBindingSource, "FileTypeID", True))
+        Me.CoverFileTypeIDTextBox.Location = New System.Drawing.Point(477, 240)
+        Me.CoverFileTypeIDTextBox.Name = "CoverFileTypeIDTextBox"
+        Me.CoverFileTypeIDTextBox.Size = New System.Drawing.Size(100, 20)
+        Me.CoverFileTypeIDTextBox.TabIndex = 68
         '
         'frmImportBooks
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(919, 531)
+        Me.ClientSize = New System.Drawing.Size(994, 531)
+        Me.Controls.Add(Label1)
+        Me.Controls.Add(Me.CoverFileTypeIDTextBox)
         Me.Controls.Add(FileTypeIDLabel1)
-        Me.Controls.Add(Me.FileTypeIDTextBox1)
+        Me.Controls.Add(Me.FileTypeIDBookTextBox)
         Me.Controls.Add(FileExtensionLabel)
-        Me.Controls.Add(Me.FileExtensionTextBox)
+        Me.Controls.Add(Me.FileExtensionBookTextBox)
         Me.Controls.Add(FileTypeLabel)
-        Me.Controls.Add(Me.FileTypeTextBox)
+        Me.Controls.Add(Me.FileTypeBookTextBox)
         Me.Controls.Add(AuthorIDLabel1)
-        Me.Controls.Add(Me.AuthorIDTextBox1)
+        Me.Controls.Add(Me.AuthorIDTextBox)
         Me.Controls.Add(AuthorNameLabel)
         Me.Controls.Add(Me.AuthorNameTextBox)
         Me.Controls.Add(AuthorSurnameLabel)
@@ -525,10 +420,9 @@ Partial Class frmImportBooks
         Me.Controls.Add(BookNameLabel)
         Me.Controls.Add(Me.BookNameTextBox)
         Me.Controls.Add(AuthorIDLabel)
-        Me.Controls.Add(Me.AuthorIDTextBox)
+        Me.Controls.Add(Me.BookAuthorIDTextBox)
         Me.Controls.Add(FileTypeIDLabel)
-        Me.Controls.Add(Me.FileTypeIDTextBox)
-        Me.Controls.Add(Me.BooksBindingNavigator)
+        Me.Controls.Add(Me.BookFileTypeIDTextBox)
         Me.Controls.Add(Me.btnSave)
         Me.Controls.Add(Me.btnImport)
         Me.Controls.Add(Me.txtCoverFileName)
@@ -542,9 +436,6 @@ Partial Class frmImportBooks
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.BooklibDataSet, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.BooksBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.BooksBindingNavigator, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.BooksBindingNavigator.ResumeLayout(False)
-        Me.BooksBindingNavigator.PerformLayout()
         CType(Me.AuthorsBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.File_typesBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
@@ -564,32 +455,20 @@ Partial Class frmImportBooks
     Friend WithEvents BooksBindingSource As BindingSource
     Friend WithEvents BooksTableAdapter As booklibDataSetTableAdapters.booksTableAdapter
     Friend WithEvents TableAdapterManager As booklibDataSetTableAdapters.TableAdapterManager
-    Friend WithEvents BooksBindingNavigator As BindingNavigator
-    Friend WithEvents BindingNavigatorAddNewItem As ToolStripButton
-    Friend WithEvents BindingNavigatorCountItem As ToolStripLabel
-    Friend WithEvents BindingNavigatorDeleteItem As ToolStripButton
-    Friend WithEvents BindingNavigatorMoveFirstItem As ToolStripButton
-    Friend WithEvents BindingNavigatorMovePreviousItem As ToolStripButton
-    Friend WithEvents BindingNavigatorSeparator As ToolStripSeparator
-    Friend WithEvents BindingNavigatorPositionItem As ToolStripTextBox
-    Friend WithEvents BindingNavigatorSeparator1 As ToolStripSeparator
-    Friend WithEvents BindingNavigatorMoveNextItem As ToolStripButton
-    Friend WithEvents BindingNavigatorMoveLastItem As ToolStripButton
-    Friend WithEvents BindingNavigatorSeparator2 As ToolStripSeparator
-    Friend WithEvents BooksBindingNavigatorSaveItem As ToolStripButton
     Friend WithEvents AuthorsTableAdapter As booklibDataSetTableAdapters.authorsTableAdapter
     Friend WithEvents BookIDTextBox As TextBox
     Friend WithEvents BookNameTextBox As TextBox
-    Friend WithEvents AuthorIDTextBox As TextBox
-    Friend WithEvents FileTypeIDTextBox As TextBox
+    Friend WithEvents BookAuthorIDTextBox As TextBox
+    Friend WithEvents BookFileTypeIDTextBox As TextBox
     Friend WithEvents AuthorsBindingSource As BindingSource
     Friend WithEvents File_typesTableAdapter As booklibDataSetTableAdapters.file_typesTableAdapter
-    Friend WithEvents AuthorIDTextBox1 As TextBox
+    Friend WithEvents AuthorIDTextBox As TextBox
     Friend WithEvents AuthorNameTextBox As TextBox
     Friend WithEvents AuthorSurnameTextBox As TextBox
     Friend WithEvents AuthorFullNameTextBox As TextBox
     Friend WithEvents File_typesBindingSource As BindingSource
-    Friend WithEvents FileTypeIDTextBox1 As TextBox
-    Friend WithEvents FileExtensionTextBox As TextBox
-    Friend WithEvents FileTypeTextBox As TextBox
+    Friend WithEvents FileTypeIDBookTextBox As TextBox
+    Friend WithEvents FileExtensionBookTextBox As TextBox
+    Friend WithEvents FileTypeBookTextBox As TextBox
+    Friend WithEvents CoverFileTypeIDTextBox As TextBox
 End Class
