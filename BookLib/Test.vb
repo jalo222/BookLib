@@ -7,12 +7,26 @@
     End Sub
 
     Private Sub Test_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Conn = Cl_MySql.Connect()
-        'TODO: This line of code loads data into the 'BooklibDataSet.authors' table. You can move, or remove it, as needed.
+        Me.File_typesTableAdapter.Fill(Me.BooklibDataSet.file_types)
         Me.AuthorsTableAdapter.Fill(Me.BooklibDataSet.authors)
-        'TODO: This line of code loads data into the 'BooklibDataSet.books' table. You can move, or remove it, as needed.
         Me.BooksTableAdapter.Fill(Me.BooklibDataSet.books)
-        Me.AuthorsBindingSource.AddNew()
 
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        Me.AuthorsBindingSource.AddNew()
+        Me.BooksBindingSource.AddNew()
+    End Sub
+
+    Private Sub Save()
+        Me.Validate()
+        Me.AuthorsBindingSource.EndEdit()
+        Me.File_typesBindingSource.EndEdit()
+        Me.BooksBindingSource.EndEdit()
+        Me.TableAdapterManager.UpdateAll(Me.BooklibDataSet)
+    End Sub
+
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        Save()
     End Sub
 End Class

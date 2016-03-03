@@ -101,9 +101,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>booklibDataSet.xsd</DependentUpon>
     </Compile>
-    <Compile Include="booklibDataSet.vb">
-      <DependentUpon>booklibDataSet.xsd</DependentUpon>
-    </Compile>
     <Compile Include="BookLibStart.designer.vb">
       <DependentUpon>BookLibStart.vb</DependentUpon>
     </Compile>
@@ -123,10 +120,16 @@
     <Compile Include="frmFileTypes.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmImportBooks.designer.vb">
+    <Compile Include="frmImportBooks.Designer.vb">
       <DependentUpon>frmImportBooks.vb</DependentUpon>
     </Compile>
     <Compile Include="frmImportBooks.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmImportBooks_OLD.designer.vb">
+      <DependentUpon>frmImportBooks_OLD.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmImportBooks_OLD.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Lib_Control.Designer.vb">
@@ -171,6 +174,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmImportBooks.resx">
       <DependentUpon>frmImportBooks.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmImportBooks_OLD.resx">
+      <DependentUpon>frmImportBooks_OLD.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Lib_Control.resx">
       <DependentUpon>Lib_Control.vb</DependentUpon>

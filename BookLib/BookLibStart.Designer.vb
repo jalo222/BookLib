@@ -30,6 +30,7 @@ Partial Class BookLibStart
         Me.CategoriesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.FileTypesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ViewToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.TestToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -44,7 +45,7 @@ Partial Class BookLibStart
         '
         'FileToolStripMenuItem
         '
-        Me.FileToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ImportReviewedBooksToolStripMenuItem})
+        Me.FileToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ImportReviewedBooksToolStripMenuItem, Me.TestToolStripMenuItem})
         Me.FileToolStripMenuItem.Name = "FileToolStripMenuItem"
         Me.FileToolStripMenuItem.Size = New System.Drawing.Size(37, 20)
         Me.FileToolStripMenuItem.Text = "File"
@@ -86,6 +87,12 @@ Partial Class BookLibStart
         Me.ViewToolStripMenuItem.Size = New System.Drawing.Size(44, 20)
         Me.ViewToolStripMenuItem.Text = "View"
         '
+        'TestToolStripMenuItem
+        '
+        Me.TestToolStripMenuItem.Name = "TestToolStripMenuItem"
+        Me.TestToolStripMenuItem.Size = New System.Drawing.Size(195, 22)
+        Me.TestToolStripMenuItem.Text = "Test"
+        '
         'BookLibStart
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -112,4 +119,5 @@ Partial Class BookLibStart
     Friend WithEvents ControlFileToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ImportReviewedBooksToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents FileTypesToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents TestToolStripMenuItem As ToolStripMenuItem
 End Class
