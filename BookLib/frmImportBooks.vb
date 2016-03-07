@@ -12,11 +12,20 @@
 
     Private Sub frmImportBooks_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.CenterToScreen()
+
+        Dim CoverFType As New DataTable("File_Types")
+        BooklibDataSet.Tables.Add(CoverFType)
         Me.TableAdapterManager.Connection = Conn
         Me.BooksTableAdapter.Connection = Conn
         Me.AuthorsTableAdapter.Connection = Conn
         Me.File_typesTableAdapter.Connection = Conn
+        Me.File_types_copyTableAdapter.Connection = Conn
+        Me.Book_coversTableAdapter.Connection = Conn
+        Me.File_types_copyTableAdapter.Connection = Conn
+        Me.File_types_copyTableAdapter.Fill(Me.BooklibDataSet.file_types_copy)
         Me.File_typesTableAdapter.Fill(Me.BooklibDataSet.file_types)
+        Me.Book_coversTableAdapter.Fill(Me.BooklibDataSet.book_covers)
+        Me.File_types_copyTableAdapter.Fill(Me.BooklibDataSet.file_types_copy)
         Me.AuthorsTableAdapter.Fill(Me.BooklibDataSet.authors)
         Me.BooksTableAdapter.Fill(Me.BooklibDataSet.books)
 
@@ -52,7 +61,9 @@
         v_BookTbl = Cl_MySql.TblLookup("books", "*", "BookName = '" & v_BookName & "'")
         If v_BookTbl.Rows.Count = 0 Then
             Me.BooksBindingSource.AddNew()
+            Me.Book_coversBindingSource.AddNew()
             Me.BookNameTextBox.Text = v_BookName
+            Me.CoverBookID.Text = Me.BookIDTextBox.Text
         Else
             Me.BooksBindingSource.Filter = "bookID = " & v_BookTbl.Rows(0).Item("bookID")
         End If
@@ -79,6 +90,7 @@
         If v_FtypeTbl.Rows.Count = 0 Then
             Me.File_typesBindingSource.AddNew()
             Me.FileExtensionBookTextBox.Text = vBook_FExt
+            'Me.BookFileTypeIDTextBox.Text = FileTypeIDBookTextBox.Text
         Else
             Me.File_typesBindingSource.Filter = "FileTypeID = " & v_FtypeTbl.Rows(0).Item("FileTypeID")
         End If
@@ -89,14 +101,13 @@
         Dim v_FtypeTbl As New DataTable
         v_FtypeTbl = Cl_MySql.TblLookup("file_types", "*", "FileExtension = '" & vCover_FExt & "'")
         If v_FtypeTbl.Rows.Count = 0 Then
-            Me.File_typesBindingSource.AddNew()
-            Me.File_typesBindingSource.Item("FileExtension") = vCover_FExt
-
-            'Me.FileExtensionCoverTextBox.Text = vBook_FExt
+            Me.File_types_copyBindingSource.AddNew()
+            Me.FileExtensionCoverTextBox.Text = vCover_FExt
+            'Me.CoverFileTypeID.Text = FileTypeIDCoverTextBox.Text
         Else
             Me.File_typesBindingSource.Filter = "FileTypeID = " & v_FtypeTbl.Rows(0).Item("FileTypeID")
         End If
-        Me.CoverFileTypeIDTextBox.Text = Me.File_typesBindingSource.Item("FileTypeID")
+        Me.CoverFileTypeID.Text = FileTypeIDCoverTextBox.Text
     End Sub
 
     Private Sub cmdSave()
@@ -104,6 +115,8 @@
         Me.AuthorsBindingSource.EndEdit()
         Me.File_typesBindingSource.EndEdit()
         Me.BooksBindingSource.EndEdit()
+        Me.File_types_copyBindingSource.EndEdit()
+        Me.Book_coversBindingSource.EndEdit()
         Me.TableAdapterManager.UpdateAll(Me.BooklibDataSet)
 
     End Sub

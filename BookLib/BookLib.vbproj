@@ -101,6 +101,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>booklibDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="booklibDataSet.vb">
+      <DependentUpon>booklibDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="BookLibStart.designer.vb">
       <DependentUpon>BookLibStart.vb</DependentUpon>
     </Compile>

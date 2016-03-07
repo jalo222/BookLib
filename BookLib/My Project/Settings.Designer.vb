@@ -64,6 +64,17 @@ Namespace My
                 Return CType(Me("booklibConnectionString"),String)
             End Get
         End Property
+        
+        <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.SpecialSettingAttribute(Global.System.Configuration.SpecialSetting.ConnectionString),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("server=localhost;user id=root;database=booklib;persistsecurityinfo=True;allowuser"& _ 
+            "variables=True")>  _
+        Public ReadOnly Property booklibConnectionString1() As String
+            Get
+                Return CType(Me("booklibConnectionString1"),String)
+            End Get
+        End Property
     End Class
 End Namespace
 
