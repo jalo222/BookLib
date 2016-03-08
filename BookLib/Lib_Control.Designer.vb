@@ -26,6 +26,7 @@ Partial Class Lib_Control
         Dim Lib_Control_IDLabel As System.Windows.Forms.Label
         Dim New_Book_DirLabel As System.Windows.Forms.Label
         Dim Reviewed_Book_DirLabel As System.Windows.Forms.Label
+        Dim ComputerNameLabel As System.Windows.Forms.Label
         Me.BooklibDataSet = New BookLib.booklibDataSet()
         Me.Lib_controlBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.Lib_controlTableAdapter = New BookLib.booklibDataSetTableAdapters.lib_controlTableAdapter()
@@ -38,9 +39,11 @@ Partial Class Lib_Control
         Me.FolderBrowserDialog = New System.Windows.Forms.FolderBrowserDialog()
         Me.btnSave = New System.Windows.Forms.Button()
         Me.btnCancel = New System.Windows.Forms.Button()
+        Me.ComputerNameTextBox = New System.Windows.Forms.TextBox()
         Lib_Control_IDLabel = New System.Windows.Forms.Label()
         New_Book_DirLabel = New System.Windows.Forms.Label()
         Reviewed_Book_DirLabel = New System.Windows.Forms.Label()
+        ComputerNameLabel = New System.Windows.Forms.Label()
         CType(Me.BooklibDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Lib_controlBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -75,6 +78,7 @@ Partial Class Lib_Control
         'BooklibDataSet
         '
         Me.BooklibDataSet.DataSetName = "booklibDataSet"
+        Me.BooklibDataSet.EnforceConstraints = False
         Me.BooklibDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
         '
         'Lib_controlBindingSource
@@ -90,8 +94,11 @@ Partial Class Lib_Control
         '
         Me.TableAdapterManager.authorsTableAdapter = Nothing
         Me.TableAdapterManager.BackupDataSetBeforeUpdate = False
+        Me.TableAdapterManager.book_coversTableAdapter = Nothing
         Me.TableAdapterManager.booksTableAdapter = Nothing
         Me.TableAdapterManager.categoriesTableAdapter = Nothing
+        Me.TableAdapterManager.file_types_copyTableAdapter = Nothing
+        Me.TableAdapterManager.file_typesTableAdapter = Nothing
         Me.TableAdapterManager.lib_controlTableAdapter = Me.Lib_controlTableAdapter
         Me.TableAdapterManager.UpdateOrder = BookLib.booklibDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete
         '
@@ -155,11 +162,30 @@ Partial Class Lib_Control
         Me.btnCancel.Text = "Cancel"
         Me.btnCancel.UseVisualStyleBackColor = True
         '
+        'ComputerNameLabel
+        '
+        ComputerNameLabel.AutoSize = True
+        ComputerNameLabel.Location = New System.Drawing.Point(221, 48)
+        ComputerNameLabel.Name = "ComputerNameLabel"
+        ComputerNameLabel.Size = New System.Drawing.Size(86, 13)
+        ComputerNameLabel.TabIndex = 12
+        ComputerNameLabel.Text = "Computer Name:"
+        '
+        'ComputerNameTextBox
+        '
+        Me.ComputerNameTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.Lib_controlBindingSource, "ComputerName", True))
+        Me.ComputerNameTextBox.Location = New System.Drawing.Point(313, 45)
+        Me.ComputerNameTextBox.Name = "ComputerNameTextBox"
+        Me.ComputerNameTextBox.Size = New System.Drawing.Size(100, 20)
+        Me.ComputerNameTextBox.TabIndex = 13
+        '
         'Lib_Control
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(715, 317)
+        Me.Controls.Add(ComputerNameLabel)
+        Me.Controls.Add(Me.ComputerNameTextBox)
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.btnSave)
         Me.Controls.Add(Me.btnBrowseReviewDir)
@@ -191,4 +217,5 @@ Partial Class Lib_Control
     Friend WithEvents FolderBrowserDialog As FolderBrowserDialog
     Friend WithEvents btnSave As Button
     Friend WithEvents btnCancel As Button
+    Friend WithEvents ComputerNameTextBox As TextBox
 End Class

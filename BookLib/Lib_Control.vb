@@ -13,15 +13,17 @@ Public Class Lib_Control
 
         Me.CenterToScreen()
 
-        'TODO: This line of code loads data into the 'BooklibDataSet.lib_control' table. You can move, or remove it, as needed.
+        'Me.txtComputerName.Text = Environment.MachineName()
         Me.Lib_controlTableAdapter.Connection = Conn
         Me.Lib_controlTableAdapter.Fill(Me.BooklibDataSet.lib_control)
-        Dim cmd As New MySqlCommand("select count(*) from lib_control", Conn)
+        Me.Lib_controlBindingSource.Filter = "ComputerName = '" & Environment.MachineName() & "'"
+        Dim cmd As New MySqlCommand("select count(*) from lib_control where ComputerName = '" & Environment.MachineName() & "'", Conn)
         CntRows = cmd.ExecuteScalar()
         If CntRows > 0 Then
             Me.Lib_controlBindingSource.MoveFirst()
         Else
             Me.Lib_controlBindingSource.AddNew()
+            Me.ComputerNameTextBox.Text = Environment.MachineName()
         End If
 
     End Sub
@@ -34,5 +36,19 @@ Public Class Lib_Control
 
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
         Me.Close()
+    End Sub
+
+    Private Sub btnBrowseReviewDir_Click(sender As Object, e As EventArgs) Handles btnBrowseReviewDir.Click
+        If FolderBrowserDialog.ShowDialog() = DialogResult.OK Then
+            Me.Reviewed_Book_DirTextBox.Text = FolderBrowserDialog.SelectedPath
+        End If
+
+    End Sub
+
+    Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
+        Me.Validate()
+        Me.Lib_controlBindingSource.EndEdit()
+        Me.TableAdapterManager.UpdateAll(Me.BooklibDataSet)
+
     End Sub
 End Class

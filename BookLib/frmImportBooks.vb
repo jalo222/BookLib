@@ -3,15 +3,10 @@
     Dim vCover_FExt As String
     Dim v_BookName As String
 
-    Private Sub BooksBindingNavigatorSaveItem_Click(sender As Object, e As EventArgs) 
-        Me.Validate()
-        Me.BooksBindingSource.EndEdit()
-        Me.TableAdapterManager.UpdateAll(Me.BooklibDataSet)
-
-    End Sub
 
     Private Sub frmImportBooks_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.CenterToScreen()
+
 
         Dim CoverFType As New DataTable("File_Types")
         BooklibDataSet.Tables.Add(CoverFType)
@@ -124,4 +119,5 @@
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         cmdSave()
     End Sub
+
 End Class

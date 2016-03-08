@@ -53,6 +53,7 @@ Partial Class frmImportBooks
         Me.TableAdapterManager = New BookLib.booklibDataSetTableAdapters.TableAdapterManager()
         Me.AuthorsTableAdapter = New BookLib.booklibDataSetTableAdapters.authorsTableAdapter()
         Me.Book_coversTableAdapter = New BookLib.booklibDataSetTableAdapters.book_coversTableAdapter()
+        Me.File_types_copyTableAdapter = New BookLib.booklibDataSetTableAdapters.file_types_copyTableAdapter()
         Me.File_typesTableAdapter = New BookLib.booklibDataSetTableAdapters.file_typesTableAdapter()
         Me.BookIDTextBox = New System.Windows.Forms.TextBox()
         Me.BookNameTextBox = New System.Windows.Forms.TextBox()
@@ -71,7 +72,6 @@ Partial Class frmImportBooks
         Me.CoverBookID = New System.Windows.Forms.TextBox()
         Me.CoverFileTypeID = New System.Windows.Forms.TextBox()
         Me.File_types_copyBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.File_types_copyTableAdapter = New BookLib.booklibDataSetTableAdapters.file_types_copyTableAdapter()
         Me.FileTypeIDCoverTextBox = New System.Windows.Forms.TextBox()
         Me.FileExtensionCoverTextBox = New System.Windows.Forms.TextBox()
         Me.FileTypeTextBox = New System.Windows.Forms.TextBox()
@@ -249,7 +249,7 @@ Partial Class frmImportBooks
         Me.FileSystemTree2.FileExtensions = "*"
         Me.FileSystemTree2.Location = New System.Drawing.Point(12, 12)
         Me.FileSystemTree2.Name = "FileSystemTree2"
-        Me.FileSystemTree2.RootDrive = Nothing
+        Me.FileSystemTree2.RootDrive = "C:\"
         Me.FileSystemTree2.Size = New System.Drawing.Size(359, 471)
         Me.FileSystemTree2.TabIndex = 2
         '
@@ -343,6 +343,10 @@ Partial Class frmImportBooks
         'Book_coversTableAdapter
         '
         Me.Book_coversTableAdapter.ClearBeforeFill = True
+        '
+        'File_types_copyTableAdapter
+        '
+        Me.File_types_copyTableAdapter.ClearBeforeFill = True
         '
         'File_typesTableAdapter
         '
@@ -471,10 +475,6 @@ Partial Class frmImportBooks
         '
         Me.File_types_copyBindingSource.DataMember = "file_types_copy"
         Me.File_types_copyBindingSource.DataSource = Me.BooklibDataSet
-        '
-        'File_types_copyTableAdapter
-        '
-        Me.File_types_copyTableAdapter.ClearBeforeFill = True
         '
         'FileTypeIDCoverTextBox
         '
