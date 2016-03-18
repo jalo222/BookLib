@@ -12,10 +12,16 @@ Public Class BookLibStart
         Me.CenterToScreen()
         Conn = Cl_MySql.Connect()
         MyCmd.Connection = Conn
-        MyCmd.CommandText = "select count(*) from books"
-        cntBooks = MyCmd.ExecuteScalar
-        MyCmd.CommandText = "select count(*) from authors"
-        cntAuthors = MyCmd.ExecuteScalar
+        Cl_MySql.GetParms()
+
+        'MsgBox("Create Dir result = " & clsGenFunc.fnCreateDir("C:\Data\Test_Create_CopyDir"))
+        'MsgBox("Move result = " & clsGenFunc.fnCopyDir("C:\Data\Test_CopyDir", "C:\Test", False))
+        'MsgBox("move result = " & clsGenFunc.fnCopyDir("C:\", "C:\Data\Test_Dir\kkk", True))
+        MsgBox("Parm incoming = " & PrmNewBookDir & ", Store in " & PrmReviewedBookDir)
+        'MyCmd.CommandText = "select count(*) from books"
+        'cntBooks = MyCmd.ExecuteScalar
+        'MyCmd.CommandText = "select count(*) from authors"
+        'cntAuthors = MyCmd.ExecuteScalar
         '        MsgBox("books = " + Str(cntBooks) + ",  Authors = " + Str(cntAuthors))
 
     End Sub
@@ -26,7 +32,7 @@ Public Class BookLibStart
     End Sub
 
     Private Sub ControlFileToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ControlFileToolStripMenuItem.Click
-        Dim frmLib_Control As New Lib_Control
+        Dim frmLib_Control As New frmLib_Control
         frmLib_Control.Show()
     End Sub
 

@@ -1,6 +1,6 @@
 ﻿Imports MySql.Data.MySqlClient
 
-Public Class Lib_Control
+Public Class frmLib_Control
     '    Private Sub Lib_controlBindingNavigatorSaveItem_Click(sender As Object, e As EventArgs) Handles MyBaseBindingNavigatorSaveItem.Click, MyBaseBindingNavigatorSaveItem.Click, MyBaseBindingNavigatorSaveItem.Click
     '    Me.Validate()
     '    Me.Lib_controlBindingSource.EndEdit()

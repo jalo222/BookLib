@@ -1,10 +1,31 @@
-﻿Public Class frmImportBooks
+﻿Imports MySql.Data.MySqlClient
+
+Public Class frmImportBooks
+
     Dim vBook_FExt As String
     Dim vCover_FExt As String
     Dim v_BookName As String
+    Dim v_SourceDir As String
+    Dim v_SourceParentDir As String
 
+    Private Function fnCheckDir(P_Dir As IO.DirectoryInfo)
+        Dim Return_Val As Integer = 0
+
+        If P_Dir.GetDirectories.Count > 0 Then
+            MsgBox("Directory " & P_Dir.FullName & " contains sub-directories. Please choose the lowest level directory for importing.")
+            Return_Val = 1
+        Else
+            If P_Dir.GetFiles.Count = 0 Then
+                MsgBox("The directory " & P_Dir.FullName & " is empty. Import has been aborted.")
+                Return_Val = 1
+            End If
+        End If
+
+        Return Return_Val
+    End Function
 
     Private Sub frmImportBooks_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
         Me.CenterToScreen()
 
 
@@ -28,27 +49,36 @@
     Private Sub btnImport_Click(sender As Object, e As EventArgs) Handles btnImport.Click
         Dim vFName As String
         Dim vFext As String
+        Dim Retval As Integer = 0
+
         For Each directory In FileSystemTree2.GetSelectedDirectories()
-            For Each ImpFile In directory.GetFiles()
-                vFName = ImpFile.Name
-                vFext = Mid(ImpFile.Extension, 2)
-                If vFExt = "mobi" Or vFExt = "epub" Then
-                    vBook_FExt = vFext
-                    Me.txtBookRef.Text = vFName
-                    v_BookName = Mid(txtBookRef.Text, 1, InStr(txtBookRef.Text, "-") - 2)
-                    Dim vAuth As String = Trim(Mid(txtBookRef.Text, InStr(txtBookRef.Text, "-") + 1))
-                    txtAuthor.Text = Mid(vAuth, 1, InStr(vAuth, ".") - 1)
-                End If
-                If vFext = "jpg" Then
-                    vCover_FExt = vFext
-                    Me.PictureBox1.Image = Image.FromFile(directory.FullName + "\" + vFName)
-                    txtCoverFileName.Text = vFName
-                End If
-            Next
-            ChkBook()
-            ChkAuthor()
-            ChkFileTypeBook()
-            ChkFileTypeCover()
+            v_SourceDir = directory.FullName
+            v_SourceParentDir = directory.Parent.FullName
+            MsgBox("Parent dir = " & v_SourceParentDir)
+            Retval = fnCheckDir(directory)
+            If Retval = 0 Then
+                For Each ImpFile In directory.GetFiles()
+                    vFName = ImpFile.Name
+                    vFext = Mid(ImpFile.Extension, 2)
+                    If vFext = "mobi" Or vFext = "epub" Then
+                        vBook_FExt = vFext
+                        Me.txtBookRef.Text = vFName
+                        v_BookName = Mid(txtBookRef.Text, 1, InStr(txtBookRef.Text, "-") - 2)
+                        Dim vAuth As String = Trim(Mid(txtBookRef.Text, InStr(txtBookRef.Text, "-") + 1))
+                        txtAuthor.Text = Mid(vAuth, 1, InStr(vAuth, ".") - 1)
+                    End If
+                    If vFext = "jpg" Then
+                        vCover_FExt = vFext
+                        txtCoverFileName.Text = vFName
+                        Dim bytes = My.Computer.FileSystem.ReadAllBytes(directory.FullName & "\" & vFName)
+                        PictureBox1.Image = Image.FromStream(New IO.MemoryStream(bytes))
+                    End If
+                Next
+                ChkBook()
+                ChkAuthor()
+                ChkFileTypeBook()
+                ChkFileTypeCover()
+            End If
         Next
     End Sub
     Private Sub ChkBook()
@@ -85,7 +115,6 @@
         If v_FtypeTbl.Rows.Count = 0 Then
             Me.File_typesBindingSource.AddNew()
             Me.FileExtensionBookTextBox.Text = vBook_FExt
-            'Me.BookFileTypeIDTextBox.Text = FileTypeIDBookTextBox.Text
         Else
             Me.File_typesBindingSource.Filter = "FileTypeID = " & v_FtypeTbl.Rows(0).Item("FileTypeID")
         End If
@@ -106,6 +135,7 @@
     End Sub
 
     Private Sub cmdSave()
+
         Me.Validate()
         Me.AuthorsBindingSource.EndEdit()
         Me.File_typesBindingSource.EndEdit()
@@ -113,9 +143,32 @@
         Me.File_types_copyBindingSource.EndEdit()
         Me.Book_coversBindingSource.EndEdit()
         Me.TableAdapterManager.UpdateAll(Me.BooklibDataSet)
+        MoveBookDir()
 
     End Sub
 
+    Private Sub MoveBookDir()
+        Dim v_DestParentDir As String
+        Dim v_DestBookDir As String
+
+        v_DestParentDir = Me.AuthorsBindingSource.Current("AuthorFullName")
+        v_DestBookDir = Me.BooksBindingSource.Current("BookName")
+        MsgBox("Move from: " & Me.AuthorsBindingSource.Current("AuthorFullName") & Chr(13) & Chr(10) & Chr(13) & Chr(10) _
+            & "Move to: " & Me.BooksBindingSource.Current("BookName"))
+        clsGenFunc.fnMoveDir(v_SourceDir, PrmReviewedBookDir & "\" & v_DestParentDir & "\" & v_DestBookDir)
+        Dim ChkDir As New System.IO.DirectoryInfo(v_SourceParentDir)
+        If ChkDir.GetDirectories.Count = 0 Then
+            If ChkDir.GetFiles.Count = 0 Then
+                clsGenFunc.fnDelDir(v_SourceParentDir)
+            Else
+                MsgBox("Directory " & v_SourceParentDir & " contains " & Str(ChkDir.GetFiles.Count) & " files")
+            End If
+        Else
+            MsgBox("Directory " & v_SourceParentDir & " contains " & Str(ChkDir.GetDirectories.Count) & " directories")
+
+        End If
+
+    End Sub
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         cmdSave()
     End Sub
