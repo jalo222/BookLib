@@ -75,6 +75,7 @@ Partial Class frmImportBooks
         Me.FileTypeIDCoverTextBox = New System.Windows.Forms.TextBox()
         Me.FileExtensionCoverTextBox = New System.Windows.Forms.TextBox()
         Me.FileTypeTextBox = New System.Windows.Forms.TextBox()
+        Me.TreeView1 = New System.Windows.Forms.TreeView()
         BookIDLabel = New System.Windows.Forms.Label()
         BookNameLabel = New System.Windows.Forms.Label()
         AuthorIDLabel = New System.Windows.Forms.Label()
@@ -500,11 +501,19 @@ Partial Class frmImportBooks
         Me.FileTypeTextBox.Size = New System.Drawing.Size(100, 20)
         Me.FileTypeTextBox.TabIndex = 81
         '
+        'TreeView1
+        '
+        Me.TreeView1.Location = New System.Drawing.Point(152, 120)
+        Me.TreeView1.Name = "TreeView1"
+        Me.TreeView1.Size = New System.Drawing.Size(258, 190)
+        Me.TreeView1.TabIndex = 82
+        '
         'frmImportBooks
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1030, 531)
+        Me.Controls.Add(Me.TreeView1)
         Me.Controls.Add(FileTypeIDLabel2)
         Me.Controls.Add(Me.FileTypeIDCoverTextBox)
         Me.Controls.Add(FileExtensionLabel1)
@@ -595,4 +604,5 @@ Partial Class frmImportBooks
     Friend WithEvents FileTypeIDCoverTextBox As TextBox
     Friend WithEvents FileExtensionCoverTextBox As TextBox
     Friend WithEvents FileTypeTextBox As TextBox
+    Friend WithEvents TreeView1 As TreeView
 End Class

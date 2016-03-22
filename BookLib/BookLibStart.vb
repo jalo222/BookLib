@@ -17,7 +17,7 @@ Public Class BookLibStart
         'MsgBox("Create Dir result = " & clsGenFunc.fnCreateDir("C:\Data\Test_Create_CopyDir"))
         'MsgBox("Move result = " & clsGenFunc.fnCopyDir("C:\Data\Test_CopyDir", "C:\Test", False))
         'MsgBox("move result = " & clsGenFunc.fnCopyDir("C:\", "C:\Data\Test_Dir\kkk", True))
-        MsgBox("Parm incoming = " & PrmNewBookDir & ", Store in " & PrmReviewedBookDir)
+        'MsgBox("Parm incoming = " & PrmNewBookDir & ", Store in " & PrmReviewedBookDir)
         'MyCmd.CommandText = "select count(*) from books"
         'cntBooks = MyCmd.ExecuteScalar
         'MyCmd.CommandText = "select count(*) from authors"
@@ -49,6 +49,10 @@ Public Class BookLibStart
     Private Sub TestToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TestToolStripMenuItem.Click
         Dim frmTest As New Test
         frmTest.Show()
+    End Sub
+
+    Private Sub MenuStrip1_ItemClicked(sender As Object, e As ToolStripItemClickedEventArgs) Handles MenuStrip1.ItemClicked
+
     End Sub
 
     '    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click

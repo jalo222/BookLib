@@ -54,7 +54,7 @@ Public Class frmImportBooks
         For Each directory In FileSystemTree2.GetSelectedDirectories()
             v_SourceDir = directory.FullName
             v_SourceParentDir = directory.Parent.FullName
-            MsgBox("Parent dir = " & v_SourceParentDir)
+            'MsgBox("Parent dir = " & v_SourceParentDir)
             Retval = fnCheckDir(directory)
             If Retval = 0 Then
                 For Each ImpFile In directory.GetFiles()
@@ -153,8 +153,8 @@ Public Class frmImportBooks
 
         v_DestParentDir = Me.AuthorsBindingSource.Current("AuthorFullName")
         v_DestBookDir = Me.BooksBindingSource.Current("BookName")
-        MsgBox("Move from: " & Me.AuthorsBindingSource.Current("AuthorFullName") & Chr(13) & Chr(10) & Chr(13) & Chr(10) _
-            & "Move to: " & Me.BooksBindingSource.Current("BookName"))
+        'MsgBox("Move from: " & Me.AuthorsBindingSource.Current("AuthorFullName") & Chr(13) & Chr(10) & Chr(13) & Chr(10) _
+        '    & "Move to: " & Me.BooksBindingSource.Current("BookName"))
         clsGenFunc.fnMoveDir(v_SourceDir, PrmReviewedBookDir & "\" & v_DestParentDir & "\" & v_DestBookDir)
         Dim ChkDir As New System.IO.DirectoryInfo(v_SourceParentDir)
         If ChkDir.GetDirectories.Count = 0 Then
