@@ -6,23 +6,14 @@ Public Class BookLibStart
 
 
     Private Sub BookLibStart_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Dim cntBooks As Integer
-        Dim cntAuthors As Integer
+        'Dim cntBooks As Integer
+        'Dim cntAuthors As Integer
 
         Me.CenterToScreen()
         Conn = Cl_MySql.Connect()
         MyCmd.Connection = Conn
         Cl_MySql.GetParms()
-
-        'MsgBox("Create Dir result = " & clsGenFunc.fnCreateDir("C:\Data\Test_Create_CopyDir"))
-        'MsgBox("Move result = " & clsGenFunc.fnCopyDir("C:\Data\Test_CopyDir", "C:\Test", False))
-        'MsgBox("move result = " & clsGenFunc.fnCopyDir("C:\", "C:\Data\Test_Dir\kkk", True))
-        'MsgBox("Parm incoming = " & PrmNewBookDir & ", Store in " & PrmReviewedBookDir)
-        'MyCmd.CommandText = "select count(*) from books"
-        'cntBooks = MyCmd.ExecuteScalar
-        'MyCmd.CommandText = "select count(*) from authors"
-        'cntAuthors = MyCmd.ExecuteScalar
-        '        MsgBox("books = " + Str(cntBooks) + ",  Authors = " + Str(cntAuthors))
+        'MsgBox("Image = " & PrmNoFileImage)
 
     End Sub
 
@@ -51,23 +42,4 @@ Public Class BookLibStart
         frmTest.Show()
     End Sub
 
-    Private Sub MenuStrip1_ItemClicked(sender As Object, e As ToolStripItemClickedEventArgs) Handles MenuStrip1.ItemClicked
-
-    End Sub
-
-    '    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-    '    Dim xtab As New DataTable
-    '    Dim coldata As String
-    '
-    '        xtab = Cl_MySql.TblLookup("authors", "*", "categoryname like 'We%'")
-    '        MsgBox("Rows = " + Str(xtab.Rows.Count))
-    '        coldata = ""
-    '    For Each xt In xtab.Rows
-    '    For Each col In xtab.Columns
-    '                coldata = coldata & " -    " & ((col.ToString) & " " & (xt(col)))
-    '    Next
-    '            coldata = coldata + Chr(10) + Chr(13)
-    '    Next
-    '        MsgBox(coldata)
-    '    End Sub
 End Class

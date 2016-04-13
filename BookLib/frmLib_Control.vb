@@ -51,4 +51,12 @@ Public Class frmLib_Control
         Me.TableAdapterManager.UpdateAll(Me.BooklibDataSet)
 
     End Sub
+
+    Private Sub btnBrowseNoFile_Click(sender As Object, e As EventArgs) Handles btnBrowseNoFile.Click
+        Using dialog As New OpenFileDialog
+            If dialog.ShowDialog() <> DialogResult.OK Then Return
+            Me.No_Image_FileTextBox.Text = dialog.FileName
+        End Using
+
+    End Sub
 End Class

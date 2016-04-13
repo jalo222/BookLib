@@ -39,13 +39,15 @@ Partial Public Class booklibDataSet
     
     Private tablelib_control As lib_controlDataTable
     
+    Private relationFK_File_Types As Global.System.Data.DataRelation
+    
     Private relationFK_Authors As Global.System.Data.DataRelation
     
-    Private relationFK_File_Types As Global.System.Data.DataRelation
+    Private relationFK_BookID As Global.System.Data.DataRelation
     
     Private relationFK_file_types_copy_book_covers As Global.System.Data.DataRelation
     
-    Private relationFK_BookID As Global.System.Data.DataRelation
+    Private relationFK_CoverFileType As Global.System.Data.DataRelation
     
     Private _schemaSerializationMode As Global.System.Data.SchemaSerializationMode = Global.System.Data.SchemaSerializationMode.IncludeSchema
     
@@ -346,10 +348,11 @@ Partial Public Class booklibDataSet
                 Me.tablelib_control.InitVars
             End If
         End If
-        Me.relationFK_Authors = Me.Relations("FK_Authors")
         Me.relationFK_File_Types = Me.Relations("FK_File_Types")
-        Me.relationFK_file_types_copy_book_covers = Me.Relations("FK_file_types_copy_book_covers")
+        Me.relationFK_Authors = Me.Relations("FK_Authors")
         Me.relationFK_BookID = Me.Relations("FK_BookID")
+        Me.relationFK_file_types_copy_book_covers = Me.Relations("FK_file_types_copy_book_covers")
+        Me.relationFK_CoverFileType = Me.Relations("FK_CoverFileType")
     End Sub
     
     <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -375,18 +378,13 @@ Partial Public Class booklibDataSet
         Me.tablelib_control = New lib_controlDataTable()
         MyBase.Tables.Add(Me.tablelib_control)
         Dim fkc As Global.System.Data.ForeignKeyConstraint
-        fkc = New Global.System.Data.ForeignKeyConstraint("FK_Authors", New Global.System.Data.DataColumn() {Me.tableauthors.AuthorIDColumn}, New Global.System.Data.DataColumn() {Me.tablebooks.AuthorIDColumn})
-        Me.tablebooks.Constraints.Add(fkc)
-        fkc.AcceptRejectRule = Global.System.Data.AcceptRejectRule.None
-        fkc.DeleteRule = Global.System.Data.Rule.Cascade
-        fkc.UpdateRule = Global.System.Data.Rule.Cascade
         fkc = New Global.System.Data.ForeignKeyConstraint("FK_File_Types", New Global.System.Data.DataColumn() {Me.tablefile_types.FileTypeIDColumn}, New Global.System.Data.DataColumn() {Me.tablebooks.FileTypeIDColumn})
         Me.tablebooks.Constraints.Add(fkc)
         fkc.AcceptRejectRule = Global.System.Data.AcceptRejectRule.None
         fkc.DeleteRule = Global.System.Data.Rule.Cascade
         fkc.UpdateRule = Global.System.Data.Rule.Cascade
-        fkc = New Global.System.Data.ForeignKeyConstraint("FK_file_types_copy_book_covers", New Global.System.Data.DataColumn() {Me.tablefile_types_copy.FileTypeIDColumn}, New Global.System.Data.DataColumn() {Me.tablebook_covers.FileTypeIDColumn})
-        Me.tablebook_covers.Constraints.Add(fkc)
+        fkc = New Global.System.Data.ForeignKeyConstraint("FK_Authors", New Global.System.Data.DataColumn() {Me.tableauthors.AuthorIDColumn}, New Global.System.Data.DataColumn() {Me.tablebooks.AuthorIDColumn})
+        Me.tablebooks.Constraints.Add(fkc)
         fkc.AcceptRejectRule = Global.System.Data.AcceptRejectRule.None
         fkc.DeleteRule = Global.System.Data.Rule.Cascade
         fkc.UpdateRule = Global.System.Data.Rule.Cascade
@@ -395,14 +393,21 @@ Partial Public Class booklibDataSet
         fkc.AcceptRejectRule = Global.System.Data.AcceptRejectRule.None
         fkc.DeleteRule = Global.System.Data.Rule.Cascade
         fkc.UpdateRule = Global.System.Data.Rule.Cascade
-        Me.relationFK_Authors = New Global.System.Data.DataRelation("FK_Authors", New Global.System.Data.DataColumn() {Me.tableauthors.AuthorIDColumn}, New Global.System.Data.DataColumn() {Me.tablebooks.AuthorIDColumn}, false)
-        Me.Relations.Add(Me.relationFK_Authors)
+        fkc = New Global.System.Data.ForeignKeyConstraint("FK_file_types_copy_book_covers", New Global.System.Data.DataColumn() {Me.tablefile_types_copy.FileTypeIDColumn}, New Global.System.Data.DataColumn() {Me.tablebook_covers.FileTypeIDColumn})
+        Me.tablebook_covers.Constraints.Add(fkc)
+        fkc.AcceptRejectRule = Global.System.Data.AcceptRejectRule.None
+        fkc.DeleteRule = Global.System.Data.Rule.Cascade
+        fkc.UpdateRule = Global.System.Data.Rule.Cascade
         Me.relationFK_File_Types = New Global.System.Data.DataRelation("FK_File_Types", New Global.System.Data.DataColumn() {Me.tablefile_types.FileTypeIDColumn}, New Global.System.Data.DataColumn() {Me.tablebooks.FileTypeIDColumn}, false)
         Me.Relations.Add(Me.relationFK_File_Types)
-        Me.relationFK_file_types_copy_book_covers = New Global.System.Data.DataRelation("FK_file_types_copy_book_covers", New Global.System.Data.DataColumn() {Me.tablefile_types_copy.FileTypeIDColumn}, New Global.System.Data.DataColumn() {Me.tablebook_covers.FileTypeIDColumn}, false)
-        Me.Relations.Add(Me.relationFK_file_types_copy_book_covers)
+        Me.relationFK_Authors = New Global.System.Data.DataRelation("FK_Authors", New Global.System.Data.DataColumn() {Me.tableauthors.AuthorIDColumn}, New Global.System.Data.DataColumn() {Me.tablebooks.AuthorIDColumn}, false)
+        Me.Relations.Add(Me.relationFK_Authors)
         Me.relationFK_BookID = New Global.System.Data.DataRelation("FK_BookID", New Global.System.Data.DataColumn() {Me.tablebooks.BookIDColumn}, New Global.System.Data.DataColumn() {Me.tablebook_covers.BookIDColumn}, false)
         Me.Relations.Add(Me.relationFK_BookID)
+        Me.relationFK_file_types_copy_book_covers = New Global.System.Data.DataRelation("FK_file_types_copy_book_covers", New Global.System.Data.DataColumn() {Me.tablefile_types_copy.FileTypeIDColumn}, New Global.System.Data.DataColumn() {Me.tablebook_covers.FileTypeIDColumn}, false)
+        Me.Relations.Add(Me.relationFK_file_types_copy_book_covers)
+        Me.relationFK_CoverFileType = New Global.System.Data.DataRelation("FK_CoverFileType", New Global.System.Data.DataColumn() {Me.tablefile_types.FileTypeIDColumn}, New Global.System.Data.DataColumn() {Me.tablebook_covers.FileTypeIDColumn}, false)
+        Me.Relations.Add(Me.relationFK_CoverFileType)
     End Sub
     
     <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -1727,6 +1732,8 @@ Partial Public Class booklibDataSet
         
         Private columnCover_Image As Global.System.Data.DataColumn
         
+        Private columnReview As Global.System.Data.DataColumn
+        
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Sub New()
@@ -1787,6 +1794,14 @@ Partial Public Class booklibDataSet
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property ReviewColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnReview
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
          Global.System.ComponentModel.Browsable(false)>  _
         Public ReadOnly Property Count() As Integer
@@ -1823,9 +1838,9 @@ Partial Public Class booklibDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Overloads Function Addbook_coversRow(ByVal parentbooksRowByFK_BookID As booksRow, ByVal parentfile_types_copyRowByFK_file_types_copy_book_covers As file_types_copyRow, ByVal Cover_Image() As Byte) As book_coversRow
+        Public Overloads Function Addbook_coversRow(ByVal parentbooksRowByFK_BookID As booksRow, ByVal parentfile_types_copyRowByFK_file_types_copy_book_covers As file_types_copyRow, ByVal Cover_Image() As Byte, ByVal Review() As Byte) As book_coversRow
             Dim rowbook_coversRow As book_coversRow = CType(Me.NewRow,book_coversRow)
-            Dim columnValuesArray() As Object = New Object() {Nothing, Nothing, Cover_Image}
+            Dim columnValuesArray() As Object = New Object() {Nothing, Nothing, Cover_Image, Review}
             If (Not (parentbooksRowByFK_BookID) Is Nothing) Then
                 columnValuesArray(0) = parentbooksRowByFK_BookID(0)
             End If
@@ -1835,6 +1850,12 @@ Partial Public Class booklibDataSet
             rowbook_coversRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowbook_coversRow)
             Return rowbook_coversRow
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function FindByBookID(ByVal BookID As Integer) As book_coversRow
+            Return CType(Me.Rows.Find(New Object() {BookID}),book_coversRow)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -1857,6 +1878,7 @@ Partial Public Class booklibDataSet
             Me.columnBookID = MyBase.Columns("BookID")
             Me.columnFileTypeID = MyBase.Columns("FileTypeID")
             Me.columnCover_Image = MyBase.Columns("Cover_Image")
+            Me.columnReview = MyBase.Columns("Review")
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -1868,7 +1890,9 @@ Partial Public Class booklibDataSet
             MyBase.Columns.Add(Me.columnFileTypeID)
             Me.columnCover_Image = New Global.System.Data.DataColumn("Cover_Image", GetType(Byte()), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnCover_Image)
-            Me.Constraints.Add(New Global.System.Data.UniqueConstraint("Constraint1", New Global.System.Data.DataColumn() {Me.columnBookID}, false))
+            Me.columnReview = New Global.System.Data.DataColumn("Review", GetType(Byte()), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnReview)
+            Me.Constraints.Add(New Global.System.Data.UniqueConstraint("Constraint1", New Global.System.Data.DataColumn() {Me.columnBookID}, true))
             Me.columnBookID.AllowDBNull = false
             Me.columnBookID.Unique = true
         End Sub
@@ -2309,6 +2333,8 @@ Partial Public Class booklibDataSet
         
         Private columnComputerName As Global.System.Data.DataColumn
         
+        Private columnNo_Image_File As Global.System.Data.DataColumn
+        
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Sub New()
@@ -2377,6 +2403,14 @@ Partial Public Class booklibDataSet
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property No_Image_FileColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnNo_Image_File
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
          Global.System.ComponentModel.Browsable(false)>  _
         Public ReadOnly Property Count() As Integer
@@ -2413,9 +2447,9 @@ Partial Public Class booklibDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Overloads Function Addlib_controlRow(ByVal New_Book_Dir As String, ByVal Reviewed_Book_Dir As String, ByVal ComputerName As String) As lib_controlRow
+        Public Overloads Function Addlib_controlRow(ByVal New_Book_Dir As String, ByVal Reviewed_Book_Dir As String, ByVal ComputerName As String, ByVal No_Image_File As String) As lib_controlRow
             Dim rowlib_controlRow As lib_controlRow = CType(Me.NewRow,lib_controlRow)
-            Dim columnValuesArray() As Object = New Object() {Nothing, New_Book_Dir, Reviewed_Book_Dir, ComputerName}
+            Dim columnValuesArray() As Object = New Object() {Nothing, New_Book_Dir, Reviewed_Book_Dir, ComputerName, No_Image_File}
             rowlib_controlRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowlib_controlRow)
             Return rowlib_controlRow
@@ -2448,6 +2482,7 @@ Partial Public Class booklibDataSet
             Me.columnNew_Book_Dir = MyBase.Columns("New_Book_Dir")
             Me.columnReviewed_Book_Dir = MyBase.Columns("Reviewed_Book_Dir")
             Me.columnComputerName = MyBase.Columns("ComputerName")
+            Me.columnNo_Image_File = MyBase.Columns("No_Image_File")
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -2461,6 +2496,8 @@ Partial Public Class booklibDataSet
             MyBase.Columns.Add(Me.columnReviewed_Book_Dir)
             Me.columnComputerName = New Global.System.Data.DataColumn("ComputerName", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnComputerName)
+            Me.columnNo_Image_File = New Global.System.Data.DataColumn("No_Image_File", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnNo_Image_File)
             Me.Constraints.Add(New Global.System.Data.UniqueConstraint("Constraint1", New Global.System.Data.DataColumn() {Me.columnLib_Control_ID}, true))
             Me.columnLib_Control_ID.AutoIncrement = true
             Me.columnLib_Control_ID.AutoIncrementSeed = -1
@@ -2470,6 +2507,7 @@ Partial Public Class booklibDataSet
             Me.columnNew_Book_Dir.MaxLength = 100
             Me.columnReviewed_Book_Dir.MaxLength = 100
             Me.columnComputerName.MaxLength = 45
+            Me.columnNo_Image_File.MaxLength = 150
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -2790,23 +2828,23 @@ Partial Public Class booklibDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Property authorsRow() As authorsRow
-            Get
-                Return CType(Me.GetParentRow(Me.Table.ParentRelations("FK_Authors")),authorsRow)
-            End Get
-            Set
-                Me.SetParentRow(value, Me.Table.ParentRelations("FK_Authors"))
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Property file_typesRow() As file_typesRow
             Get
                 Return CType(Me.GetParentRow(Me.Table.ParentRelations("FK_File_Types")),file_typesRow)
             End Get
             Set
                 Me.SetParentRow(value, Me.Table.ParentRelations("FK_File_Types"))
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property authorsRow() As authorsRow
+            Get
+                Return CType(Me.GetParentRow(Me.Table.ParentRelations("FK_Authors")),authorsRow)
+            End Get
+            Set
+                Me.SetParentRow(value, Me.Table.ParentRelations("FK_Authors"))
             End Set
         End Property
         
@@ -2984,6 +3022,16 @@ Partial Public Class booklibDataSet
                 Return CType(MyBase.GetChildRows(Me.Table.ChildRelations("FK_File_Types")),booksRow())
             End If
         End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function Getbook_coversRows() As book_coversRow()
+            If (Me.Table.ChildRelations("FK_CoverFileType") Is Nothing) Then
+                Return New book_coversRow(-1) {}
+            Else
+                Return CType(MyBase.GetChildRows(Me.Table.ChildRelations("FK_CoverFileType")),book_coversRow())
+            End If
+        End Function
     End Class
     
     '''<summary>
@@ -3044,12 +3092,16 @@ Partial Public Class booklibDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Property file_types_copyRow() As file_types_copyRow
+        Public Property Review() As Byte()
             Get
-                Return CType(Me.GetParentRow(Me.Table.ParentRelations("FK_file_types_copy_book_covers")),file_types_copyRow)
+                Try 
+                    Return CType(Me(Me.tablebook_covers.ReviewColumn),Byte())
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Review' in table 'book_covers' is DBNull.", e)
+                End Try
             End Get
             Set
-                Me.SetParentRow(value, Me.Table.ParentRelations("FK_file_types_copy_book_covers"))
+                Me(Me.tablebook_covers.ReviewColumn) = value
             End Set
         End Property
         
@@ -3061,6 +3113,28 @@ Partial Public Class booklibDataSet
             End Get
             Set
                 Me.SetParentRow(value, Me.Table.ParentRelations("FK_BookID"))
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property file_types_copyRow() As file_types_copyRow
+            Get
+                Return CType(Me.GetParentRow(Me.Table.ParentRelations("FK_file_types_copy_book_covers")),file_types_copyRow)
+            End Get
+            Set
+                Me.SetParentRow(value, Me.Table.ParentRelations("FK_file_types_copy_book_covers"))
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property file_typesRow() As file_typesRow
+            Get
+                Return CType(Me.GetParentRow(Me.Table.ParentRelations("FK_CoverFileType")),file_typesRow)
+            End Get
+            Set
+                Me.SetParentRow(value, Me.Table.ParentRelations("FK_CoverFileType"))
             End Set
         End Property
         
@@ -3086,6 +3160,18 @@ Partial Public Class booklibDataSet
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Sub SetCover_ImageNull()
             Me(Me.tablebook_covers.Cover_ImageColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsReviewNull() As Boolean
+            Return Me.IsNull(Me.tablebook_covers.ReviewColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetReviewNull()
+            Me(Me.tablebook_covers.ReviewColumn) = Global.System.Convert.DBNull
         End Sub
     End Class
     
@@ -3237,6 +3323,21 @@ Partial Public Class booklibDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property No_Image_File() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tablelib_control.No_Image_FileColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'No_Image_File' in table 'lib_control' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tablelib_control.No_Image_FileColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Function IsNew_Book_DirNull() As Boolean
             Return Me.IsNull(Me.tablelib_control.New_Book_DirColumn)
         End Function
@@ -3269,6 +3370,18 @@ Partial Public Class booklibDataSet
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Sub SetComputerNameNull()
             Me(Me.tablelib_control.ComputerNameColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsNo_Image_FileNull() As Boolean
+            Return Me.IsNull(Me.tablelib_control.No_Image_FileColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetNo_Image_FileNull()
+            Me(Me.tablelib_control.No_Image_FileColumn) = Global.System.Convert.DBNull
         End Sub
     End Class
     
@@ -5483,13 +5596,79 @@ Namespace booklibDataSetTableAdapters
             tableMapping.ColumnMappings.Add("BookID", "BookID")
             tableMapping.ColumnMappings.Add("FileTypeID", "FileTypeID")
             tableMapping.ColumnMappings.Add("Cover_Image", "Cover_Image")
+            tableMapping.ColumnMappings.Add("Review", "Review")
             Me._adapter.TableMappings.Add(tableMapping)
+            Me._adapter.DeleteCommand = New Global.MySql.Data.MySqlClient.MySqlCommand()
+            Me._adapter.DeleteCommand.Connection = Me.Connection
+            Me._adapter.DeleteCommand.CommandText = "DELETE FROM `book_covers` WHERE ((`BookID` = @p1) AND ((@p2 = 1 AND `FileTypeID` "& _ 
+                "IS NULL) OR (`FileTypeID` = @p3)) AND ((@p4 = 1 AND `Cover_Image` IS NULL) OR (`"& _ 
+                "Cover_Image` = @p5)) AND ((@p6 = 1 AND `Review` IS NULL) OR (`Review` = @p7)))"
+            Me._adapter.DeleteCommand.CommandType = Global.System.Data.CommandType.Text
+            Dim param As Global.MySql.Data.MySqlClient.MySqlParameter = New Global.MySql.Data.MySqlClient.MySqlParameter()
+            param.ParameterName = "@p1"
+            param.DbType = Global.System.Data.DbType.Int32
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.Int32
+            param.IsNullable = true
+            param.SourceColumn = "BookID"
+            param.SourceVersion = Global.System.Data.DataRowVersion.Original
+            Me._adapter.DeleteCommand.Parameters.Add(param)
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter()
+            param.ParameterName = "@p2"
+            param.DbType = Global.System.Data.DbType.Int32
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.Int32
+            param.IsNullable = true
+            param.SourceColumn = "FileTypeID"
+            param.SourceVersion = Global.System.Data.DataRowVersion.Original
+            param.SourceColumnNullMapping = true
+            Me._adapter.DeleteCommand.Parameters.Add(param)
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter()
+            param.ParameterName = "@p3"
+            param.DbType = Global.System.Data.DbType.Int32
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.Int32
+            param.IsNullable = true
+            param.SourceColumn = "FileTypeID"
+            param.SourceVersion = Global.System.Data.DataRowVersion.Original
+            Me._adapter.DeleteCommand.Parameters.Add(param)
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter()
+            param.ParameterName = "@p4"
+            param.DbType = Global.System.Data.DbType.Int32
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.Int32
+            param.IsNullable = true
+            param.SourceColumn = "Cover_Image"
+            param.SourceVersion = Global.System.Data.DataRowVersion.Original
+            param.SourceColumnNullMapping = true
+            Me._adapter.DeleteCommand.Parameters.Add(param)
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter()
+            param.ParameterName = "@p5"
+            param.DbType = Global.System.Data.DbType.[Object]
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.Blob
+            param.IsNullable = true
+            param.SourceColumn = "Cover_Image"
+            param.SourceVersion = Global.System.Data.DataRowVersion.Original
+            Me._adapter.DeleteCommand.Parameters.Add(param)
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter()
+            param.ParameterName = "@p6"
+            param.DbType = Global.System.Data.DbType.Int32
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.Int32
+            param.IsNullable = true
+            param.SourceColumn = "Review"
+            param.SourceVersion = Global.System.Data.DataRowVersion.Original
+            param.SourceColumnNullMapping = true
+            Me._adapter.DeleteCommand.Parameters.Add(param)
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter()
+            param.ParameterName = "@p7"
+            param.DbType = Global.System.Data.DbType.[Object]
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.Blob
+            param.IsNullable = true
+            param.SourceColumn = "Review"
+            param.SourceVersion = Global.System.Data.DataRowVersion.Original
+            Me._adapter.DeleteCommand.Parameters.Add(param)
             Me._adapter.InsertCommand = New Global.MySql.Data.MySqlClient.MySqlCommand()
             Me._adapter.InsertCommand.Connection = Me.Connection
-            Me._adapter.InsertCommand.CommandText = "INSERT INTO `book_covers` (`BookID`, `FileTypeID`, `Cover_Image`) VALUES (@p1, @p"& _ 
-                "2, @p3)"
+            Me._adapter.InsertCommand.CommandText = "INSERT INTO `book_covers` (`BookID`, `FileTypeID`, `Cover_Image`, `Review`) VALUE"& _ 
+                "S (@p1, @p2, @p3, @p4)"
             Me._adapter.InsertCommand.CommandType = Global.System.Data.CommandType.Text
-            Dim param As Global.MySql.Data.MySqlClient.MySqlParameter = New Global.MySql.Data.MySqlClient.MySqlParameter()
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter()
             param.ParameterName = "@p1"
             param.DbType = Global.System.Data.DbType.Int32
             param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.Int32
@@ -5510,6 +5689,107 @@ Namespace booklibDataSetTableAdapters
             param.IsNullable = true
             param.SourceColumn = "Cover_Image"
             Me._adapter.InsertCommand.Parameters.Add(param)
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter()
+            param.ParameterName = "@p4"
+            param.DbType = Global.System.Data.DbType.[Object]
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.Blob
+            param.IsNullable = true
+            param.SourceColumn = "Review"
+            Me._adapter.InsertCommand.Parameters.Add(param)
+            Me._adapter.UpdateCommand = New Global.MySql.Data.MySqlClient.MySqlCommand()
+            Me._adapter.UpdateCommand.Connection = Me.Connection
+            Me._adapter.UpdateCommand.CommandText = "UPDATE `book_covers` SET `BookID` = @p1, `FileTypeID` = @p2, `Cover_Image` = @p3,"& _ 
+                " `Review` = @p4 WHERE ((`BookID` = @p5) AND ((@p6 = 1 AND `FileTypeID` IS NULL) "& _ 
+                "OR (`FileTypeID` = @p7)) AND ((@p8 = 1 AND `Cover_Image` IS NULL) OR (`Cover_Ima"& _ 
+                "ge` = @p9)) AND ((@p10 = 1 AND `Review` IS NULL) OR (`Review` = @p11)))"
+            Me._adapter.UpdateCommand.CommandType = Global.System.Data.CommandType.Text
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter()
+            param.ParameterName = "@p1"
+            param.DbType = Global.System.Data.DbType.Int32
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.Int32
+            param.IsNullable = true
+            param.SourceColumn = "BookID"
+            Me._adapter.UpdateCommand.Parameters.Add(param)
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter()
+            param.ParameterName = "@p2"
+            param.DbType = Global.System.Data.DbType.Int32
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.Int32
+            param.IsNullable = true
+            param.SourceColumn = "FileTypeID"
+            Me._adapter.UpdateCommand.Parameters.Add(param)
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter()
+            param.ParameterName = "@p3"
+            param.DbType = Global.System.Data.DbType.[Object]
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.Blob
+            param.IsNullable = true
+            param.SourceColumn = "Cover_Image"
+            Me._adapter.UpdateCommand.Parameters.Add(param)
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter()
+            param.ParameterName = "@p4"
+            param.DbType = Global.System.Data.DbType.[Object]
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.Blob
+            param.IsNullable = true
+            param.SourceColumn = "Review"
+            Me._adapter.UpdateCommand.Parameters.Add(param)
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter()
+            param.ParameterName = "@p5"
+            param.DbType = Global.System.Data.DbType.Int32
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.Int32
+            param.IsNullable = true
+            param.SourceColumn = "BookID"
+            param.SourceVersion = Global.System.Data.DataRowVersion.Original
+            Me._adapter.UpdateCommand.Parameters.Add(param)
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter()
+            param.ParameterName = "@p6"
+            param.DbType = Global.System.Data.DbType.Int32
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.Int32
+            param.IsNullable = true
+            param.SourceColumn = "FileTypeID"
+            param.SourceVersion = Global.System.Data.DataRowVersion.Original
+            param.SourceColumnNullMapping = true
+            Me._adapter.UpdateCommand.Parameters.Add(param)
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter()
+            param.ParameterName = "@p7"
+            param.DbType = Global.System.Data.DbType.Int32
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.Int32
+            param.IsNullable = true
+            param.SourceColumn = "FileTypeID"
+            param.SourceVersion = Global.System.Data.DataRowVersion.Original
+            Me._adapter.UpdateCommand.Parameters.Add(param)
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter()
+            param.ParameterName = "@p8"
+            param.DbType = Global.System.Data.DbType.Int32
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.Int32
+            param.IsNullable = true
+            param.SourceColumn = "Cover_Image"
+            param.SourceVersion = Global.System.Data.DataRowVersion.Original
+            param.SourceColumnNullMapping = true
+            Me._adapter.UpdateCommand.Parameters.Add(param)
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter()
+            param.ParameterName = "@p9"
+            param.DbType = Global.System.Data.DbType.[Object]
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.Blob
+            param.IsNullable = true
+            param.SourceColumn = "Cover_Image"
+            param.SourceVersion = Global.System.Data.DataRowVersion.Original
+            Me._adapter.UpdateCommand.Parameters.Add(param)
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter()
+            param.ParameterName = "@p10"
+            param.DbType = Global.System.Data.DbType.Int32
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.Int32
+            param.IsNullable = true
+            param.SourceColumn = "Review"
+            param.SourceVersion = Global.System.Data.DataRowVersion.Original
+            param.SourceColumnNullMapping = true
+            Me._adapter.UpdateCommand.Parameters.Add(param)
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter()
+            param.ParameterName = "@p11"
+            param.DbType = Global.System.Data.DbType.[Object]
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.Blob
+            param.IsNullable = true
+            param.SourceColumn = "Review"
+            param.SourceVersion = Global.System.Data.DataRowVersion.Original
+            Me._adapter.UpdateCommand.Parameters.Add(param)
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -5525,7 +5805,7 @@ Namespace booklibDataSetTableAdapters
             Me._commandCollection = New Global.MySql.Data.MySqlClient.MySqlCommand(0) {}
             Me._commandCollection(0) = New Global.MySql.Data.MySqlClient.MySqlCommand()
             Me._commandCollection(0).Connection = Me.Connection
-            Me._commandCollection(0).CommandText = "SELECT `BookID`, `FileTypeID`, `Cover_Image` FROM `book_covers`"
+            Me._commandCollection(0).CommandText = "SELECT `BookID`, `FileTypeID`, `Cover_Image`, `Review` FROM `book_covers`"
             Me._commandCollection(0).CommandType = Global.System.Data.CommandType.Text
         End Sub
         
@@ -5584,8 +5864,50 @@ Namespace booklibDataSetTableAdapters
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Delete, true)>  _
+        Public Overloads Overridable Function Delete(ByVal p1 As Integer, ByVal p3 As Global.System.Nullable(Of Integer), ByVal p5 As Object, ByVal p7 As Object) As Integer
+            Me.Adapter.DeleteCommand.Parameters(0).Value = CType(p1,Integer)
+            If (p3.HasValue = true) Then
+                Me.Adapter.DeleteCommand.Parameters(1).Value = CType(0,Object)
+                Me.Adapter.DeleteCommand.Parameters(2).Value = CType(p3.Value,Integer)
+            Else
+                Me.Adapter.DeleteCommand.Parameters(1).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(2).Value = Global.System.DBNull.Value
+            End If
+            If (p5 Is Nothing) Then
+                Me.Adapter.DeleteCommand.Parameters(3).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(4).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.DeleteCommand.Parameters(3).Value = CType(0,Object)
+                Me.Adapter.DeleteCommand.Parameters(4).Value = CType(p5,Object)
+            End If
+            If (p7 Is Nothing) Then
+                Me.Adapter.DeleteCommand.Parameters(5).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(6).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.DeleteCommand.Parameters(5).Value = CType(0,Object)
+                Me.Adapter.DeleteCommand.Parameters(6).Value = CType(p7,Object)
+            End If
+            Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.DeleteCommand.Connection.State
+            If ((Me.Adapter.DeleteCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
+                        <> Global.System.Data.ConnectionState.Open) Then
+                Me.Adapter.DeleteCommand.Connection.Open
+            End If
+            Try 
+                Dim returnValue As Integer = Me.Adapter.DeleteCommand.ExecuteNonQuery
+                Return returnValue
+            Finally
+                If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
+                    Me.Adapter.DeleteCommand.Connection.Close
+                End If
+            End Try
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Insert, true)>  _
-        Public Overloads Overridable Function Insert(ByVal p1 As Integer, ByVal p2 As Global.System.Nullable(Of Integer), ByVal p3 As Object) As Integer
+        Public Overloads Overridable Function Insert(ByVal p1 As Integer, ByVal p2 As Global.System.Nullable(Of Integer), ByVal p3 As Object, ByVal p4 As Object) As Integer
             Me.Adapter.InsertCommand.Parameters(0).Value = CType(p1,Integer)
             If (p2.HasValue = true) Then
                 Me.Adapter.InsertCommand.Parameters(1).Value = CType(p2.Value,Integer)
@@ -5596,6 +5918,11 @@ Namespace booklibDataSetTableAdapters
                 Me.Adapter.InsertCommand.Parameters(2).Value = Global.System.DBNull.Value
             Else
                 Me.Adapter.InsertCommand.Parameters(2).Value = CType(p3,Object)
+            End If
+            If (p4 Is Nothing) Then
+                Me.Adapter.InsertCommand.Parameters(3).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.InsertCommand.Parameters(3).Value = CType(p4,Object)
             End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.InsertCommand.Connection.State
             If ((Me.Adapter.InsertCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
@@ -5610,6 +5937,72 @@ Namespace booklibDataSetTableAdapters
                     Me.Adapter.InsertCommand.Connection.Close
                 End If
             End Try
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, true)>  _
+        Public Overloads Overridable Function Update(ByVal p1 As Integer, ByVal p2 As Global.System.Nullable(Of Integer), ByVal p3 As Object, ByVal p4 As Object, ByVal p5 As Integer, ByVal p7 As Global.System.Nullable(Of Integer), ByVal p9 As Object, ByVal p11 As Object) As Integer
+            Me.Adapter.UpdateCommand.Parameters(0).Value = CType(p1,Integer)
+            If (p2.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(1).Value = CType(p2.Value,Integer)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(1).Value = Global.System.DBNull.Value
+            End If
+            If (p3 Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(2).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(2).Value = CType(p3,Object)
+            End If
+            If (p4 Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(3).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(3).Value = CType(p4,Object)
+            End If
+            Me.Adapter.UpdateCommand.Parameters(4).Value = CType(p5,Integer)
+            If (p7.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(5).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(6).Value = CType(p7.Value,Integer)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(5).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(6).Value = Global.System.DBNull.Value
+            End If
+            If (p9 Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(7).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(8).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(7).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(8).Value = CType(p9,Object)
+            End If
+            If (p11 Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(9).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(10).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(9).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(10).Value = CType(p11,Object)
+            End If
+            Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.UpdateCommand.Connection.State
+            If ((Me.Adapter.UpdateCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
+                        <> Global.System.Data.ConnectionState.Open) Then
+                Me.Adapter.UpdateCommand.Connection.Open
+            End If
+            Try 
+                Dim returnValue As Integer = Me.Adapter.UpdateCommand.ExecuteNonQuery
+                Return returnValue
+            Finally
+                If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
+                    Me.Adapter.UpdateCommand.Connection.Close
+                End If
+            End Try
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, true)>  _
+        Public Overloads Overridable Function Update(ByVal p2 As Global.System.Nullable(Of Integer), ByVal p3 As Object, ByVal p4 As Object, ByVal p5 As Integer, ByVal p7 As Global.System.Nullable(Of Integer), ByVal p9 As Object, ByVal p11 As Object) As Integer
+            Return Me.Update(p5, p2, p3, p4, p5, p7, p9, p11)
         End Function
     End Class
     
@@ -6164,13 +6557,15 @@ Namespace booklibDataSetTableAdapters
             tableMapping.ColumnMappings.Add("New_Book_Dir", "New_Book_Dir")
             tableMapping.ColumnMappings.Add("Reviewed_Book_Dir", "Reviewed_Book_Dir")
             tableMapping.ColumnMappings.Add("ComputerName", "ComputerName")
+            tableMapping.ColumnMappings.Add("No_Image_File", "No_Image_File")
             Me._adapter.TableMappings.Add(tableMapping)
             Me._adapter.DeleteCommand = New Global.MySql.Data.MySqlClient.MySqlCommand()
             Me._adapter.DeleteCommand.Connection = Me.Connection
             Me._adapter.DeleteCommand.CommandText = "DELETE FROM `lib_control` WHERE ((`Lib_Control_ID` = @p1) AND ((@p2 = 1 AND `New_"& _ 
                 "Book_Dir` IS NULL) OR (`New_Book_Dir` = @p3)) AND ((@p4 = 1 AND `Reviewed_Book_D"& _ 
                 "ir` IS NULL) OR (`Reviewed_Book_Dir` = @p5)) AND ((@p6 = 1 AND `ComputerName` IS"& _ 
-                " NULL) OR (`ComputerName` = @p7)))"
+                " NULL) OR (`ComputerName` = @p7)) AND ((@p8 = 1 AND `No_Image_File` IS NULL) OR "& _ 
+                "(`No_Image_File` = @p9)))"
             Me._adapter.DeleteCommand.CommandType = Global.System.Data.CommandType.Text
             Dim param As Global.MySql.Data.MySqlClient.MySqlParameter = New Global.MySql.Data.MySqlClient.MySqlParameter()
             param.ParameterName = "@p1"
@@ -6231,11 +6626,27 @@ Namespace booklibDataSetTableAdapters
             param.SourceColumn = "ComputerName"
             param.SourceVersion = Global.System.Data.DataRowVersion.Original
             Me._adapter.DeleteCommand.Parameters.Add(param)
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter()
+            param.ParameterName = "@p8"
+            param.DbType = Global.System.Data.DbType.Int32
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.Int32
+            param.IsNullable = true
+            param.SourceColumn = "No_Image_File"
+            param.SourceVersion = Global.System.Data.DataRowVersion.Original
+            param.SourceColumnNullMapping = true
+            Me._adapter.DeleteCommand.Parameters.Add(param)
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter()
+            param.ParameterName = "@p9"
+            param.DbType = Global.System.Data.DbType.[String]
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.VarChar
+            param.IsNullable = true
+            param.SourceColumn = "No_Image_File"
+            param.SourceVersion = Global.System.Data.DataRowVersion.Original
+            Me._adapter.DeleteCommand.Parameters.Add(param)
             Me._adapter.InsertCommand = New Global.MySql.Data.MySqlClient.MySqlCommand()
             Me._adapter.InsertCommand.Connection = Me.Connection
-            Me._adapter.InsertCommand.CommandText = "INSERT INTO lib_control"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         (New_Book_Dir, Reviewed_Book_Di"& _ 
-                "r, ComputerName)"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"VALUES        (@p1, @p2, @p3);"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"select * from lib_control wher"& _ 
-                "e Lib_Control_ID = last_insert_id()"
+            Me._adapter.InsertCommand.CommandText = "INSERT INTO `lib_control` (`New_Book_Dir`, `Reviewed_Book_Dir`, `ComputerName`, `"& _ 
+                "No_Image_File`) VALUES (@p1, @p2, @p3, @p4)"
             Me._adapter.InsertCommand.CommandType = Global.System.Data.CommandType.Text
             param = New Global.MySql.Data.MySqlClient.MySqlParameter()
             param.ParameterName = "@p1"
@@ -6258,13 +6669,21 @@ Namespace booklibDataSetTableAdapters
             param.IsNullable = true
             param.SourceColumn = "ComputerName"
             Me._adapter.InsertCommand.Parameters.Add(param)
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter()
+            param.ParameterName = "@p4"
+            param.DbType = Global.System.Data.DbType.[String]
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.VarChar
+            param.IsNullable = true
+            param.SourceColumn = "No_Image_File"
+            Me._adapter.InsertCommand.Parameters.Add(param)
             Me._adapter.UpdateCommand = New Global.MySql.Data.MySqlClient.MySqlCommand()
             Me._adapter.UpdateCommand.Connection = Me.Connection
             Me._adapter.UpdateCommand.CommandText = "UPDATE `lib_control` SET `New_Book_Dir` = @p1, `Reviewed_Book_Dir` = @p2, `Comput"& _ 
-                "erName` = @p3 WHERE ((`Lib_Control_ID` = @p4) AND ((@p5 = 1 AND `New_Book_Dir` I"& _ 
-                "S NULL) OR (`New_Book_Dir` = @p6)) AND ((@p7 = 1 AND `Reviewed_Book_Dir` IS NULL"& _ 
-                ") OR (`Reviewed_Book_Dir` = @p8)) AND ((@p9 = 1 AND `ComputerName` IS NULL) OR ("& _ 
-                "`ComputerName` = @p10)))"
+                "erName` = @p3, `No_Image_File` = @p4 WHERE ((`Lib_Control_ID` = @p5) AND ((@p6 ="& _ 
+                " 1 AND `New_Book_Dir` IS NULL) OR (`New_Book_Dir` = @p7)) AND ((@p8 = 1 AND `Rev"& _ 
+                "iewed_Book_Dir` IS NULL) OR (`Reviewed_Book_Dir` = @p9)) AND ((@p10 = 1 AND `Com"& _ 
+                "puterName` IS NULL) OR (`ComputerName` = @p11)) AND ((@p12 = 1 AND `No_Image_Fil"& _ 
+                "e` IS NULL) OR (`No_Image_File` = @p13)))"
             Me._adapter.UpdateCommand.CommandType = Global.System.Data.CommandType.Text
             param = New Global.MySql.Data.MySqlClient.MySqlParameter()
             param.ParameterName = "@p1"
@@ -6289,6 +6708,13 @@ Namespace booklibDataSetTableAdapters
             Me._adapter.UpdateCommand.Parameters.Add(param)
             param = New Global.MySql.Data.MySqlClient.MySqlParameter()
             param.ParameterName = "@p4"
+            param.DbType = Global.System.Data.DbType.[String]
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.VarChar
+            param.IsNullable = true
+            param.SourceColumn = "No_Image_File"
+            Me._adapter.UpdateCommand.Parameters.Add(param)
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter()
+            param.ParameterName = "@p5"
             param.DbType = Global.System.Data.DbType.Int32
             param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.Int32
             param.IsNullable = true
@@ -6296,33 +6722,33 @@ Namespace booklibDataSetTableAdapters
             param.SourceVersion = Global.System.Data.DataRowVersion.Original
             Me._adapter.UpdateCommand.Parameters.Add(param)
             param = New Global.MySql.Data.MySqlClient.MySqlParameter()
-            param.ParameterName = "@p5"
+            param.ParameterName = "@p6"
             param.DbType = Global.System.Data.DbType.Int32
             param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.Int32
             param.IsNullable = true
             param.SourceColumn = "New_Book_Dir"
             param.SourceVersion = Global.System.Data.DataRowVersion.Original
             param.SourceColumnNullMapping = true
-            Me._adapter.UpdateCommand.Parameters.Add(param)
-            param = New Global.MySql.Data.MySqlClient.MySqlParameter()
-            param.ParameterName = "@p6"
-            param.DbType = Global.System.Data.DbType.[String]
-            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.VarChar
-            param.IsNullable = true
-            param.SourceColumn = "New_Book_Dir"
-            param.SourceVersion = Global.System.Data.DataRowVersion.Original
             Me._adapter.UpdateCommand.Parameters.Add(param)
             param = New Global.MySql.Data.MySqlClient.MySqlParameter()
             param.ParameterName = "@p7"
-            param.DbType = Global.System.Data.DbType.Int32
-            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.Int32
+            param.DbType = Global.System.Data.DbType.[String]
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.VarChar
             param.IsNullable = true
-            param.SourceColumn = "Reviewed_Book_Dir"
+            param.SourceColumn = "New_Book_Dir"
             param.SourceVersion = Global.System.Data.DataRowVersion.Original
-            param.SourceColumnNullMapping = true
             Me._adapter.UpdateCommand.Parameters.Add(param)
             param = New Global.MySql.Data.MySqlClient.MySqlParameter()
             param.ParameterName = "@p8"
+            param.DbType = Global.System.Data.DbType.Int32
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.Int32
+            param.IsNullable = true
+            param.SourceColumn = "Reviewed_Book_Dir"
+            param.SourceVersion = Global.System.Data.DataRowVersion.Original
+            param.SourceColumnNullMapping = true
+            Me._adapter.UpdateCommand.Parameters.Add(param)
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter()
+            param.ParameterName = "@p9"
             param.DbType = Global.System.Data.DbType.[String]
             param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.VarChar
             param.IsNullable = true
@@ -6330,7 +6756,7 @@ Namespace booklibDataSetTableAdapters
             param.SourceVersion = Global.System.Data.DataRowVersion.Original
             Me._adapter.UpdateCommand.Parameters.Add(param)
             param = New Global.MySql.Data.MySqlClient.MySqlParameter()
-            param.ParameterName = "@p9"
+            param.ParameterName = "@p10"
             param.DbType = Global.System.Data.DbType.Int32
             param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.Int32
             param.IsNullable = true
@@ -6339,11 +6765,28 @@ Namespace booklibDataSetTableAdapters
             param.SourceColumnNullMapping = true
             Me._adapter.UpdateCommand.Parameters.Add(param)
             param = New Global.MySql.Data.MySqlClient.MySqlParameter()
-            param.ParameterName = "@p10"
+            param.ParameterName = "@p11"
             param.DbType = Global.System.Data.DbType.[String]
             param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.VarChar
             param.IsNullable = true
             param.SourceColumn = "ComputerName"
+            param.SourceVersion = Global.System.Data.DataRowVersion.Original
+            Me._adapter.UpdateCommand.Parameters.Add(param)
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter()
+            param.ParameterName = "@p12"
+            param.DbType = Global.System.Data.DbType.Int32
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.Int32
+            param.IsNullable = true
+            param.SourceColumn = "No_Image_File"
+            param.SourceVersion = Global.System.Data.DataRowVersion.Original
+            param.SourceColumnNullMapping = true
+            Me._adapter.UpdateCommand.Parameters.Add(param)
+            param = New Global.MySql.Data.MySqlClient.MySqlParameter()
+            param.ParameterName = "@p13"
+            param.DbType = Global.System.Data.DbType.[String]
+            param.MySqlDbType = Global.MySql.Data.MySqlClient.MySqlDbType.VarChar
+            param.IsNullable = true
+            param.SourceColumn = "No_Image_File"
             param.SourceVersion = Global.System.Data.DataRowVersion.Original
             Me._adapter.UpdateCommand.Parameters.Add(param)
         End Sub
@@ -6352,7 +6795,7 @@ Namespace booklibDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Private Sub InitConnection()
             Me._connection = New Global.MySql.Data.MySqlClient.MySqlConnection()
-            Me._connection.ConnectionString = Global.BookLib.My.MySettings.Default.booklibConnectionString1
+            Me._connection.ConnectionString = Global.BookLib.My.MySettings.Default.booklibConnectionString
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -6361,8 +6804,8 @@ Namespace booklibDataSetTableAdapters
             Me._commandCollection = New Global.MySql.Data.MySqlClient.MySqlCommand(0) {}
             Me._commandCollection(0) = New Global.MySql.Data.MySqlClient.MySqlCommand()
             Me._commandCollection(0).Connection = Me.Connection
-            Me._commandCollection(0).CommandText = "SELECT `Lib_Control_ID`, `New_Book_Dir`, `Reviewed_Book_Dir`, `ComputerName` FROM"& _ 
-                " `lib_control`"
+            Me._commandCollection(0).CommandText = "SELECT `Lib_Control_ID`, `New_Book_Dir`, `Reviewed_Book_Dir`, `ComputerName`, `No"& _ 
+                "_Image_File`  FROM `lib_control`"
             Me._commandCollection(0).CommandType = Global.System.Data.CommandType.Text
         End Sub
         
@@ -6422,7 +6865,7 @@ Namespace booklibDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Delete, true)>  _
-        Public Overloads Overridable Function Delete(ByVal p1 As Integer, ByVal p3 As String, ByVal p5 As String, ByVal p7 As String) As Integer
+        Public Overloads Overridable Function Delete(ByVal p1 As Integer, ByVal p3 As String, ByVal p5 As String, ByVal p7 As String, ByVal p9 As String) As Integer
             Me.Adapter.DeleteCommand.Parameters(0).Value = CType(p1,Integer)
             If (p3 Is Nothing) Then
                 Me.Adapter.DeleteCommand.Parameters(1).Value = CType(1,Object)
@@ -6445,6 +6888,13 @@ Namespace booklibDataSetTableAdapters
                 Me.Adapter.DeleteCommand.Parameters(5).Value = CType(0,Object)
                 Me.Adapter.DeleteCommand.Parameters(6).Value = CType(p7,String)
             End If
+            If (p9 Is Nothing) Then
+                Me.Adapter.DeleteCommand.Parameters(7).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(8).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.DeleteCommand.Parameters(7).Value = CType(0,Object)
+                Me.Adapter.DeleteCommand.Parameters(8).Value = CType(p9,String)
+            End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.DeleteCommand.Connection.State
             If ((Me.Adapter.DeleteCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
                         <> Global.System.Data.ConnectionState.Open) Then
@@ -6464,7 +6914,7 @@ Namespace booklibDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Insert, true)>  _
-        Public Overloads Overridable Function Insert(ByVal p1 As String, ByVal p2 As String, ByVal p3 As String) As Integer
+        Public Overloads Overridable Function Insert(ByVal p1 As String, ByVal p2 As String, ByVal p3 As String, ByVal p4 As String) As Integer
             If (p1 Is Nothing) Then
                 Me.Adapter.InsertCommand.Parameters(0).Value = Global.System.DBNull.Value
             Else
@@ -6479,6 +6929,11 @@ Namespace booklibDataSetTableAdapters
                 Me.Adapter.InsertCommand.Parameters(2).Value = Global.System.DBNull.Value
             Else
                 Me.Adapter.InsertCommand.Parameters(2).Value = CType(p3,String)
+            End If
+            If (p4 Is Nothing) Then
+                Me.Adapter.InsertCommand.Parameters(3).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.InsertCommand.Parameters(3).Value = CType(p4,String)
             End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.InsertCommand.Connection.State
             If ((Me.Adapter.InsertCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
@@ -6499,7 +6954,7 @@ Namespace booklibDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, true)>  _
-        Public Overloads Overridable Function Update(ByVal p1 As String, ByVal p2 As String, ByVal p3 As String, ByVal p4 As Integer, ByVal p6 As String, ByVal p8 As String, ByVal p10 As String) As Integer
+        Public Overloads Overridable Function Update(ByVal p1 As String, ByVal p2 As String, ByVal p3 As String, ByVal p4 As String, ByVal p5 As Integer, ByVal p7 As String, ByVal p9 As String, ByVal p11 As String, ByVal p13 As String) As Integer
             If (p1 Is Nothing) Then
                 Me.Adapter.UpdateCommand.Parameters(0).Value = Global.System.DBNull.Value
             Else
@@ -6515,27 +6970,39 @@ Namespace booklibDataSetTableAdapters
             Else
                 Me.Adapter.UpdateCommand.Parameters(2).Value = CType(p3,String)
             End If
-            Me.Adapter.UpdateCommand.Parameters(3).Value = CType(p4,Integer)
-            If (p6 Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(4).Value = CType(1,Object)
-                Me.Adapter.UpdateCommand.Parameters(5).Value = Global.System.DBNull.Value
+            If (p4 Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(3).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(4).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(5).Value = CType(p6,String)
+                Me.Adapter.UpdateCommand.Parameters(3).Value = CType(p4,String)
             End If
-            If (p8 Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(6).Value = CType(1,Object)
-                Me.Adapter.UpdateCommand.Parameters(7).Value = Global.System.DBNull.Value
+            Me.Adapter.UpdateCommand.Parameters(4).Value = CType(p5,Integer)
+            If (p7 Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(5).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(6).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(6).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(7).Value = CType(p8,String)
+                Me.Adapter.UpdateCommand.Parameters(5).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(6).Value = CType(p7,String)
             End If
-            If (p10 Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(8).Value = CType(1,Object)
-                Me.Adapter.UpdateCommand.Parameters(9).Value = Global.System.DBNull.Value
+            If (p9 Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(7).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(8).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(8).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(9).Value = CType(p10,String)
+                Me.Adapter.UpdateCommand.Parameters(7).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(8).Value = CType(p9,String)
+            End If
+            If (p11 Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(9).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(10).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(9).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(10).Value = CType(p11,String)
+            End If
+            If (p13 Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(11).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(12).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(11).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(12).Value = CType(p13,String)
             End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.UpdateCommand.Connection.State
             If ((Me.Adapter.UpdateCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _

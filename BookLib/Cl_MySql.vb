@@ -20,7 +20,7 @@ Public Class Cl_MySql
         If Len(P_Where) > 0 Then v_Where = " where " & P_Where Else v_Where = ""
         v_SqlTxt = String.Join(" ", "Select", P_VarList, "from", P_Table, v_Where)
         cmd.CommandText = v_SqlTxt
-        '        MsgBox(v_SqlTxt)
+        'MsgBox(v_SqlTxt)
         myDataAdapter.SelectCommand = cmd
 
         'Fill the DataTable
@@ -64,6 +64,7 @@ Public Class Cl_MySql
         For Each row In PrmTable.Rows
             PrmNewBookDir = row("new_book_dir")
             PrmReviewedBookDir = row("Reviewed_Book_Dir")
+            PrmNoFileImage = row("No_Image_File")
         Next
 
     End Function

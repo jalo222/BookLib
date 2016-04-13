@@ -27,6 +27,7 @@ Partial Class frmLib_Control
         Dim New_Book_DirLabel As System.Windows.Forms.Label
         Dim Reviewed_Book_DirLabel As System.Windows.Forms.Label
         Dim ComputerNameLabel As System.Windows.Forms.Label
+        Dim No_Image_FileLabel As System.Windows.Forms.Label
         Me.BooklibDataSet = New BookLib.booklibDataSet()
         Me.Lib_controlBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.Lib_controlTableAdapter = New BookLib.booklibDataSetTableAdapters.lib_controlTableAdapter()
@@ -40,10 +41,13 @@ Partial Class frmLib_Control
         Me.btnSave = New System.Windows.Forms.Button()
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.ComputerNameTextBox = New System.Windows.Forms.TextBox()
+        Me.No_Image_FileTextBox = New System.Windows.Forms.TextBox()
+        Me.btnBrowseNoFile = New System.Windows.Forms.Button()
         Lib_Control_IDLabel = New System.Windows.Forms.Label()
         New_Book_DirLabel = New System.Windows.Forms.Label()
         Reviewed_Book_DirLabel = New System.Windows.Forms.Label()
         ComputerNameLabel = New System.Windows.Forms.Label()
+        No_Image_FileLabel = New System.Windows.Forms.Label()
         CType(Me.BooklibDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Lib_controlBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -74,6 +78,15 @@ Partial Class frmLib_Control
         Reviewed_Book_DirLabel.Size = New System.Drawing.Size(102, 13)
         Reviewed_Book_DirLabel.TabIndex = 5
         Reviewed_Book_DirLabel.Text = "Reviewed Book Dir:"
+        '
+        'ComputerNameLabel
+        '
+        ComputerNameLabel.AutoSize = True
+        ComputerNameLabel.Location = New System.Drawing.Point(221, 48)
+        ComputerNameLabel.Name = "ComputerNameLabel"
+        ComputerNameLabel.Size = New System.Drawing.Size(86, 13)
+        ComputerNameLabel.TabIndex = 12
+        ComputerNameLabel.Text = "Computer Name:"
         '
         'BooklibDataSet
         '
@@ -146,7 +159,7 @@ Partial Class frmLib_Control
         '
         'btnSave
         '
-        Me.btnSave.Location = New System.Drawing.Point(95, 208)
+        Me.btnSave.Location = New System.Drawing.Point(246, 262)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(75, 23)
         Me.btnSave.TabIndex = 9
@@ -155,21 +168,12 @@ Partial Class frmLib_Control
         '
         'btnCancel
         '
-        Me.btnCancel.Location = New System.Drawing.Point(240, 207)
+        Me.btnCancel.Location = New System.Drawing.Point(391, 261)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(75, 23)
         Me.btnCancel.TabIndex = 10
         Me.btnCancel.Text = "Cancel"
         Me.btnCancel.UseVisualStyleBackColor = True
-        '
-        'ComputerNameLabel
-        '
-        ComputerNameLabel.AutoSize = True
-        ComputerNameLabel.Location = New System.Drawing.Point(221, 48)
-        ComputerNameLabel.Name = "ComputerNameLabel"
-        ComputerNameLabel.Size = New System.Drawing.Size(86, 13)
-        ComputerNameLabel.TabIndex = 12
-        ComputerNameLabel.Text = "Computer Name:"
         '
         'ComputerNameTextBox
         '
@@ -179,11 +183,40 @@ Partial Class frmLib_Control
         Me.ComputerNameTextBox.Size = New System.Drawing.Size(100, 20)
         Me.ComputerNameTextBox.TabIndex = 13
         '
-        'Lib_Control
+        'No_Image_FileLabel
+        '
+        No_Image_FileLabel.AutoSize = True
+        No_Image_FileLabel.Location = New System.Drawing.Point(51, 190)
+        No_Image_FileLabel.Name = "No_Image_FileLabel"
+        No_Image_FileLabel.Size = New System.Drawing.Size(75, 13)
+        No_Image_FileLabel.TabIndex = 13
+        No_Image_FileLabel.Text = "No Image File:"
+        '
+        'No_Image_FileTextBox
+        '
+        Me.No_Image_FileTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.Lib_controlBindingSource, "No_Image_File", True))
+        Me.No_Image_FileTextBox.Location = New System.Drawing.Point(143, 187)
+        Me.No_Image_FileTextBox.Name = "No_Image_FileTextBox"
+        Me.No_Image_FileTextBox.Size = New System.Drawing.Size(450, 20)
+        Me.No_Image_FileTextBox.TabIndex = 14
+        '
+        'btnBrowseNoFile
+        '
+        Me.btnBrowseNoFile.Location = New System.Drawing.Point(599, 185)
+        Me.btnBrowseNoFile.Name = "btnBrowseNoFile"
+        Me.btnBrowseNoFile.Size = New System.Drawing.Size(75, 23)
+        Me.btnBrowseNoFile.TabIndex = 15
+        Me.btnBrowseNoFile.Text = "Browse"
+        Me.btnBrowseNoFile.UseVisualStyleBackColor = True
+        '
+        'frmLib_Control
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(715, 317)
+        Me.Controls.Add(Me.btnBrowseNoFile)
+        Me.Controls.Add(No_Image_FileLabel)
+        Me.Controls.Add(Me.No_Image_FileTextBox)
         Me.Controls.Add(ComputerNameLabel)
         Me.Controls.Add(Me.ComputerNameTextBox)
         Me.Controls.Add(Me.btnCancel)
@@ -196,7 +229,7 @@ Partial Class frmLib_Control
         Me.Controls.Add(Me.New_Book_DirTextBox)
         Me.Controls.Add(Lib_Control_IDLabel)
         Me.Controls.Add(Me.Lib_Control_IDTextBox)
-        Me.Name = "Lib_Control"
+        Me.Name = "frmLib_Control"
         Me.Text = "Lib_Control"
         CType(Me.BooklibDataSet, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.Lib_controlBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
@@ -218,4 +251,6 @@ Partial Class frmLib_Control
     Friend WithEvents btnSave As Button
     Friend WithEvents btnCancel As Button
     Friend WithEvents ComputerNameTextBox As TextBox
+    Friend WithEvents No_Image_FileTextBox As TextBox
+    Friend WithEvents btnBrowseNoFile As Button
 End Class
